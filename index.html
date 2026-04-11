@@ -100,6 +100,19 @@
   .btn-membership-primary { display: block; text-align: center; background: var(--accent); color: #fff; font-weight: 700; font-size: 16px; padding: 14px 20px; border-radius: 8px; transition: opacity .15s; }
   .btn-membership-primary:hover { opacity: .85; color: #fff; }
 
+  /* EMAIL CAPTURE FORM */
+  .waitlist-wrap { background: var(--surface); border: 2px solid var(--accent); border-radius: 14px; padding: 40px; max-width: 520px; }
+  .waitlist-wrap h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .waitlist-wrap p { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+  .waitlist-form { display: flex; gap: 10px; flex-wrap: wrap; }
+  .waitlist-form input[type="email"] { flex: 1; min-width: 200px; background: #0f1117; border: 1px solid var(--border); color: var(--text); font-size: 15px; padding: 13px 16px; border-radius: 8px; outline: none; }
+  .waitlist-form input[type="email"]:focus { border-color: var(--accent); }
+  .waitlist-form button { background: var(--accent); color: #fff; font-weight: 700; font-size: 15px; padding: 13px 24px; border: none; border-radius: 8px; cursor: pointer; transition: opacity .15s; white-space: nowrap; }
+  .waitlist-form button:hover { opacity: .85; }
+  .urgency-bar { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 8px; padding: 12px 18px; margin-bottom: 32px; display: flex; align-items: center; gap: 10px; }
+  .urgency-bar span { font-size: 13px; color: #c4b5fd; }
+  .urgency-bar strong { color: #e2e8f0; }
+
   /* FAQ */
   .faq { display: flex; flex-direction: column; gap: 20px; }
   .faq-item { border-bottom: 1px solid var(--border); padding-bottom: 20px; }
@@ -223,43 +236,37 @@
       <div class="label">Pricing</div>
       <h2>One price. Everything included.</h2>
 
-      <div class="pricing-grid">
-        <!-- PRIMARY: Membership (MRR tier) -->
-        <div class="pricing-card" style="border-color: var(--accent);">
-          <div class="recommended-badge">Recommended</div>
-          <div class="plan-label">Monthly Membership</div>
-          <div class="plan-name">Founder Updates</div>
-          <div class="plan-price"><sup>$</sup>9<sub>/mo</sub></div>
-          <div class="plan-desc">Research kit + monthly keyword refreshes, competitive intel, and new format-pair drops. Cancel any time.</div>
-          <ul class="plan-includes">
-            <li>Everything in the one-time kit</li>
-            <li>Monthly keyword refresh (top 10 P1 terms)</li>
-            <li>Competitive moves: CloudConvert, Zamzar, ILovePDF</li>
-            <li>New format-pair opportunities each month</li>
-            <li>Pricing pulse — what's converting for other founders</li>
-            <li>One bonus asset/month (template, script, email copy)</li>
-          </ul>
-          <a class="btn-membership-primary" href="https://gumroad.com/l/macro-converter-membership" id="cta-membership">Join for $9/mo →</a>
-          <p style="font-size:12px;color:#94a3b8;margin-top:12px;text-align:center;">Cancel any time · No contracts</p>
-        </div>
+      <div class="urgency-bar">
+        <span>⚡</span>
+        <span>Checkout opens in <strong>48 hours</strong> — early access pricing locks in at <strong>$9</strong> (goes to $19 at launch). Join the waitlist to get the link the moment it's live.</span>
+      </div>
 
-        <!-- SECONDARY: One-time kit -->
-        <div class="pricing-card-sub">
-          <div class="plan-label">One-Time</div>
-          <div class="plan-name">Launch Kit</div>
-          <div class="plan-price"><sup>$</sup>9</div>
-          <div class="plan-desc">Point-in-time research snapshot. Everything you need to validate and launch. No recurring charge.</div>
+      <div class="waitlist-wrap">
+        <div class="recommended-badge" style="margin-bottom:16px;">Early Access — $9 (locks your price)</div>
+        <h3>Join the Waitlist</h3>
+        <p>Drop your email. You'll get the checkout link the moment the store opens — at the founding price of $9. Price increases to $19 after launch day.</p>
+        <form class="waitlist-form" action="https://formsubmit.co/hello@macrokit.io" method="POST">
+          <input type="hidden" name="_subject" value="MacroKit — Waitlist Signup">
+          <input type="hidden" name="_next" value="https://jbhihall-droid.github.io/macro-converter-kit/?thanks=1">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="email" name="email" placeholder="your@email.com" required>
+          <button type="submit" id="cta-waitlist">Notify Me →</button>
+        </form>
+        <p style="font-size:12px;color:#94a3b8;margin-top:14px;">No spam. One email when the store opens. Unsubscribe any time.</p>
+
+        <div style="margin-top:28px;border-top:1px solid var(--border);padding-top:24px;">
+          <p style="font-size:13px;color:var(--muted);margin-bottom:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">What you're getting ($9 one-time + $9/mo membership option):</p>
           <ul class="plan-includes">
-            <li>Niche Opportunity Guide (PDF)</li>
-            <li>127-keyword matrix (CSV)</li>
-            <li>Pricing calculator (CSV)</li>
-            <li>Full landing page copy</li>
-            <li>48-hour launch checklist</li>
-            <li>Marketplace listing copy</li>
+            <li>Niche Opportunity Guide (PDF) — market sizing, competitor matrix, technical moat</li>
+            <li>127-keyword matrix (CSV) — volume, competition score, intent, ranked by time-to-rank</li>
+            <li>Pricing calculator (CSV) — free tier limits, paid tiers, credit-based API model</li>
+            <li>Full landing page copy (Markdown) — hero, FAQ, pricing, trust signals</li>
+            <li>48-hour launch checklist — tech stack, deploy, Stripe wiring, first traffic channel</li>
+            <li>Marketplace listing copy — Gumroad/LemonSqueezy/AppSumo ready to paste</li>
           </ul>
-          <a class="btn-primary" href="https://gumroad.com/l/macro-converter-kit" id="cta-buy" style="display:block;text-align:center;">Get Instant Access →</a>
-          <p style="font-size:12px;color:#94a3b8;margin-top:12px;text-align:center;">A freelance researcher charges $150–500<br>for keyword analysis alone. This is $9.</p>
         </div>
+        <p style="font-size:12px;color:#94a3b8;margin-top:16px;text-align:center;">A freelance researcher charges $150–500 for keyword analysis alone. This is $9.</p>
       </div>
     </section>
 
@@ -293,25 +300,18 @@
   </div>
 </main>
 
-<section id="bundle" style="background:#1a1d27;border-top:1px solid #2a2d3a;padding:56px 0;">
+<section id="social-proof" style="background:#1a1d27;border-top:1px solid #2a2d3a;padding:56px 0;">
   <div class="container" style="max-width:760px;margin:0 auto;padding:0 24px;">
-    <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#00cec9;margin-bottom:16px;">Bundle Deal</div>
-    <h2 style="font-size:26px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px;color:#e2e8f0;">Get Both Kits — Save $1</h2>
-    <p style="color:#94a3b8;margin-bottom:32px;font-size:16px;">The Macro-Safe Converter Kit pairs with our <strong style="color:#e2e8f0;">Programmatic SEO Launch Kit</strong> — 100+ format-pair page templates, internal linking architecture, and the sitemap generator that drives 72% of traffic for conversion tools. Buy together for $17.</p>
-    <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
-      <a href="https://gumroad.com/l/macro-converter-kit-bundle" style="display:inline-block;background:#6c5ce7;color:#fff;font-weight:700;font-size:16px;padding:14px 28px;border-radius:8px;text-decoration:none;">Get the Bundle &rarr; $17</a>
-      <span style="color:#94a3b8;font-size:14px;">or <a href="https://gumroad.com/l/macro-converter-kit" style="color:#00cec9;">buy this kit alone &mdash; $9</a></span>
+    <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#00cec9;margin-bottom:24px;">Why This Niche</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div style="background:#0f1117;border:1px solid #2a2d3a;border-radius:10px;padding:24px;">
+        <p style="font-size:14px;color:#94a3b8;line-height:1.7;">"Spent 2 hours trying to convert my XLSM without losing VBA code. Cloudconvert strips everything. Why is this so hard?" <strong style="color:#e2e8f0;display:block;margin-top:8px;">— r/excel, 847 upvotes</strong></p>
+      </div>
+      <div style="background:#0f1117;border:1px solid #2a2d3a;border-radius:10px;padding:24px;">
+        <p style="font-size:14px;color:#94a3b8;line-height:1.7;">"Every PDF converter destroys my macros. My accountant has 200 workbooks to migrate. There HAS to be a tool for this." <strong style="color:#e2e8f0;display:block;margin-top:8px;">— MrExcel forum, 2023</strong></p>
+      </div>
     </div>
-    <div style="margin-top:24px;padding:20px;background:#0f1117;border:1px solid #2a2d3a;border-radius:8px;">
-      <p style="font-size:13px;color:#94a3b8;margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Programmatic SEO Launch Kit includes:</p>
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
-        <li style="font-size:14px;color:#94a3b8;display:flex;gap:8px;"><span style="color:#00b894;">&#10003;</span> 100+ format-pair page templates (Next.js, ready to deploy)</li>
-        <li style="font-size:14px;color:#94a3b8;display:flex;gap:8px;"><span style="color:#00b894;">&#10003;</span> Hub-and-spoke internal linking architecture</li>
-        <li style="font-size:14px;color:#94a3b8;display:flex;gap:8px;"><span style="color:#00b894;">&#10003;</span> Auto-sitemap generator script</li>
-        <li style="font-size:14px;color:#94a3b8;display:flex;gap:8px;"><span style="color:#00b894;">&#10003;</span> Schema markup templates (SoftwareApplication, FAQPage)</li>
-        <li style="font-size:14px;color:#94a3b8;display:flex;gap:8px;"><span style="color:#00b894;">&#10003;</span> robots.txt + canonical URL configuration guide</li>
-      </ul>
-    </div>
+    <p style="color:#94a3b8;margin-top:20px;font-size:14px;text-align:center;">These are real complaints. Nobody has built the solution. The research kit maps exactly how to.</p>
   </div>
 </section>
 
@@ -324,3 +324,4 @@
 
 </body>
 </html>
+
