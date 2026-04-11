@@ -245,15 +245,42 @@
         <div class="recommended-badge" style="margin-bottom:16px;">Early Access — $9 (locks your price)</div>
         <h3>Join the Waitlist</h3>
         <p>Drop your email. You'll get the checkout link the moment the store opens — at the founding price of $9. Price increases to $19 after launch day.</p>
-        <form class="waitlist-form" action="https://formsubmit.co/hello@macrokit.io" method="POST">
-          <input type="hidden" name="_subject" value="MacroKit — Waitlist Signup">
-          <input type="hidden" name="_next" value="https://jbhihall-droid.github.io/macro-converter-kit/?thanks=1">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="table">
-          <input type="email" name="email" placeholder="your@email.com" required>
+        <form class="waitlist-form" id="waitlist-form" onsubmit="submitWaitlist(event)">
+          <input type="email" name="email" id="waitlist-email" placeholder="your@email.com" required>
           <button type="submit" id="cta-waitlist">Notify Me →</button>
         </form>
+        <p id="waitlist-msg" style="font-size:13px;color:#00b894;margin-top:14px;display:none;font-weight:600;">You're on the list! We'll email you the moment checkout opens.</p>
         <p style="font-size:12px;color:#94a3b8;margin-top:14px;">No spam. One email when the store opens. Unsubscribe any time.</p>
+        <script>
+        async function submitWaitlist(e) {
+          e.preventDefault();
+          const btn = document.getElementById('cta-waitlist');
+          const email = document.getElementById('waitlist-email').value.trim();
+          btn.textContent = 'Saving...'; btn.disabled = true;
+          let ok = false;
+          try {
+            const r = await fetch('https://spoke-told-corporation-hewlett.trycloudflare.com/waitlist', {
+              method: 'POST', headers: {'Content-Type':'application/json'},
+              body: JSON.stringify({email})
+            });
+            ok = r.ok;
+          } catch(_) {}
+          if (!ok) {
+            // Fallback: formsubmit.co
+            try {
+              const fd = new FormData();
+              fd.append('email', email);
+              fd.append('_subject', 'MacroKit — Waitlist Signup');
+              fd.append('_captcha', 'false');
+              await fetch('https://formsubmit.co/hello@macrokit.io', {method:'POST', body: fd});
+              ok = true;
+            } catch(_) {}
+          }
+          document.getElementById('waitlist-form').style.display = 'none';
+          document.getElementById('waitlist-msg').style.display = 'block';
+          if (typeof gtag !== 'undefined') gtag('event', 'waitlist_signup', {email});
+        }
+        </script>
 
         <div style="margin-top:28px;border-top:1px solid var(--border);padding-top:24px;">
           <p style="font-size:13px;color:var(--muted);margin-bottom:14px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">What you're getting ($9 one-time + $9/mo membership option):</p>
