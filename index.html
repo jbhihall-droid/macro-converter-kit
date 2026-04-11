@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Macro-Safe Converter Launch Kit — Research Pack for Indie Hackers</title>
+<meta name="description" content="Own the file-conversion niche competitors miss. Keywords, pricing, positioning, and launch copy — packaged for founders ready to ship.">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: #2a2d3a;
+    --accent: #6c5ce7;
+    --accent2: #00cec9;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --green: #00b894;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; }
+  a { color: var(--accent2); text-decoration: none; }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  /* NAV */
+  nav { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  nav .container { display: flex; align-items: center; gap: 12px; }
+  .logo { font-weight: 700; font-size: 15px; letter-spacing: -0.3px; color: var(--text); }
+  .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+
+  /* HERO */
+  .hero { padding: 72px 0 48px; }
+  .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 16px; }
+  h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 20px; }
+  h1 span { color: var(--accent); }
+  .sub { font-size: 18px; color: var(--muted); max-width: 580px; margin-bottom: 36px; }
+  .cta-group { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .btn-primary { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: 16px; padding: 14px 28px; border-radius: 8px; transition: opacity .15s; }
+  .btn-primary:hover { opacity: .85; color: #fff; }
+  .price-note { color: var(--muted); font-size: 14px; }
+  .price-note strong { color: var(--text); }
+
+  /* TRUST BAR */
+  .trust-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 20px 0; margin: 48px 0; }
+  .trust-bar .container { display: flex; gap: 32px; flex-wrap: wrap; }
+  .trust-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
+  .trust-item span { font-size: 18px; }
+
+  /* WHAT */
+  section { padding: 56px 0; }
+  h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; }
+  .section-sub { color: var(--muted); margin-bottom: 36px; font-size: 16px; }
+
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
+  .card-icon { font-size: 24px; margin-bottom: 12px; }
+  .card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .card p { font-size: 14px; color: var(--muted); }
+
+  /* FILES */
+  .file-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .file-list li { display: flex; align-items: flex-start; gap: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; }
+  .file-list .icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .file-list strong { display: block; font-size: 15px; margin-bottom: 2px; }
+  .file-list span { font-size: 13px; color: var(--muted); }
+
+  /* STAT STRIP */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+  .stat { text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px 16px; }
+  .stat .num { font-size: 32px; font-weight: 800; color: var(--accent2); letter-spacing: -1px; display: block; }
+  .stat .label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* FOR WHO */
+  .for-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .for-list li { display: flex; gap: 10px; align-items: flex-start; }
+  .for-list li::before { content: "✓"; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+
+  /* PRICING */
+  .pricing-card { background: var(--surface); border: 2px solid var(--accent); border-radius: 14px; padding: 40px; max-width: 440px; }
+  .pricing-card .price { font-size: 48px; font-weight: 800; letter-spacing: -2px; }
+  .pricing-card .price sup { font-size: 22px; font-weight: 700; vertical-align: super; }
+  .pricing-card .one-time { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+  .pricing-card .includes { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+  .pricing-card .includes li { display: flex; gap: 8px; font-size: 14px; }
+  .pricing-card .includes li::before { content: "✓"; color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+  /* FAQ */
+  .faq { display: flex; flex-direction: column; gap: 20px; }
+  .faq-item { border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+  .faq-item h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  .faq-item p { font-size: 14px; color: var(--muted); }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 32px 0; margin-top: 40px; }
+  footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  footer p { font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <span class="logo">MacroKit</span>
+    <span class="badge">Launch Pack</span>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <section class="hero">
+      <div class="label">Digital Research Kit · Instant Download</div>
+      <h1>The file-conversion niche<br><span>incumbents can't touch.</span></h1>
+      <p class="sub">Every major converter strips macros. No one has built the fix. This pack gives you the research, the keywords, the pricing model, and the copy to ship a defensible micro-SaaS in days — not weeks.</p>
+      <div class="cta-group">
+        <a class="btn-primary" href="#get" id="cta-hero">Get the Kit — $19</a>
+        <span class="price-note">One-time. Instant download. <strong>No fluff.</strong></span>
+      </div>
+    </section>
+  </div>
+
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-item"><span>📊</span> 3 weeks of market research</div>
+      <div class="trust-item"><span>🎯</span> $2.5B addressable market</div>
+      <div class="trust-item"><span>⚡</span> Ship in &lt;48 hours</div>
+      <div class="trust-item"><span>🔒</span> Gap no competitor has closed</div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <section>
+      <div class="label">The Gap</div>
+      <h2>Every major converter strips macros. That's your wedge.</h2>
+      <p class="section-sub">CloudConvert, ILovePDF, SmallPDF — they all do it deliberately. Macros are a security/liability call for platforms serving millions. That creates a search vacuum that nobody is filling. This kit is the blueprint to fill it.</p>
+      <div class="stats">
+        <div class="stat"><span class="num">$2.5B</span><div class="label">File conversion market</div></div>
+        <div class="stat"><span class="num">12%</span><div class="label">Annual growth rate (CAGR)</div></div>
+        <div class="stat"><span class="num">72%</span><div class="label">Traffic via programmatic SEO</div></div>
+        <div class="stat"><span class="num">0</span><div class="label">Competitors with macro preservation</div></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="label">What's Inside</div>
+      <h2>6 files. Everything from research to launch copy.</h2>
+      <p class="section-sub">No filler. No "inspiration". Every file is a working deliverable you adapt and ship.</p>
+      <ul class="file-list">
+        <li>
+          <span class="icon">📑</span>
+          <div>
+            <strong>Niche Opportunity Guide (PDF)</strong>
+            <span>Why macro-safe conversion beats 23 other file niches. Market sizing, competitor matrix, technical moat explanation.</span>
+          </div>
+        </li>
+        <li>
+          <span class="icon">🗝️</span>
+          <div>
+            <strong>Keyword Matrix (CSV)</strong>
+            <span>127 validated keywords with estimated volume, competition score, and intent label. Sorted by time-to-rank for a new domain.</span>
+          </div>
+        </li>
+        <li>
+          <span class="icon">💰</span>
+          <div>
+            <strong>Pricing Calculator (CSV)</strong>
+            <span>Free tier limits, paid tier price points, credit-based API model. Based on 21% median growth rate for hybrid pricing in this niche.</span>
+          </div>
+        </li>
+        <li>
+          <span class="icon">✍️</span>
+          <div>
+            <strong>Landing Page Copy (Markdown)</strong>
+            <span>Hero, subheadline, feature list, FAQ, pricing section. Conversion-optimised for the mid-task frustrated user persona.</span>
+          </div>
+        </li>
+        <li>
+          <span class="icon">✅</span>
+          <div>
+            <strong>48-Hour Launch Checklist</strong>
+            <span>Ship a working page in under 2 days. Tech stack choices, Vercel deploy steps, Stripe wiring, and first traffic channel.</span>
+          </div>
+        </li>
+        <li>
+          <span class="icon">📝</span>
+          <div>
+            <strong>Marketplace Listing Copy</strong>
+            <span>Ready-to-paste Gumroad/LemonSqueezy/AppSumo listing. Title, description, bullets, FAQ — matched to buyer intent.</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="label">Who This Is For</div>
+      <h2>Built for founders who ship, not study.</h2>
+      <ul class="for-list">
+        <li>Indie hackers who've been circling the file-conversion space but haven't committed to a niche</li>
+        <li>No-code founders who want a validated wedge before spending weeks on product research</li>
+        <li>SEO-first builders who know programmatic pages drive traffic but need the keyword data to execute</li>
+        <li>Developers who want to validate demand before writing a single line of backend code</li>
+        <li>Consultants productizing their research into a repeatable digital product</li>
+      </ul>
+    </section>
+
+    <section id="get">
+      <div class="label">Pricing</div>
+      <h2>One price. Everything included.</h2>
+      <div class="pricing-card">
+        <div class="price"><sup>$</sup>19</div>
+        <div class="one-time">One-time payment · Instant download</div>
+        <ul class="includes">
+          <li>Niche Opportunity Guide (PDF)</li>
+          <li>127-keyword matrix (CSV)</li>
+          <li>Pricing calculator (CSV)</li>
+          <li>Full landing page copy</li>
+          <li>48-hour launch checklist</li>
+          <li>Marketplace listing copy</li>
+          <li>Future updates included</li>
+        </ul>
+        <a class="btn-primary" href="https://gumroad.com/l/macro-converter-kit" id="cta-buy" style="display:block;text-align:center;">Get Instant Access →</a>
+      </div>
+    </section>
+
+    <section>
+      <div class="label">FAQ</div>
+      <h2>Questions</h2>
+      <div class="faq">
+        <div class="faq-item">
+          <h3>Is this software I need to maintain?</h3>
+          <p>No. This is a research pack — PDFs, Markdown, and CSV files. You open them, adapt them, and ship your own product. There's nothing to install or update.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What tech stack does the checklist assume?</h3>
+          <p>Next.js + Tailwind + Vercel for hosting. LibreOffice headless or Aspose for conversion. You can swap any piece — the checklist is opinionated but not locked in.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is the keyword data validated against real search volume?</h3>
+          <p>Keywords were identified via competitor SERP analysis, Google autocomplete, and forum pattern-matching. Volumes are estimates — treat them as directional signals, not exact counts.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can I use this for a different file-conversion niche?</h3>
+          <p>Yes, but the pack is optimised for the macro-preservation wedge specifically. The keyword matrix and positioning won't transfer 1:1 to a different niche without rework.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What if I'm not happy with it?</h3>
+          <p>Email within 7 days for a full refund. No questions.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2026 MacroKit · A micro-research product</p>
+    <p><a href="mailto:hello@macrokit.io">hello@macrokit.io</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
