@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Every Online Converter Destroys Your Excel Macros (And What Actually Works)</title>
+<meta name="description" content="Why Every Online Converter Destroys Your Excel Macros (And What Actually Works)">
+<link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/why-converters-destroy-excel-macros/">
+<meta property="og:title" content="Why Every Online Converter Destroys Your Excel Macros (And What Actually Works)">
+<meta property="og:description" content="Why Every Online Converter Destroys Your Excel Macros (And What Actually Works)">
+<meta property="og:type" content="article">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Why Every Online Converter Destroys Your Excel Macros (And What Actually Works)","datePublished":"2026-04-12","publisher":{"@type":"Organization","name":"Macro-Safe Converter"}}</script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0f1117;--surface:#1a1d27;--border:#2a2d3a;--accent:#6c5ce7;--accent2:#00cec9;--text:#e2e8f0;--muted:#94a3b8}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.7;font-size:17px}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  nav{border-bottom:1px solid var(--border);padding:16px 0}
+  nav .inner{max-width:720px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:12px}
+  .logo{font-weight:700;font-size:15px;color:var(--text)}
+  .badge{background:var(--accent);color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px}
+  .container{max-width:720px;margin:0 auto;padding:40px 24px 80px}
+  .meta{color:var(--muted);font-size:14px;margin-bottom:32px}
+  h1{font-size:clamp(24px,4vw,38px);font-weight:800;line-height:1.2;letter-spacing:-0.5px;margin-bottom:16px}
+  h2{font-size:22px;font-weight:700;margin:40px 0 16px;color:var(--accent2)}
+  h3{font-size:18px;font-weight:700;margin:28px 0 12px}
+  h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+  p{margin:0 0 20px;color:var(--text)}
+  ul,ol{margin:0 0 20px 24px}
+  li{margin-bottom:8px}
+  blockquote{border-left:3px solid var(--accent);padding:16px 20px;margin:24px 0;background:var(--surface);border-radius:0 8px 8px 0;color:var(--muted)}
+  pre{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;overflow-x:auto;margin:24px 0}
+  code{font-family:monospace;font-size:14px;color:var(--accent2)}
+  hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+  strong{color:var(--text);font-weight:700}
+  .cta-box{background:var(--surface);border:2px solid var(--accent);border-radius:14px;padding:32px;margin:48px 0;text-align:center}
+  .cta-box h3{color:var(--accent2);margin-bottom:12px}
+  .cta-box p{color:var(--muted);margin-bottom:20px}
+  .btn{display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:14px 28px;border-radius:8px;font-size:16px}
+  .breadcrumb{font-size:13px;color:var(--muted);margin-bottom:24px}
+  .breadcrumb a{color:var(--muted)}
+  table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px}
+  th{background:var(--surface);padding:10px 14px;text-align:left;border:1px solid var(--border);font-weight:600}
+  td{padding:10px 14px;border:1px solid var(--border)}
+  tr:nth-child(even){background:var(--surface)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="inner">
+    <span class="logo">Macro-Safe Converter</span>
+    <span class="badge">Beta</span>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit" style="margin-left:auto;color:var(--muted);font-size:14px">← Home</a>
+  </div>
+</nav>
+<div class="container">
+  <div class="breadcrumb"><a href="https://jbhihall-droid.github.io/macro-converter-kit">Home</a> › <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/">Blog</a> › Why Every Online Converter Destroys Your Excel Macros (And What Actually Works)</div>
+  <div class="meta">Published 2026-04-12 &nbsp;·&nbsp; 5 min read</div>
+  <h1>Why Every Online Converter Destroys Your Excel Macros (And What Actually Works)</h1>
+<p>You've been there. You open an XLSM file in CloudConvert, SmallPDF, or any of the dozen
+other online converters, hit convert, and the output arrives — technically correct, macros
+missing. Every time.</p>
+<p>This isn't a bug. It's a deliberate design decision, and understanding <em>why</em> they do it
+points you toward what actually works.</p>
+<hr>
+<h2>The Architecture Problem</h2>
+<p>Every major online file converter — CloudConvert, ILovePDF, Zamzar, Smallpdf — serves
+millions of users per month. To do that at scale, they run conversion jobs in sandboxed,
+isolated environments with no execution layer. Files go in, static outputs come out.</p>
+<p>VBA macros are executable code. They can call external APIs, write to disk, open
+applications, run shell commands. Allowing a converter to "preserve" macros in any
+meaningful sense would require:</p>
+<p>1. Executing untrusted VBA code server-side (catastrophic security risk)
+2. Or copying macro bytecode blindly without understanding it (breaks on every
+   Office version mismatch)</p>
+<p>Neither is viable at scale. So they strip them. Not lazily — intentionally.</p>
+<hr>
+<h2>What "Macro Preservation" Actually Means</h2>
+<p>When you search for "keep macros when converting Excel," you're probably asking one of
+three different questions:</p>
+<p><strong>Question 1: You need the macros to still run in the output file.</strong>
+This is only possible if the output format supports macros: XLSM, XLSB, XLAM, or
+a .bas module export. PDF, XLSX, and CSV cannot run macros — ever. The format
+physically cannot store executable code.</p>
+<p>**Question 2: You're doing a bulk format migration and need macros intact in the
+new XLSM files.**
+Totally solvable. Python + COM automation (Windows), or openpyxl for simpler cases.
+The macros stay because you're not converting <em>away</em> from a macro-capable format.</p>
+<p><strong>Question 3: You want a PDF output + the VBA code archived alongside it.</strong>
+Also solvable. Split the operation: generate the PDF, extract the VBA modules to
+.bas files, store them together. The PDF is static, the code is preserved separately.</p>
+<p>Most online converters solve none of these correctly — they handle Question 3 by
+silently dropping the code and calling it "converted."</p>
+<hr>
+<h2>Tools That Actually Work (2026)</h2>
+<h3>For bulk XLSM → XLSM/XLSB migration (macros fully preserved)</h3>
+<p><strong>Python + win32com (Windows only):</strong>
+<pre><code>import win32com.client</p>
+<p>def convert_batch(input_dir, output_dir):
+    excel = win32com.client.Dispatch("Excel.Application")
+    excel.Visible = False
+    for xlsm in Path(input_dir).glob("*.xlsm"):
+        wb = excel.Workbooks.Open(str(xlsm))
+        out = Path(output_dir) / xlsm.name
+        wb.SaveAs(str(out), FileFormat=52)  # 52 = xlsm
+        wb.Close()
+    excel.Quit()
+</code></pre></p>
+<p>This is the only reliable method for keeping macros truly intact across a batch.
+It uses the actual Excel engine — no conversion, no reinterpretation.</p>
+<h3>For XLSM → PDF with archived VBA code</h3>
+<p><strong>LibreOffice headless (cross-platform):</strong>
+<pre><code>libreoffice --headless --convert-to pdf *.xlsm --outdir ./pdf_output
+</code></pre></p>
+<p>Then extract macros with python-pptx / openpyxl:
+<pre><code>from zipfile import ZipFile
+with ZipFile("file.xlsm") as z:
+    for name in z.namelist():
+        if name.startswith("xl/vbaProject"):
+            z.extract(name, "macro_archive/")
+</code></pre></p>
+<p>This gives you the PDF and a binary VBA archive. Not runnable, but preserved for
+compliance or reference.</p>
+<hr>
+<h2>The Niche Nobody Has Solved Properly</h2>
+<p>Here's what's interesting from a market perspective: there's no SaaS tool
+specifically designed for enterprise macro migration at scale.</p>
+<p>The tools that exist are either:
+<ul><li>Generic converters that strip macros (useless for this)</li>
+<li>Enterprise ETL tools that cost $50K+/year (overkill for most use cases)</li>
+<li>Manual Python scripts that require developer time to maintain</li>
+</ul>
+The search signal is there. "xlsm to pdf keep macros," "macro safe document conversion,"
+"convert docm without losing macros" — all showing real volume with weak competition
+(DA 20-40 results on page 1).</p>
+<p>This is the kind of gap worth building into.</p>
+<hr>
+<h2>Practical Takeaway</h2>
+<p>If you need to migrate macro-heavy workbooks today:</p>
+<p>1. <strong>Stay in Excel-native formats</strong> (XLSM → XLSM/XLSB) using COM automation
+2. <strong>Don't trust any online converter</strong> to preserve executable code — they won't
+3. <strong>Archive macros separately</strong> if you need a static output (PDF + .bas files)
+4. <strong>Document the macro inventory first</strong> — know what each macro does before migrating,
+   because some will break regardless of the tool</p>
+<hr>
+<h2>Going Deeper</h2>
+<p>If you're evaluating this as a product niche, or planning a migration project for
+a large workbook library, I've put together a more detailed kit: keyword research,
+pricing model, competitive analysis, and a programmatic SEO plan for building in
+this space.</p>
+<p>→ <a href="https://jbhihall-droid.github.io/macro-converter-kit/">Macro-Safe Converter Launch Kit</a>
+($7 — founder research kit, not a tool subscription)</p>
+<hr>
+<p>*This article is part of an ongoing series on underserved SaaS niches in file conversion.
+Next: Why "batch convert DOC to DOCX" is a $0 niche disguised as a $2.5B market.*</p>
+  <div class="cta-box">
+    <h3>Stop losing Excel macros to broken converters</h3>
+    <p>Macro-Safe Converter preserves VBA macros through XLSM conversions. One-time kit — no subscription.</p>
+    <a class="btn" href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html">Get the Kit — $9 one-time →</a>
+  </div>
+</div>
+</body>
+</html>

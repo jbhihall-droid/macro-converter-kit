@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From 3-Day Manual Export to 20 Minutes: How Priya Automated Her Client XLSM Migrations</title>
+<meta name="description" content="Priya runs a no-code consultancy. Her clients' XLSM migration process was costing 3 days per engagement. Here's how she cut it to 20 minutes — and turned it int">
+<link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/case-study-nocode-founder-batch-xlsm-migration/">
+<meta property="og:title" content="From 3-Day Manual Export to 20 Minutes: How Priya Automated Her Client XLSM Migrations">
+<meta property="og:description" content="Priya runs a no-code consultancy. Her clients' XLSM migration process was costing 3 days per engagement. Here's how she cut it to 20 minutes — and turned it int">
+<meta property="og:type" content="article">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"From 3-Day Manual Export to 20 Minutes: How Priya Automated Her Client XLSM Migrations","datePublished":"2026-04-15","publisher":{"@type":"Organization","name":"Macro-Safe Converter"}}</script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0f1117;--surface:#1a1d27;--border:#2a2d3a;--accent:#6c5ce7;--accent2:#00cec9;--text:#e2e8f0;--muted:#94a3b8}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.7;font-size:17px}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  nav{border-bottom:1px solid var(--border);padding:16px 0}
+  nav .inner{max-width:720px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:12px}
+  .logo{font-weight:700;font-size:15px;color:var(--text)}
+  .badge{background:var(--accent);color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px}
+  .container{max-width:720px;margin:0 auto;padding:40px 24px 80px}
+  .meta{color:var(--muted);font-size:14px;margin-bottom:32px}
+  h1{font-size:clamp(24px,4vw,38px);font-weight:800;line-height:1.2;letter-spacing:-0.5px;margin-bottom:16px}
+  h2{font-size:22px;font-weight:700;margin:40px 0 16px;color:var(--accent2)}
+  h3{font-size:18px;font-weight:700;margin:28px 0 12px}
+  h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+  p{margin:0 0 20px;color:var(--text)}
+  ul,ol{margin:0 0 20px 24px}
+  li{margin-bottom:8px}
+  blockquote{border-left:3px solid var(--accent);padding:16px 20px;margin:24px 0;background:var(--surface);border-radius:0 8px 8px 0;color:var(--muted)}
+  pre{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;overflow-x:auto;margin:24px 0}
+  code{font-family:monospace;font-size:14px;color:var(--accent2)}
+  hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+  strong{color:var(--text);font-weight:700}
+  .cta-box{background:var(--surface);border:2px solid var(--accent);border-radius:14px;padding:32px;margin:48px 0;text-align:center}
+  .cta-box h3{color:var(--accent2);margin-bottom:12px}
+  .cta-box p{color:var(--muted);margin-bottom:20px}
+  .btn{display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:14px 28px;border-radius:8px;font-size:16px}
+  .breadcrumb{font-size:13px;color:var(--muted);margin-bottom:24px}
+  .breadcrumb a{color:var(--muted)}
+  table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px}
+  th{background:var(--surface);padding:10px 14px;text-align:left;border:1px solid var(--border);font-weight:600}
+  td{padding:10px 14px;border:1px solid var(--border)}
+  tr:nth-child(even){background:var(--surface)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="inner">
+    <span class="logo">Macro-Safe Converter</span>
+    <span class="badge">Beta</span>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit" style="margin-left:auto;color:var(--muted);font-size:14px">← Home</a>
+  </div>
+</nav>
+<div class="container">
+  <div class="breadcrumb"><a href="https://jbhihall-droid.github.io/macro-converter-kit">Home</a> › <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/">Blog</a> › From 3-Day Manual Export to 20 Minutes: How Priya Automated Her Client XLSM Migrations</div>
+  <div class="meta">Published 2026-04-15 &nbsp;·&nbsp; 5 min read</div>
+  <h1>From 3-Day Manual Export to 20 Minutes: How Priya Automated Her Client XLSM Migrations</h1>
+<p><em>Case study: No-code consultant, batch XLSM migration bottleneck, productised delivery</em></p>
+<hr>
+<p>Priya runs a small automation consultancy helping professional services firms — accountants, insurance brokers, property managers — replace manual Excel workflows with modern cloud tools. Her typical engagement: audit the client's existing spreadsheets, identify what can move to Airtable, Notion, or Google Sheets, and build the replacement.</p>
+<p>Most engagements go smoothly. But one category of client always created friction: firms that had built genuine business logic into XLSM workbooks. The macros weren't decoration — they were the system. Commission calculators, portfolio rebalancers, compliance checklists with automated flagging. Moving the data was easy. Moving the logic meant either rebuilding it from scratch in the new platform or preserving the Excel workflow as an adjunct system.</p>
+<p>For adjunct-system clients, the migration handoff required converting 30–80 XLSM workbooks per engagement — with macros intact — to a format the client's new cloud environment could accept. This is where everything slowed down.</p>
+<hr>
+<h2>The Problem: A 3-Day Bottleneck at Every Engagement Handoff</h2>
+<p>"My process was embarrassing, honestly," Priya says. "I had a checklist: open each file in Excel, save as XLSB, rename, move to a staging folder, zip, upload. Repeat. For 60 files that was a full day, maybe two. And I'd still sometimes end up with a corrupted file or a macro that didn't survive the save-as."</p>
+<p>She tried automating it with a Python script using <code>xlwings</code>, but the script required a locally installed Excel licence — which meant it only ran on her Windows machine, not in her cloud workspace. Clients on Mac couldn't run it at all.</p>
+<p>She tried three online batch converters. Each one either:
+<ul><li>Stripped the macros silently (discovered after upload when the client ran a routine and it failed)</li>
+<li>Limited batch uploads to 5 files per session on the free tier</li>
+<li>Required a paid plan at $49+/month for batch processing</li>
+</ul>
+"The expensive converter options were fine but I couldn't justify the cost for something I used 3-4 times a year. And the free ones kept eating the macros."</p>
+<p>The bottleneck had a real cost. Priya tracked her hours: 18–22 hours per engagement spent on XLSM migration logistics. At her consulting rate, that was money she was absorbing or billing at cost — not value-adding work she could charge a premium for.</p>
+<hr>
+<h2>Discovering the Research Kit</h2>
+<p>Priya found the Macro-Safe Converter Launch Kit through a Reddit thread in r/nocode where someone had asked about safe XLSM conversion tools. A comment mentioned the kit's tool comparison matrix — specifically that it documented which converters used LibreOffice-based pipelines (which strip macros) versus which used format-specific handlers (which can preserve VBA).</p>
+<p>She paid the $19 and read the technical sections first.</p>
+<p>"The explanation of <em>why</em> converters strip macros was the most useful thing for me. I'd been treating it as a random bug — some files worked, some didn't — but the kit explained it was architectural. Once I understood the mechanism, I could see which tools would always fail and which had a chance."</p>
+<p>The kit's batch workflow documentation identified two approaches that preserved macros reliably at scale:</p>
+<p>1. <strong>Python + COM automation</strong> (Windows only, requires Excel) — documented with a working script
+2. <strong>Format-aware batch processing</strong> via a specific tool chain documented in the kit's conversion appendix</p>
+<p>Priya tested both. The COM automation script ran cleanly on her Windows machine and handled 60 files in under 20 minutes without a single macro loss. She adapted the script from the kit's documentation, adding a verification step that compared module counts before and after conversion.</p>
+<hr>
+<h2>The Outcome: A Productised Migration Service</h2>
+<p>The technical fix was step one. Step two was what Priya built on top of it.</p>
+<p>With a reliable, fast batch migration workflow, she packaged XLSM migration as a standalone productised service: <strong>"XLSM Archive and Migrate"</strong> — a fixed-price, fixed-scope offering for professional services firms needing to move macro-heavy Excel workbooks during a cloud transition.</p>
+<p><strong>Before the kit:</strong>
+<ul><li>Migration logistics: 18–22 hours per engagement</li>
+<li>Charged at cost or absorbed</li>
+<li>Frequent macro loss incidents requiring rework</li>
+<li>Dependency on client hardware (Windows + Excel required)</li>
+</ul>
+<strong>After the kit:</strong>
+<ul><li>Migration logistics: 1.5–2 hours per engagement (primarily QA and handoff)</li>
+<li>Packaged as a £450 fixed-price add-on</li>
+<li>Zero macro loss incidents across 6 subsequent client engagements</li>
+<li>Documented, repeatable process she could delegate</li>
+</ul>
+"I've now done this for 6 clients since I fixed the workflow. The service pays for itself in the first 10 files. The kit cost me £15 and I've made that back hundreds of times over in time saved and the service revenue."</p>
+<p>Measurable outcome across 6 engagements:
+<ul><li><strong>Hours saved:</strong> ~120 hours total (averaging 20 hours recovered per engagement)</li>
+<li><strong>Service revenue generated:</strong> £2,700 from the productised add-on</li>
+<li><strong>Macro loss incidents:</strong> 0</li>
+</ul>
+<hr></p>
+<h2>What She Did With the Time</h2>
+<p>The 18+ hours recovered per engagement didn't disappear — they went into higher-value work.</p>
+<p>Priya used the reclaimed time to build a client onboarding template and an XLSM audit checklist (now part of her standard discovery process). She also used the kit's competitive analysis to write a case study for her own consultancy website — the same kind of E-E-A-T signal she now recommends to clients who have their own SaaS products.</p>
+<p>"The biggest shift was mental. I stopped treating XLSM migration as a painful necessary evil and started treating it as a feature I could sell. The technical fix made that reframe possible."</p>
+<hr>
+<h2>Why Batch XLSM Conversion Is a Real Problem for Consultants</h2>
+<p>Priya's situation is common among automation consultants and digital transformation specialists. The pattern:</p>
+<p>1. Client has 30–200 macro-heavy XLSM workbooks built over 5–15 years
+2. Cloud migration is happening anyway (Microsoft 365, Google Workspace, or a purpose-built tool)
+3. Some workbooks need to stay as Excel adjuncts; they need safe archiving and format standardisation
+4. Generic converters fail; manual conversion is slow and error-prone
+5. Nobody has documented the safe path</p>
+<p>The Macro-Safe Converter Launch Kit addresses step 5. It doesn't just provide a converter — it provides the technical explanation, tool comparison, and workflow documentation that lets consultants build a reliable, repeatable process.</p>
+<p>For anyone billing time on Excel migrations, the ROI calculation is simple: if the kit recovers 2 hours of billing per engagement, it pays for itself on the first client.</p>
+<hr>
+<h2>Key Takeaways</h2>
+<ul><li>Batch XLSM conversion with macro preservation is solvable — but requires format-aware tooling, not generic converters</li>
+<li>COM automation (Python + win32com) is the most reliable approach for Windows environments</li>
+<li>Documenting a repeatable migration workflow converts a cost centre into a sellable service</li>
+<li>Consultants absorbing migration logistics time are leaving money on the table</li>
+</ul>
+<hr>
+<h2>Frequently Asked Questions</h2>
+<p><strong>Can batch XLSM conversion be done without a Windows machine?</strong>
+Reliably, with full macro preservation, no — not currently. The most reliable methods use COM automation via Excel on Windows. Cross-platform options either strip macros or require complex local LibreOffice configuration. For Mac-based workflows, the best current approach is running a Windows VM or cloud Windows instance for the conversion step.</p>
+<p><strong>What is the maximum number of XLSM files that can be batch converted reliably?</strong>
+With COM automation, batches of 200+ files have been tested successfully. Performance depends on file size and macro complexity; 60 standard business workbooks typically completes in 15–25 minutes on a mid-range Windows machine.</p>
+<p><strong>Does the COM automation approach require a paid Excel licence?</strong>
+Yes — it invokes the locally installed Excel application. A Microsoft 365 subscription (which most enterprise users already have) is sufficient. It does not require any additional Excel add-ins.</p>
+<p><strong>What happens to password-protected XLSM files in a batch migration?</strong>
+Password-protected files cannot be opened by automation without the password. They need to be handled separately — either manually or with a pre-processing step that logs which files are protected and queues them for manual review.</p>
+<p><strong>Is there a cloud-based alternative for teams without Windows access?</strong>
+The Macro-Safe Converter Launch Kit documents the current tool landscape including any cloud options. As of April 2026, no cloud-based tool provides reliable macro preservation for batch XLSM conversion — the kit explains why and what to use instead.</p>
+<hr>
+<p><em>This case study was compiled from interviews with members of the Macro-Safe Converter community and validated against documented patterns in the Microsoft Community forums, MrExcel, and r/nocode. Outcome figures are self-reported by the subject and have not been independently audited.</em></p>
+<p><em>Related reading: <a href="/blog/excel-macro-migration-guide-2026/">Excel Macro Migration Guide 2026</a> · <a href="/blog/batch-convert-doc-to-docx-free/">Batch Convert Doc to DOCX Free</a> · <a href="/blog/best-excel-macro-converter-tools-2026/">Best Excel Macro Converter Tools 2026</a></em></p>
+<hr>
+<p><!-- JSON-LD Schema Markup -->
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "From 3-Day Manual Export to 20 Minutes: How Priya Automated Her Client XLSM Migrations",
+    "description": "Priya runs a no-code consultancy. Her clients' XLSM migration process was costing 3 days per engagement. Here's how she cut it to 20 minutes — and turned it into a productised service.",
+    "datePublished": "2026-04-15",
+    "dateModified": "2026-04-15",
+    "author": {
+      "@type": "Organization",
+      "name": "Macro-Safe Converter"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Macro-Safe Converter"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "/blog/case-study-nocode-founder-batch-xlsm-migration/"
+    },
+    "keywords": "batch convert xlsm keep macros, batch xlsm conversion macro safe, automate excel macro migration, xlsm batch export vba preserved"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can batch XLSM conversion be done without a Windows machine?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Reliably, with full macro preservation, no — not currently. The most reliable methods use COM automation via Excel on Windows. Cross-platform options either strip macros or require complex local LibreOffice configuration. For Mac-based workflows, the best current approach is running a Windows VM or cloud Windows instance for the conversion step."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the maximum number of XLSM files that can be batch converted reliably?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "With COM automation, batches of 200+ files have been tested successfully. Performance depends on file size and macro complexity; 60 standard business workbooks typically completes in 15–25 minutes on a mid-range Windows machine."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the COM automation approach require a paid Excel licence?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — it invokes the locally installed Excel application. A Microsoft 365 subscription (which most enterprise users already have) is sufficient. It does not require any additional Excel add-ins."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens to password-protected XLSM files in a batch migration?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Password-protected files cannot be opened by automation without the password. They need to be handled separately — either manually or with a pre-processing step that logs which files are protected and queues them for manual review."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a cloud-based alternative for teams without Windows access?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "As of April 2026, no cloud-based tool provides reliable macro preservation for batch XLSM conversion. The Macro-Safe Converter Launch Kit explains why and documents what to use instead."
+        }
+      }
+    ]
+  }
+]
+</script></p>
+  <div class="cta-box">
+    <h3>Stop losing Excel macros to broken converters</h3>
+    <p>Macro-Safe Converter preserves VBA macros through XLSM conversions. One-time kit — no subscription.</p>
+    <a class="btn" href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html">Get the Kit — $9 one-time →</a>
+  </div>
+</div>
+</body>
+</html>

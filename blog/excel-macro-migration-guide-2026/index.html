@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excel Macro Migration Guide 2026: Moving VBA Workbooks Without Breaking Them</title>
+<meta name="description" content="The complete 2026 guide to migrating Excel workbooks with VBA macros. Covers XLSM→XLSX, XLSM→Google Sheets, XLSM→Power Automate, and which converters actually p">
+<link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-migration-guide-2026/">
+<meta property="og:title" content="Excel Macro Migration Guide 2026: Moving VBA Workbooks Without Breaking Them">
+<meta property="og:description" content="The complete 2026 guide to migrating Excel workbooks with VBA macros. Covers XLSM→XLSX, XLSM→Google Sheets, XLSM→Power Automate, and which converters actually p">
+<meta property="og:type" content="article">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Excel Macro Migration Guide 2026: Moving VBA Workbooks Without Breaking Them","datePublished":"2026-04-12","publisher":{"@type":"Organization","name":"Macro-Safe Converter"}}</script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0f1117;--surface:#1a1d27;--border:#2a2d3a;--accent:#6c5ce7;--accent2:#00cec9;--text:#e2e8f0;--muted:#94a3b8}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.7;font-size:17px}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  nav{border-bottom:1px solid var(--border);padding:16px 0}
+  nav .inner{max-width:720px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:12px}
+  .logo{font-weight:700;font-size:15px;color:var(--text)}
+  .badge{background:var(--accent);color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px}
+  .container{max-width:720px;margin:0 auto;padding:40px 24px 80px}
+  .meta{color:var(--muted);font-size:14px;margin-bottom:32px}
+  h1{font-size:clamp(24px,4vw,38px);font-weight:800;line-height:1.2;letter-spacing:-0.5px;margin-bottom:16px}
+  h2{font-size:22px;font-weight:700;margin:40px 0 16px;color:var(--accent2)}
+  h3{font-size:18px;font-weight:700;margin:28px 0 12px}
+  h4{font-size:16px;font-weight:600;margin:20px 0 8px}
+  p{margin:0 0 20px;color:var(--text)}
+  ul,ol{margin:0 0 20px 24px}
+  li{margin-bottom:8px}
+  blockquote{border-left:3px solid var(--accent);padding:16px 20px;margin:24px 0;background:var(--surface);border-radius:0 8px 8px 0;color:var(--muted)}
+  pre{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;overflow-x:auto;margin:24px 0}
+  code{font-family:monospace;font-size:14px;color:var(--accent2)}
+  hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+  strong{color:var(--text);font-weight:700}
+  .cta-box{background:var(--surface);border:2px solid var(--accent);border-radius:14px;padding:32px;margin:48px 0;text-align:center}
+  .cta-box h3{color:var(--accent2);margin-bottom:12px}
+  .cta-box p{color:var(--muted);margin-bottom:20px}
+  .btn{display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:14px 28px;border-radius:8px;font-size:16px}
+  .breadcrumb{font-size:13px;color:var(--muted);margin-bottom:24px}
+  .breadcrumb a{color:var(--muted)}
+  table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px}
+  th{background:var(--surface);padding:10px 14px;text-align:left;border:1px solid var(--border);font-weight:600}
+  td{padding:10px 14px;border:1px solid var(--border)}
+  tr:nth-child(even){background:var(--surface)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="inner">
+    <span class="logo">Macro-Safe Converter</span>
+    <span class="badge">Beta</span>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit" style="margin-left:auto;color:var(--muted);font-size:14px">← Home</a>
+  </div>
+</nav>
+<div class="container">
+  <div class="breadcrumb"><a href="https://jbhihall-droid.github.io/macro-converter-kit">Home</a> › <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/">Blog</a> › Excel Macro Migration Guide 2026: Moving VBA Workbooks Without Breaking Them</div>
+  <div class="meta">Published 2026-04-12 &nbsp;·&nbsp; 5 min read</div>
+  <h1>Excel Macro Migration Guide 2026: Moving VBA Workbooks Without Breaking Them</h1>
+<p>If you're managing a fleet of macro-heavy Excel workbooks — for compliance, migration to cloud, or simply upgrading legacy tools — you've likely discovered that the standard advice ("just use online converters") doesn't work when macros are involved.</p>
+<p>This guide covers every migration path for XLSM workbooks in 2026, what works, what doesn't, and the tools that handle it correctly.</p>
+<hr>
+<h2>What Is Excel Macro Migration, Actually?</h2>
+<p>"Excel macro migration" covers several distinct problems that need different solutions:</p>
+<p>1. <strong>Format migration:</strong> Converting XLSM → XLSX (modern Excel, no macros) or XLSM → XLSB (binary, smaller, macros preserved)
+2. <strong>Platform migration:</strong> Moving VBA workbooks from Excel to Google Sheets, LibreOffice Calc, or OnlyOffice
+3. <strong>Technology migration:</strong> Converting VBA macros to modern alternatives (Power Automate, Apps Script, Python, Power Query)
+4. <strong>Archive migration:</strong> Converting macro-heavy workbooks to PDF + archived VBA code for compliance/records</p>
+<p>Each of these has different tooling, different complexity, and different risks. This guide addresses all four.</p>
+<hr>
+<h2>Migration Path 1: XLSM → XLSM/XLSB (Format Only, Macros Preserved)</h2>
+<p>If you're migrating between Windows machines, upgrading Office versions, or consolidating from 32-bit to 64-bit Excel, you often just need the workbooks in a consistent format with macros intact.</p>
+<h3>Python + COM Automation (Recommended)</h3>
+<pre><code>import win32com.client
+import os
+from pathlib import Path
+<p>def migrate_xlsm_batch(input_dir: str, output_dir: str, 
+                        target_format: str = "xlsm") -> dict:
+    """
+    Migrates XLSM workbooks preserving macros.
+    target_format: 'xlsm' (52), 'xlsb' (50), 'xls' (56)
+    """
+    FORMAT_CODES = {
+        "xlsm": 52,   # xlOpenXMLWorkbookMacroEnabled
+        "xlsb": 50,   # xlExcel12 (binary, smaller)
+        "xls": 56,    # xlExcel8 (legacy, broadest compatibility)
+    }
+    
+    xl = win32com.client.Dispatch("Excel.Application")
+    xl.Visible = False
+    xl.DisplayAlerts = False
+    
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+    
+    results = {"success": 0, "failed": 0, "errors": []}
+    
+    for xlsm_file in Path(input_dir).glob("*.xlsm"):
+        output_file = output_path / f"{xlsm_file.stem}.{target_format}"
+        try:
+            wb = xl.Workbooks.Open(str(xlsm_file.resolve()))
+            wb.SaveAs(
+                str(output_file.resolve()),
+                FileFormat=FORMAT_CODES[target_format]
+            )
+            wb.Close(False)
+            results["success"] += 1
+        except Exception as e:
+            results["failed"] += 1
+            results["errors"].append(f"{xlsm_file.name}: {str(e)}")
+    
+    xl.Quit()
+    return results
+</code></pre></p>
+<h3>32-bit to 64-bit VBA Migration Issues</h3>
+<p>If you're migrating workbooks from 32-bit Excel to 64-bit, macros using Windows API calls will break. The fix is updating <code>Declare</code> statements:</p>
+<pre><code>' 32-bit (breaks in 64-bit Excel)
+Declare Function GetWindowsDirectory Lib "kernel32" _
+    Alias "GetWindowsDirectoryA" (ByVal lpBuffer As String, _
+    ByVal nSize As Long) As Long
+<p>' 64-bit compatible (works in both 32-bit and 64-bit)
+#If VBA7 Then
+    Declare PtrSafe Function GetWindowsDirectory Lib "kernel32" _
+        Alias "GetWindowsDirectoryA" (ByVal lpBuffer As String, _
+        ByVal nSize As Long) As Long
+#Else
+    Declare Function GetWindowsDirectory Lib "kernel32" _
+        Alias "GetWindowsDirectoryA" (ByVal lpBuffer As String, _
+        ByVal nSize As Long) As Long
+#End If
+</code></pre></p>
+<p>For large workbook portfolios, a macro scanner that identifies incompatible <code>Declare</code> statements before migration saves significant debugging time.</p>
+<hr>
+<h2>Migration Path 2: XLSM → Google Sheets (Platform Migration)</h2>
+<p>Google Sheets has no native VBA support. When you import an XLSM into Google Sheets, the macros are silently ignored. Your options:</p>
+<h3>Option A: Rewrite in Google Apps Script</h3>
+<p>Apps Script is JavaScript-based and has a similar automation model to VBA. For simple macros (loops, formulas, formatting), rewriting is usually a day's work. For complex VBA with COM calls, Windows API interaction, or custom ribbon controls, it's a full redevelopment project.</p>
+<p>Simple VBA → Apps Script translation example:</p>
+<pre><code>' VBA: Format all cells in column A as currency
+Sub FormatCurrency()
+    Dim lastRow As Long
+    lastRow = Cells(Rows.Count, 1).End(xlUp).Row
+    Range("A1:A" & lastRow).NumberFormat = "$#,##0.00"
+End Sub
+</code></pre>
+<pre><code>// Apps Script equivalent
+function formatCurrency() {
+  const sheet = SpreadsheetApp.getActiveSheet();
+  const lastRow = sheet.getLastRow();
+  const range = sheet.getRange(1, 1, lastRow, 1);
+  range.setNumberFormat('$#,##0.00');
+}
+</code></pre>
+<h3>Option B: Use Vertex AI or GPT for Bulk VBA Translation</h3>
+<p>For portfolios of 50+ macros, AI-assisted translation is now viable. Export each VBA module as a .bas file, then use a batch prompt to convert:</p>
+<pre><code>import anthropic
+from pathlib import Path
+<p>client = anthropic.Anthropic()</p>
+<p>def translate_vba_to_apps_script(vba_code: str) -> str:
+    response = client.messages.create(
+        model="claude-opus-4-6",
+        max_tokens=4096,
+        messages=[{
+            "role": "user",
+            "content": f"""Convert this VBA macro to Google Apps Script.
+            
+Preserve the exact logic. Use SpreadsheetApp API (not Charts, not Drive).
+Return only the Apps Script code, no explanation.</p>
+<p>VBA:
+{vba_code}"""
+        }]
+    )
+    return response.content[0].text</p>
+<h1>Batch translate</h1>
+for bas_file in Path("vba_exports").glob("*.bas"):
+    vba_code = bas_file.read_text()
+    apps_script = translate_vba_to_apps_script(vba_code)
+    output_file = Path("apps_script_output") / bas_file.with_suffix(".gs").name
+    output_file.write_text(apps_script)
+    print(f"Translated: {bas_file.name}")
+</code></pre>
+<p><strong>Accuracy note:</strong> AI translation handles ~80-90% of standard VBA patterns correctly. COM calls, Windows API, and complex UDF patterns require manual review.</p>
+<hr>
+<h2>Migration Path 3: VBA → Power Automate / Power Query</h2>
+<p>For organisations already on Microsoft 365, the modern replacement for VBA is Power Automate (workflow automation) + Power Query (data transformation).</p>
+<p><strong>When to migrate to Power Automate:</strong>
+<ul><li>Macros that interact with Outlook, SharePoint, or Teams</li>
+<li>Scheduled macro runs (replacing Application.OnTime)</li>
+<li>Approval workflows that email stakeholders</li>
+</ul>
+<strong>When to migrate to Power Query:</strong>
+<ul><li>Macros that import, clean, and reshape data (ETL operations)</li>
+<li>Any macro that loops through rows performing calculations</li>
+<li>Macros that connect to databases or external data sources</li>
+</ul>
+<strong>When to keep VBA:</strong>
+<ul><li>Custom functions (UDFs) used in cell formulas</li>
+<li>Complex UI automation (custom ribbons, UserForms)</li>
+<li>Macros with tight performance requirements (Power Query is slower for some operations)</li>
+</ul>
+<h3>Export VBA Modules for Documentation</h3></p>
+<p>Before migration, export all VBA code for the record:</p>
+<pre><code>import win32com.client
+from pathlib import Path
+<p>def export_all_vba(xlsm_path: str, output_dir: str):
+    """Export all VBA modules from an XLSM workbook."""
+    xl = win32com.client.Dispatch("Excel.Application")
+    xl.Visible = False
+    
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+    
+    wb = xl.Workbooks.Open(xlsm_path)
+    
+    for component in wb.VBProject.VBComponents:
+        # Types: 1=Module, 2=Class, 3=UserForm, 100=Worksheet/Workbook
+        ext = {1: ".bas", 2: ".cls", 3: ".frm"}.get(component.Type, ".bas")
+        if component.CodeModule.CountOfLines > 0:
+            export_path = str(output_path / (component.Name + ext))
+            component.Export(export_path)
+            print(f"Exported: {component.Name}{ext}")
+    
+    wb.Close(False)
+    xl.Quit()</p>
+<p>export_all_vba(r"C:\workbooks\complex-model.xlsm", r"C:\vba-exports")
+</code></pre></p>
+<hr>
+<h2>Migration Path 4: XLSM → PDF + VBA Archive (Compliance/Records)</h2>
+<p>For compliance migrations (legal holds, audit archives, records management), you need both a visual record (PDF) and a code archive (exported VBA modules). The PDF represents the workbook state; the VBA archive preserves the logic for potential future audits.</p>
+<h3>Complete Compliance Migration Script</h3>
+<pre><code>import win32com.client
+import os
+from pathlib import Path
+from datetime import datetime
+<p>def compliance_migrate(xlsm_path: str, output_dir: str, metadata: dict = None):
+    """
+    Full compliance migration: PDF export + VBA archive + metadata.
+    Creates: output_dir/filename/filename.pdf, *.bas files, metadata.json
+    """
+    import json
+    
+    xl = win32com.client.Dispatch("Excel.Application")
+    xl.Visible = False
+    xl.DisplayAlerts = False
+    
+    xlsm_path = Path(xlsm_path)
+    stem = xlsm_path.stem
+    output_path = Path(output_dir) / stem
+    output_path.mkdir(parents=True, exist_ok=True)
+    
+    wb = xl.Workbooks.Open(str(xlsm_path.resolve()))
+    
+    # 1. Export PDF
+    pdf_path = str(output_path / f"{stem}.pdf")
+    wb.ExportAsFixedFormat(0, pdf_path)
+    
+    # 2. Export VBA modules
+    vba_count = 0
+    for component in wb.VBProject.VBComponents:
+        ext = {1: ".bas", 2: ".cls", 3: ".frm"}.get(component.Type, ".bas")
+        if component.CodeModule.CountOfLines > 0:
+            export_file = str(output_path / (component.Name + ext))
+            component.Export(export_file)
+            vba_count += 1
+    
+    # 3. Write metadata
+    meta = {
+        "source_file": str(xlsm_path),
+        "migration_date": datetime.utcnow().isoformat(),
+        "sheet_count": wb.Worksheets.Count,
+        "vba_modules_exported": vba_count,
+        "excel_version": xl.Version,
+        **(metadata or {})
+    }
+    (output_path / "metadata.json").write_text(json.dumps(meta, indent=2))
+    
+    wb.Close(False)
+    xl.Quit()
+    
+    print(f"Migration complete: {stem}")
+    print(f"  PDF: {pdf_path}")
+    print(f"  VBA modules: {vba_count}")
+    return str(output_path)
+</code></pre></p>
+<hr>
+<h2>Which Tools Handle Macro-Aware Conversion At Scale?</h2>
+<p>| Tool | Macro Preservation | Platform | Cost | Batch Support |
+|------|--------------------|----------|------|---------------|
+| Excel + COM automation | Excellent | Windows only | Free (needs Excel license) | Yes (script it) |
+| Aspose.Cells | Excellent | Any | $1,200+/year | Yes (API) |
+| LibreOffice headless | Poor (Basic, not VBA) | Any | Free | Yes |
+| Online converters (all) | None (stripped) | Browser | Free-$25/mo | Limited |
+| Google Sheets import | None (ignored) | Browser | Free | No |</p>
+<p><strong>The gap:</strong> There is no mid-market tool (priced $7-50/month) that provides reliable macro-aware conversion across platforms. Enterprise users either pay for Aspose or maintain in-house COM automation scripts. This is an unsolved problem at scale.</p>
+<hr>
+<h2>Common Migration Errors and Fixes</h2>
+<h3>Error: "This workbook contains macros" dialog during headless conversion</h3>
+<p>LibreOffice shows this dialog on files with macro content. Suppress it:
+<pre><code>libreoffice --headless --norestore --nofirststartwizard --convert-to docx file.xlsm
+</code></pre></p>
+<h3>Error: VBA project is password-protected</h3>
+<p>COM automation can unlock with:
+<pre><code>wb.VBProject.Protection = 0  # May fail if VBA project is locked
+<h1>If locked, you'll need to supply the VBA project password:</h1>
+wb = xl.Workbooks.Open(path, Password="", WriteResPassword="", 
+                        ReadOnly=False, Notify=False, 
+                        AddToMru=False, MemorySize=0, Converter=0)
+</code></pre></p>
+<h3>Error: Missing font causing PDF rendering differences</h3>
+<p>Install required fonts before batch conversion:
+<pre><code><h1>Ubuntu</h1>
+sudo apt-get install ttf-mscorefonts-installer fonts-liberation
+</code></pre></p>
+<hr>
+<h2>FAQ</h2>
+<h3>Does converting XLSM to XLSX delete the macros?</h3>
+<p>Yes. XLSX format does not support macros. Converting XLSM to XLSX permanently removes all VBA code. If you need macros preserved, use XLSM→XLSM or XLSM→XLSB as your output format.</p>
+<h3>Can Google Sheets run Excel macros?</h3>
+<p>No. Google Sheets does not support VBA. Macros are silently ignored when importing XLSM files. You must rewrite macros in Google Apps Script or Power Automate if you're migrating to Google Workspace.</p>
+<h3>What's the best format for long-term macro archival?</h3>
+<p>XLSB (Excel Binary Workbook, FileFormat 50) is the most compact macro-enabled format and has the best read performance for large workbooks. XLSM is better for version control and diffs (it's XML-based). For archival, XLSM is preferred because the XML content can be inspected without Excel.</p>
+<h3>Is there a tool that converts VBA to Python automatically?</h3>
+<p>AI-assisted translation (Claude, GPT-4) handles 70-85% of standard VBA patterns. Complex Windows API calls, COM automation, and Excel-specific object model interactions require manual review. For production migration, plan for human review of all AI-translated code before deployment.</p>
+<hr>
+<h2>The Niche Tool That Doesn't Exist Yet</h2>
+<p>Every migration path described above requires either Windows + Office licences (COM automation) or $1,200+/year (Aspose). The mid-market — a web-based, macro-aware batch converter at $7-15/month — doesn't exist.</p>
+<p>If you're a developer looking for a defensible micro-SaaS opportunity, this is it.</p>
+<p>I researched the full competitive landscape, search demand, pricing model, and technical architecture for a macro-safe conversion product. It's packaged as a founder kit:</p>
+<p><strong><a href="[GUMROAD_URL]">Macro-Safe Converter Launch Kit</a></strong> — keyword matrix, positioning guide, landing page copy, pricing framework, and 48-hour launch checklist. Everything needed to validate and build in this niche.</p>
+<hr>
+<p><em>Last updated: April 2026</em></p>
+  <div class="cta-box">
+    <h3>Stop losing Excel macros to broken converters</h3>
+    <p>Macro-Safe Converter preserves VBA macros through XLSM conversions. One-time kit — no subscription.</p>
+    <a class="btn" href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html">Get the Kit — $9 one-time →</a>
+  </div>
+</div>
+</body>
+</html>
