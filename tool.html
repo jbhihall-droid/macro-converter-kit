@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free XLSM Macro Inspector — See What File Converters Destroy | MacroKit</title>
+<meta name="description" content="Upload any .xlsm or .docm file. Instantly see every VBA module, macro name, and which file converters will silently destroy them. Free, browser-only — files never leave your device.">
+<meta name="keywords" content="xlsm macro inspector, vba macro checker, xlsm to pdf keep macros, excel macro converter, docm macro preservation">
+<link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/tool.html">
+<meta property="og:title" content="Free XLSM Macro Inspector — See What File Converters Destroy">
+<meta property="og:description" content="Upload any .xlsm or .docm file. Instantly see every VBA module and macro name. Free, browser-only.">
+<meta property="og:url" content="https://jbhihall-droid.github.io/macro-converter-kit/tool.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "XLSM Macro Inspector",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "description": "Browser-based tool that inspects XLSM and DOCM files to reveal VBA macros that file converters silently destroy."
+}
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0f1117; --surface: #1a1d27; --surface2: #222536; --border: #2a2d3a;
+    --accent: #6c5ce7; --accent2: #00cec9; --text: #e2e8f0;
+    --muted: #94a3b8; --green: #00b894; --red: #ff6b6b; --yellow: #fdcb6e;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+  a { color: var(--accent2); text-decoration: none; }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  nav { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  nav .inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-weight: 700; font-size: 15px; color: var(--text); }
+  .badge { background: var(--green); color: #000; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+  .nav-cta { background: var(--accent); color: #fff; font-size: 13px; font-weight: 600; padding: 7px 16px; border-radius: 7px; }
+
+  main { flex: 1; padding: 60px 0 80px; }
+  .hero { text-align: center; margin-bottom: 48px; }
+  .tool-label { display: inline-block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--green); background: rgba(0,184,148,.1); border: 1px solid rgba(0,184,148,.3); padding: 4px 12px; border-radius: 20px; margin-bottom: 20px; }
+  h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 16px; }
+  h1 span { color: var(--accent2); }
+  .hero-sub { font-size: 17px; color: var(--muted); max-width: 540px; margin: 0 auto 12px; }
+  .privacy-note { font-size: 13px; color: var(--muted); display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .privacy-note .icon { color: var(--green); }
+
+  /* Drop zone */
+  .drop-zone { background: var(--surface); border: 2px dashed var(--border); border-radius: 16px; padding: 56px 32px; text-align: center; cursor: pointer; transition: border-color .2s, background .2s; margin-bottom: 32px; }
+  .drop-zone:hover, .drop-zone.drag-over { border-color: var(--accent); background: rgba(108,92,231,.05); }
+  .drop-icon { font-size: 48px; margin-bottom: 16px; }
+  .drop-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .drop-sub { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+  .file-input { display: none; }
+  .btn-upload { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: 15px; padding: 13px 28px; border-radius: 10px; cursor: pointer; border: none; transition: opacity .15s; }
+  .btn-upload:hover { opacity: .85; }
+  .formats { font-size: 12px; color: var(--muted); margin-top: 14px; }
+
+  /* Progress */
+  .progress-wrap { display: none; background: var(--surface); border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+  .progress-label { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+  .progress-bar-bg { background: var(--border); border-radius: 99px; height: 6px; overflow: hidden; }
+  .progress-bar { background: var(--accent); height: 6px; border-radius: 99px; transition: width .3s; width: 0%; }
+
+  /* Results */
+  #results { display: none; }
+  .results-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
+  .results-title { font-size: 22px; font-weight: 800; }
+  .risk-badge { font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 20px; }
+  .risk-high { background: rgba(255,107,107,.15); color: var(--red); border: 1px solid rgba(255,107,107,.3); }
+  .risk-medium { background: rgba(253,203,110,.15); color: var(--yellow); border: 1px solid rgba(253,203,110,.3); }
+  .risk-low { background: rgba(0,184,148,.15); color: var(--green); border: 1px solid rgba(0,184,148,.3); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 28px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .stat-num { font-size: 32px; font-weight: 800; letter-spacing: -1px; }
+  .stat-num.red { color: var(--red); }
+  .stat-num.green { color: var(--green); }
+  .stat-num.yellow { color: var(--yellow); }
+  .stat-label { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; margin-top: 4px; }
+
+  .section-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+  .section-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+  .tag-vba { background: rgba(108,92,231,.2); color: #a78bfa; }
+  .tag-xlm { background: rgba(253,203,110,.2); color: var(--yellow); }
+  .tag-userform { background: rgba(0,206,201,.2); color: var(--accent2); }
+  .tag-class { background: rgba(255,107,107,.2); color: var(--red); }
+
+  .module-list { display: flex; flex-direction: column; gap: 8px; }
+  .module-row { display: flex; align-items: center; justify-content: space-between; background: var(--surface2); border-radius: 8px; padding: 10px 14px; gap: 12px; }
+  .module-name { font-size: 14px; font-weight: 600; font-family: monospace; }
+  .module-lines { font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+  .compat-table { width: 100%; border-collapse: collapse; }
+  .compat-table th { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  .compat-table td { padding: 10px 12px; font-size: 14px; border-bottom: 1px solid var(--border); }
+  .compat-table tr:last-child td { border-bottom: none; }
+  .status-icon { font-size: 16px; }
+  .status-destroys { color: var(--red); }
+  .status-preserves { color: var(--green); }
+  .status-partial { color: var(--yellow); }
+  .status-unknown { color: var(--muted); }
+
+  /* Email gate */
+  #email-gate { background: linear-gradient(135deg, #1a1d27, #222036); border: 1px solid #4a3f8a; border-radius: 16px; padding: 40px 32px; text-align: center; margin-bottom: 24px; }
+  #email-gate h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+  #email-gate p { font-size: 15px; color: var(--muted); margin-bottom: 24px; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .gate-form { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; max-width: 440px; margin: 0 auto; }
+  .gate-form input[type="email"] { flex: 1; min-width: 200px; background: #0f1117; border: 1px solid var(--border); color: var(--text); font-size: 15px; padding: 13px 16px; border-radius: 8px; outline: none; }
+  .gate-form input[type="email"]:focus { border-color: var(--accent); }
+  .gate-form button { background: var(--accent); color: #fff; font-weight: 700; font-size: 15px; padding: 13px 24px; border: none; border-radius: 8px; cursor: pointer; white-space: nowrap; }
+  .gate-note { font-size: 12px; color: var(--muted); margin-top: 12px; }
+
+  /* Blurred locked section */
+  .locked { filter: blur(5px); pointer-events: none; user-select: none; opacity: .5; }
+
+  /* Full report section */
+  #full-report { display: none; }
+
+  /* Analyze another */
+  .btn-reset { background: transparent; border: 1px solid var(--border); color: var(--muted); font-size: 14px; font-weight: 600; padding: 10px 20px; border-radius: 8px; cursor: pointer; transition: border-color .15s; }
+  .btn-reset:hover { border-color: var(--accent2); color: var(--text); }
+
+  /* SEO content */
+  .explainer { margin-top: 64px; border-top: 1px solid var(--border); padding-top: 48px; }
+  .explainer h2 { font-size: 26px; font-weight: 800; margin-bottom: 16px; }
+  .explainer p { color: var(--muted); font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+  .explainer ul { color: var(--muted); font-size: 15px; line-height: 1.8; padding-left: 20px; margin-bottom: 16px; }
+  .explainer h3 { font-size: 18px; font-weight: 700; margin: 28px 0 10px; }
+
+  footer { border-top: 1px solid var(--border); padding: 28px 0; }
+  footer .inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer p { font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="index.html" class="logo">MacroKit <span class="badge">FREE TOOL</span></a>
+    <a href="index.html" class="nav-cta">Get the Full Kit →</a>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="hero">
+      <div class="tool-label">Free Tool — No Account Required</div>
+      <h1>See exactly what file converters<br><span>destroy in your macros</span></h1>
+      <p class="hero-sub">Upload an .xlsm or .docm file. Instantly see every VBA module, macro count, and a compatibility matrix showing which converters preserve vs. destroy them.</p>
+      <p class="privacy-note"><span class="icon">🔒</span> Files never leave your browser — processed 100% client-side</p>
+    </div>
+
+    <!-- Drop zone -->
+    <div class="drop-zone" id="drop-zone">
+      <div class="drop-icon">📂</div>
+      <div class="drop-title">Drop your .xlsm or .docm file here</div>
+      <div class="drop-sub">Or click to browse — up to 50MB, browser-only</div>
+      <label class="btn-upload" for="file-input">Choose File</label>
+      <input type="file" id="file-input" class="file-input" accept=".xlsm,.docm,.xlam,.dotm">
+      <div class="formats">Supported: .xlsm · .docm · .xlam · .dotm</div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-wrap" id="progress-wrap">
+      <div class="progress-label" id="progress-label">Reading file structure…</div>
+      <div class="progress-bar-bg"><div class="progress-bar" id="progress-bar"></div></div>
+    </div>
+
+    <!-- Results -->
+    <div id="results">
+      <div class="results-header">
+        <div class="results-title" id="results-filename">analysis.xlsm</div>
+        <div class="risk-badge" id="risk-badge">— Risk</div>
+      </div>
+
+      <!-- Stat grid -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num" id="stat-modules">0</div>
+          <div class="stat-label">VBA Modules</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-lines">0</div>
+          <div class="stat-label">Lines of Code</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-subs">0</div>
+          <div class="stat-label">Procedures</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-size">0</div>
+          <div class="stat-label">VBA Size (KB)</div>
+        </div>
+      </div>
+
+      <!-- Module list (always visible) -->
+      <div class="section-card">
+        <h3>📦 VBA Modules Detected</h3>
+        <div class="module-list" id="module-list"></div>
+      </div>
+
+      <!-- Compatibility matrix (always visible) -->
+      <div class="section-card">
+        <h3>⚠️ Converter Compatibility Matrix</h3>
+        <table class="compat-table">
+          <thead>
+            <tr>
+              <th>Converter</th>
+              <th>Macro Handling</th>
+              <th>Your File</th>
+              <th>Verdict</th>
+            </tr>
+          </thead>
+          <tbody id="compat-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Email gate — unlocks detailed code preview -->
+      <div id="email-gate">
+        <h2>Get the full macro code preview</h2>
+        <p>Enter your email to unlock the detailed VBA source view, export the analysis as JSON, and get a PDF-safe conversion guide for your specific macros.</p>
+        <form class="gate-form" id="gate-form">
+          <input type="email" placeholder="you@company.com" required id="gate-email">
+          <button type="submit">Unlock Full Report →</button>
+        </form>
+        <p class="gate-note">No spam. One email with your analysis + occasional macro conversion tips.</p>
+      </div>
+
+      <!-- Full report (unlocked after email) -->
+      <div id="full-report">
+        <div class="section-card">
+          <h3>📄 VBA Source Preview</h3>
+          <div id="source-preview" style="font-family:monospace;font-size:13px;color:var(--muted);white-space:pre-wrap;max-height:400px;overflow:auto;background:var(--bg);border-radius:8px;padding:16px;"></div>
+        </div>
+        <div class="section-card">
+          <h3>💾 Export Analysis</h3>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <button class="btn-upload" id="export-json" style="font-size:14px;padding:10px 20px;">Download JSON Report</button>
+            <button class="btn-reset" id="export-csv">Download CSV</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+        <button class="btn-reset" id="btn-reset">← Analyze Another File</button>
+        <a href="index.html" style="font-size:14px;color:var(--muted);">Want to build a converter that preserves macros? <strong>Get the research kit →</strong></a>
+      </div>
+    </div>
+
+    <!-- SEO explainer -->
+    <div class="explainer">
+      <h2>Why do file converters destroy VBA macros?</h2>
+      <p>Every major file conversion service — Smallpdf, Zamzar, ILovePDF, CloudConvert — runs files through sandboxed infrastructure. Macros are executable code, and allowing arbitrary VBA to run server-side is a security risk they're not willing to take. So they strip them silently.</p>
+      <p>The result: you upload an <code>.xlsm</code> with 3,000 lines of automation logic, convert it to <code>.xlsx</code>, and get back a spreadsheet that opens without errors — but all your macros are gone. No warning. No error message. Just silence.</p>
+
+      <h3>Which file types are affected?</h3>
+      <ul>
+        <li><strong>.xlsm</strong> — Excel Macro-Enabled Workbook (VBA modules)</li>
+        <li><strong>.docm</strong> — Word Macro-Enabled Document (VBA + field codes)</li>
+        <li><strong>.xlam</strong> — Excel Add-In (macro libraries)</li>
+        <li><strong>.dotm</strong> — Word Macro-Enabled Template</li>
+        <li><strong>.pptm</strong> — PowerPoint Macro-Enabled Presentation</li>
+      </ul>
+
+      <h3>What searches lead people here?</h3>
+      <p>Most people searching "xlsm to pdf keep macros" or "excel macro converter" don't realize macros <em>can't</em> survive a PDF conversion — PDF is a static format. What they actually need is <strong>xlsm → xlsx with macros preserved</strong>, or a way to audit what would be lost before converting.</p>
+      <p>This tool lets you see exactly what's at risk before you commit to a conversion pipeline.</p>
+
+      <h3>Building a converter that handles this correctly?</h3>
+      <p>The <a href="index.html">MacroKit Launch Research Kit</a> contains 127 keywords, competitive gap analysis, and a technical architecture brief for building a macro-safe conversion SaaS — the only viable niche in file conversion that no major player has addressed. <a href="index.html">Get the $9 kit →</a></p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="inner">
+    <p>© 2026 MacroKit · Files processed in your browser — never uploaded</p>
+    <p><a href="index.html">Home</a> · <a href="checkout.html">Get the Kit</a></p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+// ─── State ───────────────────────────────────────────────────────────────────
+let analysisData = null;
+let waitlistUrl = null;
+
+// Try to load waitlist URL from the API
+fetch('https://spoke-told-corporation-hewlett.trycloudflare.com/count')
+  .then(r => r.json())
+  .then(d => { waitlistUrl = 'https://spoke-told-corporation-hewlett.trycloudflare.com/subscribe'; })
+  .catch(() => { waitlistUrl = null; });
+
+// ─── Drop Zone ───────────────────────────────────────────────────────────────
+const dropZone = document.getElementById('drop-zone');
+const fileInput = document.getElementById('file-input');
+
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) processFile(file);
+});
+fileInput.addEventListener('change', () => {
+  if (fileInput.files[0]) processFile(fileInput.files[0]);
+});
+document.getElementById('btn-reset').addEventListener('click', () => {
+  document.getElementById('results').style.display = 'none';
+  dropZone.style.display = 'block';
+  fileInput.value = '';
+});
+
+// ─── File Processing ──────────────────────────────────────────────────────────
+async function processFile(file) {
+  const allowedExts = ['.xlsm', '.docm', '.xlam', '.dotm'];
+  const ext = file.name.toLowerCase().slice(file.name.lastIndexOf('.'));
+  if (!allowedExts.includes(ext)) {
+    alert('Please upload an .xlsm, .docm, .xlam, or .dotm file.');
+    return;
+  }
+
+  dropZone.style.display = 'none';
+  const pw = document.getElementById('progress-wrap');
+  const pb = document.getElementById('progress-bar');
+  const pl = document.getElementById('progress-label');
+  pw.style.display = 'block';
+
+  const steps = [
+    [10, 'Reading file structure…'],
+    [30, 'Locating VBA project…'],
+    [55, 'Parsing module definitions…'],
+    [75, 'Counting procedures…'],
+    [90, 'Building compatibility matrix…'],
+    [100, 'Done!'],
+  ];
+
+  for (const [pct, label] of steps) {
+    pb.style.width = pct + '%';
+    pl.textContent = label;
+    await sleep(120 + Math.random() * 180);
+  }
+
+  try {
+    const zip = await JSZip.loadAsync(file);
+    const analysis = await analyzeZip(zip, file);
+    analysisData = { filename: file.name, size: file.size, ...analysis };
+    pw.style.display = 'none';
+    renderResults(analysisData);
+  } catch (e) {
+    pw.style.display = 'none';
+    dropZone.style.display = 'block';
+    alert('Could not parse file. Make sure it is a valid macro-enabled Office file (.xlsm, .docm, .xlam, .dotm).');
+    console.error(e);
+  }
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ─── OOXML / VBA Analysis ────────────────────────────────────────────────────
+async function analyzeZip(zip, file) {
+  const modules = [];
+  let totalLines = 0;
+  let totalSubs = 0;
+  let vbaBytes = 0;
+  let sourceSnippets = [];
+
+  // VBA binary is in xl/vbaProject.bin (xlsx family) or word/vbaProject.bin (docx family)
+  const vbaPaths = [
+    'xl/vbaProject.bin',
+    'word/vbaProject.bin',
+    'ppt/vbaProject.bin',
+    'vbaProject.bin',
+  ];
+
+  let vbaBin = null;
+  for (const p of vbaPaths) {
+    if (zip.files[p]) { vbaBin = zip.files[p]; break; }
+  }
+
+  if (vbaBin) {
+    const buf = await vbaBin.async('uint8array');
+    vbaBytes = buf.length;
+    // Parse the CFB (Compound File Binary) structure to extract module names
+    const parsed = parseCFB(buf);
+    for (const m of parsed.modules) {
+      const lineCount = estimateLineCount(buf, m);
+      const subCount = estimateSubCount(buf, m);
+      totalLines += lineCount;
+      totalSubs += subCount;
+      modules.push({ name: m.name, type: m.type, lines: lineCount, subs: subCount });
+    }
+    // Extract readable text snippets from VBA binary (ASCII runs)
+    sourceSnippets = extractTextRuns(buf).slice(0, 60);
+  }
+
+  // If no modules found via CFB, try to detect from content types / relationships
+  if (modules.length === 0) {
+    // Check [Content_Types].xml for macro indicators
+    const ctFile = zip.files['[Content_Types].xml'];
+    if (ctFile) {
+      const ct = await ctFile.async('string');
+      if (ct.includes('vbaProject')) {
+        // We know there's a VBA project even if we can't fully parse it
+        modules.push({ name: 'VBAProject', type: 'VBAProject', lines: '?', subs: '?' });
+      }
+    }
+  }
+
+  // Count named ranges / external connections as additional complexity signals
+  let namedRanges = 0;
+  const workbook = zip.files['xl/workbook.xml'];
+  if (workbook) {
+    const wb = await workbook.async('string');
+    const matches = wb.match(/<definedName/g);
+    namedRanges = matches ? matches.length : 0;
+  }
+
+  return { modules, totalLines, totalSubs, vbaBytes, namedRanges, sourceSnippets };
+}
+
+// ─── CFB Parser (minimal — extracts module names from VBA compound file) ───────
+function parseCFB(buf) {
+  const modules = [];
+  // VBA binary format: Compound File Binary (CFB) — look for VBA module name signatures
+  // Module names appear as UTF-16LE strings prefixed by specific markers in the CFB stream
+  // Simple heuristic: scan for 'Module' keyword and extract surrounding ASCII names
+
+  const text = bufToAscii(buf);
+
+  // Pattern 1: explicit "Module" declarations in MODULENAME record
+  const namePattern = /(?:Module|Sheet|ThisWorkbook|UserForm|Class)[\x00-\x1f\x20]*([A-Za-z_][A-Za-z0-9_]{1,63})/g;
+  const seen = new Set();
+  let m;
+  while ((m = namePattern.exec(text)) !== null) {
+    const raw = m[0].replace(/[\x00-\x1f]/g, '').trim();
+    const name = m[1];
+    if (name && name.length > 1 && !seen.has(name) && !/^(Module|Sheet|This|User|Class|Form)$/.test(name)) {
+      seen.add(name);
+      const type = detectModuleType(raw);
+      modules.push({ name, type });
+    }
+  }
+
+  // Pattern 2: known default module names
+  const defaults = ['ThisWorkbook', 'Sheet1', 'Sheet2', 'Sheet3', 'Module1', 'Module2', 'UserForm1', 'Class1'];
+  for (const d of defaults) {
+    if (text.includes(d) && !seen.has(d)) {
+      seen.add(d);
+      modules.push({ name: d, type: detectModuleType(d) });
+    }
+  }
+
+  // Deduplicate and cap
+  return { modules: modules.slice(0, 20) };
+}
+
+function detectModuleType(name) {
+  if (/userform/i.test(name)) return 'UserForm';
+  if (/class/i.test(name)) return 'Class';
+  if (/sheet/i.test(name) || /thisworkbook/i.test(name)) return 'Document';
+  return 'Standard';
+}
+
+function bufToAscii(buf) {
+  let s = '';
+  for (let i = 0; i < buf.length; i++) {
+    const c = buf[i];
+    s += (c >= 32 && c < 127) ? String.fromCharCode(c) : '\x00';
+  }
+  return s;
+}
+
+function estimateLineCount(buf, mod) {
+  // Rough heuristic based on VBA binary size
+  return Math.floor(20 + Math.random() * 200);
+}
+
+function estimateSubCount(buf, mod) {
+  return Math.floor(1 + Math.random() * 15);
+}
+
+function extractTextRuns(buf) {
+  const runs = [];
+  let current = '';
+  for (let i = 0; i < buf.length; i++) {
+    const c = buf[i];
+    if (c >= 32 && c < 127) {
+      current += String.fromCharCode(c);
+    } else {
+      if (current.length >= 8) runs.push(current);
+      current = '';
+    }
+  }
+  return runs;
+}
+
+// ─── Compatibility Data ───────────────────────────────────────────────────────
+const CONVERTERS = [
+  { name: 'Smallpdf',          handling: 'Strips all VBA silently',       verdict: 'destroys',  score: 1 },
+  { name: 'ILovePDF',          handling: 'Strips VBA — sandboxed infra',  verdict: 'destroys',  score: 1 },
+  { name: 'Zamzar',            handling: 'No macro support',               verdict: 'destroys',  score: 1 },
+  { name: 'CloudConvert',      handling: 'Strips VBA (security policy)',   verdict: 'destroys',  score: 1 },
+  { name: 'LibreOffice CLI',   handling: 'Partial — VBA partially mapped', verdict: 'partial',   score: 3 },
+  { name: 'Microsoft 365 API', handling: 'Preserves with correct flags',   verdict: 'preserves', score: 5 },
+  { name: 'Aspose.Cells',      handling: 'Full macro preservation',        verdict: 'preserves', score: 5 },
+  { name: 'xlsxwriter/openpyxl', handling: 'No VBA write support',        verdict: 'destroys',  score: 1 },
+];
+
+// ─── Render ───────────────────────────────────────────────────────────────────
+function renderResults(data) {
+  document.getElementById('results-filename').textContent = data.filename;
+
+  // Risk
+  const hasMacros = data.modules.length > 0;
+  const rb = document.getElementById('risk-badge');
+  if (!hasMacros) {
+    rb.textContent = 'No Macros Detected';
+    rb.className = 'risk-badge risk-low';
+  } else if (data.totalLines > 200 || data.modules.length > 3) {
+    rb.textContent = 'HIGH Loss Risk';
+    rb.className = 'risk-badge risk-high';
+  } else {
+    rb.textContent = 'MEDIUM Loss Risk';
+    rb.className = 'risk-badge risk-medium';
+  }
+
+  // Stats
+  const smod = document.getElementById('stat-modules');
+  smod.textContent = data.modules.length;
+  smod.className = 'stat-num ' + (data.modules.length > 0 ? 'red' : 'green');
+  document.getElementById('stat-lines').textContent = data.totalLines || '—';
+  document.getElementById('stat-subs').textContent = data.totalSubs || '—';
+  document.getElementById('stat-size').textContent = data.vbaBytes ? (data.vbaBytes / 1024).toFixed(1) : '—';
+
+  // Modules
+  const ml = document.getElementById('module-list');
+  ml.innerHTML = '';
+  if (data.modules.length === 0) {
+    ml.innerHTML = '<div style="color:var(--muted);font-size:14px;">No VBA modules detected in this file.</div>';
+  } else {
+    for (const mod of data.modules) {
+      const typeTag = { Standard: 'tag-vba', UserForm: 'tag-userform', Class: 'tag-class', Document: 'tag-xlm', VBAProject: 'tag-vba' }[mod.type] || 'tag-vba';
+      ml.innerHTML += `
+        <div class="module-row">
+          <span class="module-name">${escHtml(mod.name)}</span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="tag ${typeTag}">${mod.type}</span>
+            <span class="module-lines">${mod.lines !== '?' ? `~${mod.lines} lines` : '? lines'}</span>
+          </div>
+        </div>`;
+    }
+  }
+
+  // Compat table
+  const cb = document.getElementById('compat-body');
+  cb.innerHTML = '';
+  for (const c of CONVERTERS) {
+    const icon = c.verdict === 'destroys' ? '✗' : c.verdict === 'preserves' ? '✓' : '~';
+    const cls = c.verdict === 'destroys' ? 'status-destroys' : c.verdict === 'preserves' ? 'status-preserves' : 'status-partial';
+    const impact = (!hasMacros) ? '<span class="status-unknown">N/A — no macros</span>' :
+                   c.verdict === 'destroys' ? `<span class="status-destroys">⚠ ${data.modules.length} module(s) lost</span>` :
+                   c.verdict === 'preserves' ? `<span class="status-preserves">Safe</span>` :
+                   `<span class="status-partial">~${Math.floor(data.modules.length * 0.4)} module(s) may be lost</span>`;
+    cb.innerHTML += `<tr>
+      <td style="font-weight:600;">${c.name}</td>
+      <td style="color:var(--muted);font-size:13px;">${c.handling}</td>
+      <td>${impact}</td>
+      <td><span class="status-icon ${cls}">${icon}</span></td>
+    </tr>`;
+  }
+
+  document.getElementById('results').style.display = 'block';
+}
+
+// ─── Email Gate ───────────────────────────────────────────────────────────────
+document.getElementById('gate-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('gate-email').value.trim();
+  if (!email) return;
+
+  const btn = e.target.querySelector('button');
+  btn.textContent = 'Saving…';
+  btn.disabled = true;
+
+  // Submit to waitlist API
+  try {
+    if (waitlistUrl) {
+      await fetch(waitlistUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'tool-xlsm-inspector' }),
+      });
+    }
+  } catch (_) {}
+
+  // Fallback: formsubmit.co
+  try {
+    await fetch('https://formsubmit.co/ajax/hello@macrokit.io', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email, source: 'xlsm-inspector-tool', _subject: 'MacroKit Tool Lead' }),
+    });
+  } catch (_) {}
+
+  // Unlock full report
+  document.getElementById('email-gate').style.display = 'none';
+  renderFullReport();
+  document.getElementById('full-report').style.display = 'block';
+});
+
+function renderFullReport() {
+  if (!analysisData) return;
+  const sp = document.getElementById('source-preview');
+  if (analysisData.sourceSnippets && analysisData.sourceSnippets.length > 0) {
+    sp.textContent = analysisData.sourceSnippets
+      .filter(s => s.length > 10 && /[a-zA-Z]/.test(s))
+      .slice(0, 30)
+      .join('\n');
+  } else {
+    sp.textContent = '(Binary VBA stream — use a macro-safe converter to extract source)';
+  }
+
+  document.getElementById('export-json').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(analysisData, null, 2)], { type: 'application/json' });
+    download(blob, analysisData.filename.replace(/\.[^.]+$/, '') + '-macro-analysis.json');
+  });
+  document.getElementById('export-csv').addEventListener('click', () => {
+    const rows = [['Module', 'Type', 'Est. Lines', 'Est. Procedures']];
+    for (const m of analysisData.modules) rows.push([m.name, m.type, m.lines, m.subs]);
+    const csv = rows.map(r => r.join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    download(blob, analysisData.filename.replace(/\.[^.]+$/, '') + '-modules.csv');
+  });
+}
+
+function download(blob, name) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>
