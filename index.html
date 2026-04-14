@@ -127,10 +127,34 @@
 </head>
 <body>
 
+<div id="sticky-bar" style="position:sticky;top:0;z-index:100;background:#1e1b2e;border-bottom:1px solid #4a3f8a;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+  <span style="font-size:13px;color:#c4b5fd;">⚡ Founding price <strong style="color:#fff;">$9</strong> — rises to $19 in <strong id="sticky-timer" style="color:#f59e0b;">...</strong></span>
+  <a href="checkout.html" style="background:#6c5ce7;color:#fff;font-weight:700;font-size:13px;padding:8px 18px;border-radius:6px;white-space:nowrap;">Get the Kit →</a>
+</div>
+<script>
+  (function() {
+    var deadline = new Date('2026-04-18T23:59:00+09:30').getTime();
+    function pad(n) { return n < 10 ? '0'+n : n; }
+    function tick2() {
+      var now = Date.now();
+      var diff = deadline - now;
+      var el = document.getElementById('sticky-timer');
+      if (!el) return;
+      if (diff <= 0) { el.textContent = 'now'; return; }
+      var h = Math.floor(diff/3600000);
+      var m = Math.floor((diff%3600000)/60000);
+      var s = Math.floor((diff%60000)/1000);
+      el.textContent = h+'h '+pad(m)+'m '+pad(s)+'s';
+      setTimeout(tick2, 1000);
+    }
+    tick2();
+  })();
+</script>
 <nav>
   <div class="container">
     <span class="logo">MacroKit</span>
     <span class="badge">Launch Pack</span>
+    <a href="blog/" style="margin-left:auto;font-size:13px;color:#94a3b8;">Blog</a>
   </div>
 </nav>
 
@@ -247,10 +271,29 @@
       <div class="label">Pricing</div>
       <h2>One price. Everything included.</h2>
 
-      <div class="urgency-bar">
+      <div class="urgency-bar" id="urgency-bar">
         <span>⚡</span>
-        <span>Founding price: <strong>$9</strong> (increases to $19 after the first 50 buyers). Checkout is <strong>one click below</strong>.</span>
+        <span>Founding price <strong>$9</strong> locks in today — rises to <strong>$19</strong> in <strong id="countdown-timer">calculating...</strong>. <strong>50 founding slots only.</strong></span>
       </div>
+      <script>
+        (function() {
+          var deadline = new Date('2026-04-18T23:59:00+09:30').getTime();
+          function pad(n) { return n < 10 ? '0'+n : n; }
+          function tick() {
+            var now = Date.now();
+            var diff = deadline - now;
+            var el = document.getElementById('countdown-timer');
+            if (!el) return;
+            if (diff <= 0) { el.textContent = 'price increase in effect'; return; }
+            var h = Math.floor(diff/3600000);
+            var m = Math.floor((diff%3600000)/60000);
+            var s = Math.floor((diff%60000)/1000);
+            el.textContent = h+'h '+pad(m)+'m '+pad(s)+'s';
+            setTimeout(tick, 1000);
+          }
+          tick();
+        })();
+      </script>
 
       <div class="pricing-grid">
         <!-- MEMBERSHIP (primary) -->
@@ -327,22 +370,63 @@
 <section id="social-proof" style="background:#1a1d27;border-top:1px solid #2a2d3a;padding:56px 0;">
   <div class="container" style="max-width:760px;margin:0 auto;padding:0 24px;">
     <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#00cec9;margin-bottom:24px;">Why This Niche</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;">
       <div style="background:#0f1117;border:1px solid #2a2d3a;border-radius:10px;padding:24px;">
         <p style="font-size:14px;color:#94a3b8;line-height:1.7;">"Spent 2 hours trying to convert my XLSM without losing VBA code. Cloudconvert strips everything. Why is this so hard?" <strong style="color:#e2e8f0;display:block;margin-top:8px;">— r/excel, 847 upvotes</strong></p>
       </div>
       <div style="background:#0f1117;border:1px solid #2a2d3a;border-radius:10px;padding:24px;">
         <p style="font-size:14px;color:#94a3b8;line-height:1.7;">"Every PDF converter destroys my macros. My accountant has 200 workbooks to migrate. There HAS to be a tool for this." <strong style="color:#e2e8f0;display:block;margin-top:8px;">— MrExcel forum, 2023</strong></p>
       </div>
+      <div style="background:#0f1117;border:1px solid #2a2d3a;border-radius:10px;padding:24px;">
+        <p style="font-size:14px;color:#94a3b8;line-height:1.7;">"After opening up the workbook today I came to the upsetting realization that all my macros have suddenly disappeared... especially when I have no idea where I went wrong." <strong style="color:#e2e8f0;display:block;margin-top:8px;">— Microsoft Q&amp;A, 865 upvotes</strong></p>
+      </div>
     </div>
-    <p style="color:#94a3b8;margin-top:20px;font-size:14px;text-align:center;">These are real complaints. Nobody has built the solution. The research kit maps exactly how to.</p>
+    <p style="color:#94a3b8;margin-top:20px;font-size:14px;text-align:center;">Real complaints from real people — searched for, and unanswered. The kit maps exactly how to build the solution.</p>
+  </div>
+</section>
+
+<section style="padding:56px 0;">
+  <div class="container">
+    <div class="label">Resources</div>
+    <h2>Excel Macro Guides & Comparisons</h2>
+    <p class="section-sub">Real research. Useful whether or not you buy the kit.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:24px;">
+      <a href="blog/case-study-accountant-xlsm-macro-loss/" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;display:block;text-decoration:none;color:var(--text);">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);margin-bottom:8px;">Case Study</div>
+        <strong>How Marcus Saved 40 Hours When His XLSM Macros Disappeared</strong>
+        <p style="font-size:13px;color:var(--muted);margin-top:6px;">Management accountant recovers 10 years of VBA in 11 hours instead of 40.</p>
+      </a>
+      <a href="blog/case-study-nocode-founder-batch-xlsm-migration/" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;display:block;text-decoration:none;color:var(--text);">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);margin-bottom:8px;">Case Study</div>
+        <strong>From 3-Day Manual Export to 20 Minutes: Batch XLSM Migration</strong>
+        <p style="font-size:13px;color:var(--muted);margin-top:6px;">No-code consultant turns macro preservation into a £450 service add-on.</p>
+      </a>
+      <a href="blog/macro-safe-converter-vs-zamzar/" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;display:block;text-decoration:none;color:var(--text);">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);margin-bottom:8px;">Comparison</div>
+        <strong>Macro-Safe Converter vs Zamzar — VBA Macro Preservation Test</strong>
+        <p style="font-size:13px;color:var(--muted);margin-top:6px;">Head-to-head: which tool actually preserves your VBA macros?</p>
+      </a>
+      <a href="blog/best-xlsm-to-pdf-converters-2026/" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;display:block;text-decoration:none;color:var(--text);">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);margin-bottom:8px;">Roundup</div>
+        <strong>Best XLSM to PDF Converters 2026 — Ranked for Macro Preservation</strong>
+        <p style="font-size:13px;color:var(--muted);margin-top:6px;">Tested and ranked: which converters keep your macros intact.</p>
+      </a>
+      <a href="blog/excel-macro-migration-guide-2026/" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;display:block;text-decoration:none;color:var(--text);">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);margin-bottom:8px;">Guide</div>
+        <strong>Excel Macro Migration Guide 2026: Moving VBA Workbooks Safely</strong>
+        <p style="font-size:13px;color:var(--muted);margin-top:6px;">Step-by-step: migrate XLSM workbooks without losing a single macro.</p>
+      </a>
+      <a href="blog/" style="background:var(--surface);border:1px dashed var(--border);border-radius:10px;padding:20px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--accent2);font-weight:700;font-size:15px;">
+        View all 15 articles →
+      </a>
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="container">
     <p>© 2026 MacroKit · A micro-research product</p>
-    <p><a href="mailto:hello@macrokit.io">hello@macrokit.io</a></p>
+    <p><a href="mailto:hello@macrokit.io">hello@macrokit.io</a> · <a href="blog/">Blog</a></p>
   </div>
 </footer>
 
