@@ -287,13 +287,6 @@
 <script>
 // ─── State ───────────────────────────────────────────────────────────────────
 let analysisData = null;
-let waitlistUrl = null;
-
-// Try to load waitlist URL from the API
-fetch('https://spoke-told-corporation-hewlett.trycloudflare.com/count')
-  .then(r => r.json())
-  .then(d => { waitlistUrl = 'https://spoke-told-corporation-hewlett.trycloudflare.com/subscribe'; })
-  .catch(() => { waitlistUrl = null; });
 
 // ─── Drop Zone ───────────────────────────────────────────────────────────────
 const dropZone = document.getElementById('drop-zone');
@@ -588,18 +581,7 @@ document.getElementById('gate-form').addEventListener('submit', async (e) => {
   btn.textContent = 'Saving…';
   btn.disabled = true;
 
-  // Submit to waitlist API
-  try {
-    if (waitlistUrl) {
-      await fetch(waitlistUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'tool-xlsm-inspector' }),
-      });
-    }
-  } catch (_) {}
-
-  // Fallback: formsubmit.co
+  // Submit to formsubmit.co (primary — no tunnel dependency)
   try {
     await fetch('https://formsubmit.co/ajax/hello@macrokit.io', {
       method: 'POST',
