@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank you — MacroKit Download</title>
+<meta name="robots" content="noindex">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --accent: #6c5ce7; --accent2: #00cec9; --text: #e2e8f0; --muted: #94a3b8; --green: #00b894; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px 24px; }
+  .card { background: var(--surface); border: 2px solid var(--green); border-radius: 20px; padding: 56px 48px; max-width: 520px; width: 100%; text-align: center; }
+  .icon { font-size: 56px; margin-bottom: 20px; }
+  h1 { font-size: 30px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; }
+  p { font-size: 16px; color: var(--muted); margin-bottom: 8px; }
+  .dl-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: 16px; padding: 14px 32px; border-radius: 10px; margin: 24px 0 12px; text-decoration: none; }
+  .dl-btn:hover { opacity: .85; color: #fff; }
+  .note { font-size: 13px; color: var(--muted); margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px; }
+  .note a { color: var(--accent2); }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="icon">🎉</div>
+  <h1>Payment confirmed!</h1>
+  <p>Your MacroKit download is ready.</p>
+  <p style="margin-top:4px;">Check your email for the receipt and download link from Stripe.</p>
+  <a href="https://github.com/jbhihall-droid/macro-converter-kit/raw/main/macro-safe-launch-kit.zip" class="dl-btn" id="dl-link">
+    Download MacroKit ZIP →
+  </a>
+  <p style="font-size:13px;color:var(--muted);">File: macro-safe-launch-kit.zip (~2MB)</p>
+  <div class="note">
+    Questions? Email <a href="mailto:hello@macrokit.io">hello@macrokit.io</a> — 7-day refund, no questions asked.<br><br>
+    <a href="index.html" style="color:var(--muted);">← Back to MacroKit</a>
+  </div>
+</div>
+<script>
+  // Auto-trigger download after 1 second
+  setTimeout(() => {
+    const link = document.getElementById('dl-link');
+    if (link) {
+      const a = document.createElement('a');
+      a.href = link.href;
+      a.download = 'macro-safe-launch-kit.zip';
+      a.click();
+    }
+  }, 1200);
+</script>
+</body>
+</html>
