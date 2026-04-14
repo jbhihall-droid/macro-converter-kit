@@ -117,8 +117,9 @@
   <div class="container" id="checkout-pending">
     <div class="checkout-pending">
       <div style="font-size:48px;margin-bottom:16px;">⚡</div>
-      <h2>Checkout opens in 48 hours</h2>
-      <p>Drop your email — you'll get the direct checkout link the moment the store opens, at the founding price of $9 (increases to $19 at launch).</p>
+      <h2>Checkout opens soon</h2>
+      <p id="checkout-sub">Drop your email — you'll get the direct checkout link the moment the store opens, at the founding price of $9 (increases to $19 on Apr 18).</p>
+      <div id="checkout-countdown" style="font-size:28px;font-weight:800;color:#f59e0b;margin:16px 0;letter-spacing:-0.5px;">calculating...</div>
       <form class="waitlist-form" id="waitlist-form" onsubmit="submitWaitlist(event)">
         <input type="email" name="email" id="waitlist-email" placeholder="your@email.com" required>
         <button type="submit" id="cta-waitlist">Notify Me →</button>
@@ -141,6 +142,32 @@
 </footer>
 
 <script>
+// Countdown timer for checkout-pending
+(function() {
+  var deadline = new Date('2026-04-18T23:59:00+09:30').getTime();
+  var el = document.getElementById('checkout-countdown');
+  var sub = document.getElementById('checkout-sub');
+  function pad(n) { return n < 10 ? '0'+n : n; }
+  function tick() {
+    if (!el) return;
+    var diff = deadline - Date.now();
+    if (diff <= 0) {
+      el.textContent = 'Price increase now in effect ($19)';
+      el.style.color = '#94a3b8';
+      el.style.fontSize = '16px';
+      if (sub) sub.textContent = 'The founding price period has ended. Price is now $19.';
+      return;
+    }
+    var d = Math.floor(diff/86400000);
+    var h = Math.floor((diff%86400000)/3600000);
+    var m = Math.floor((diff%3600000)/60000);
+    var s = Math.floor((diff%60000)/1000);
+    el.textContent = (d > 0 ? d+'d ' : '') + pad(h)+'h '+pad(m)+'m '+pad(s)+'s until $19';
+    setTimeout(tick, 1000);
+  }
+  tick();
+})();
+
 // Show live checkout if Stripe URLs have been injected (setup-stripe.sh has run)
 const subUrl = "STRIPE_SUB_URL";
 const onetimeUrl = "STRIPE_ONETIME_URL";

@@ -121,4 +121,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/how-to-convert-xls-to-xlsx-without-losing-macros/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

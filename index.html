@@ -165,7 +165,7 @@
       <h1>The Niche Research Kit That<br><span>Builds a $5K/mo File Converter</span></h1>
       <p class="sub">3 weeks of competitive research, keyword mapping, and positioning work — packaged for the file-conversion niche that generic converters can't touch.</p>
       <div class="cta-group">
-        <a class="btn-primary" href="checkout.html" id="cta-hero">Get the Kit — $9</a>
+        <a class="btn-primary" href="checkout.html" id="cta-hero">Get the Kit — <span id="cta-price">$9</span></a>
         <span class="price-note">One-time. Instant download. <strong>No fluff.</strong></span>
       </div>
     </section>
@@ -430,6 +430,18 @@
   </div>
 </footer>
 
+<script>
+  // Post-deadline price honesty: swap $9 → $19 after Apr 18 23:59 ACST
+  (function() {
+    var deadline = new Date('2026-04-18T23:59:00+09:30').getTime();
+    var priceEl = document.getElementById('cta-price');
+    if (priceEl && Date.now() > deadline) {
+      priceEl.textContent = '$19';
+      var stickyTimer = document.getElementById('sticky-timer');
+      if (stickyTimer) { stickyTimer.closest('span').innerHTML = '⚡ Price is now <strong style="color:#fff;">$19</strong> — founding price period has ended'; }
+    }
+  })();
+</script>
 </body>
 </html>
 
