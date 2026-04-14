@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excel Macro Survival Checker — Will Your VBA Macros Survive Conversion?</title>
+<meta name="description" content="Free tool: Select your source and target file format to instantly see if Excel VBA macros survive conversion. Works for XLSM, XLSX, PDF, Google Sheets, DOCM, and more.">
+<meta name="keywords" content="excel macro conversion, xlsm to xlsx macros, vba macro survival, file conversion macros, excel macro checker">
+<link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/checker.html">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Excel Macro Survival Checker","applicationCategory":"UtilitiesApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Instantly check if VBA macros survive when converting between Excel, PDF, Google Sheets, and other file formats."}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f1117;--surface:#1a1d27;--surface2:#222536;--border:#2a2d3a;
+  --accent:#6c5ce7;--text:#e2e8f0;--muted:#94a3b8;
+  --green:#00b894;--red:#e17055;--yellow:#fdcb6e;--orange:#fd7e34;
+  font-size:16px;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:2rem;width:100%;max-width:520px}
+h1{font-size:1.25rem;font-weight:700;margin-bottom:.4rem}
+.sub{color:var(--muted);font-size:.875rem;margin-bottom:1.75rem;line-height:1.5}
+.row{display:flex;gap:.75rem;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap}
+.row label{color:var(--muted);font-size:.8125rem;white-space:nowrap}
+select{background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:.6rem .9rem;font-size:.9375rem;flex:1;min-width:120px;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center;padding-right:2rem}
+select:focus{outline:2px solid var(--accent);outline-offset:2px}
+.arrow{color:var(--muted);font-size:1.25rem;flex-shrink:0}
+button{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.7rem 1.5rem;font-size:.9375rem;font-weight:600;cursor:pointer;width:100%;margin-bottom:1.25rem;transition:opacity .15s}
+button:hover{opacity:.88}
+button:active{opacity:.75}
+.result{border-radius:8px;padding:1.25rem;display:none;margin-bottom:1rem}
+.result.show{display:block}
+.result-icon{font-size:2rem;margin-bottom:.5rem}
+.result-title{font-size:1.0625rem;font-weight:700;margin-bottom:.4rem}
+.result-body{font-size:.875rem;line-height:1.6;color:var(--muted)}
+.result.safe{background:rgba(0,184,148,.1);border:1px solid rgba(0,184,148,.3)}
+.result.safe .result-title{color:var(--green)}
+.result.risky{background:rgba(253,203,110,.08);border:1px solid rgba(253,203,110,.3)}
+.result.risky .result-title{color:var(--yellow)}
+.result.lost{background:rgba(225,112,85,.1);border:1px solid rgba(225,112,85,.3)}
+.result.lost .result-title{color:var(--red)}
+.cta{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin-top:1rem;display:none;text-align:center}
+.cta.show{display:block}
+.cta p{font-size:.8125rem;color:var(--muted);margin-bottom:.6rem}
+.cta a{color:var(--accent);font-weight:600;font-size:.875rem;text-decoration:none}
+.cta a:hover{text-decoration:underline}
+.embed-box{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border)}
+.embed-box summary{color:var(--muted);font-size:.8125rem;cursor:pointer;user-select:none}
+.embed-box summary:hover{color:var(--text)}
+.embed-code{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:.75rem;margin-top:.75rem;font-family:monospace;font-size:.75rem;color:var(--muted);word-break:break-all;position:relative}
+.copy-btn{position:absolute;top:.5rem;right:.5rem;background:var(--accent);color:#fff;border:none;border-radius:4px;padding:.2rem .6rem;font-size:.7rem;cursor:pointer;opacity:.8}
+.copy-btn:hover{opacity:1}
+.powered{text-align:center;margin-top:1.5rem;font-size:.75rem;color:var(--muted)}
+.powered a{color:var(--muted);text-decoration:none}
+.powered a:hover{color:var(--text)}
+@media(max-width:400px){.row{flex-direction:column;align-items:stretch}.arrow{text-align:center}}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Excel Macro Survival Checker</h1>
+  <p class="sub">Select your source and target format. Instantly see if VBA macros survive — before you convert and discover the hard way.</p>
+  <div class="row">
+    <label>From</label>
+    <select id="src" aria-label="Source format">
+      <option value="xlsm">.xlsm (Excel with macros)</option>
+      <option value="xls">.xls (Legacy Excel)</option>
+      <option value="docm">.docm (Word with macros)</option>
+      <option value="pptm">.pptm (PowerPoint with macros)</option>
+      <option value="xlsx">.xlsx (Excel no macros)</option>
+    </select>
+    <span class="arrow">→</span>
+    <select id="dst" aria-label="Target format">
+      <option value="xlsx">.xlsx (Excel, no macros)</option>
+      <option value="pdf">.pdf</option>
+      <option value="gsheet">Google Sheets</option>
+      <option value="csv">.csv</option>
+      <option value="xlsm">.xlsm (Excel with macros)</option>
+      <option value="xls">.xls (Legacy Excel)</option>
+      <option value="docx">.docx (Word)</option>
+      <option value="html">.html</option>
+      <option value="ods">.ods (LibreOffice)</option>
+    </select>
+  </div>
+  <button onclick="check()">Check Macro Survival →</button>
+  <div class="result" id="result">
+    <div class="result-icon" id="icon"></div>
+    <div class="result-title" id="title"></div>
+    <div class="result-body" id="body"></div>
+  </div>
+  <div class="cta" id="cta">
+    <p>Need to preserve macros through conversion? The Macro-Safe Converter Kit includes tested workflows for 12 format pairs.</p>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/" target="_blank" rel="noopener">Get the Macro-Safe Converter Kit →</a>
+  </div>
+  <details class="embed-box">
+    <summary>Embed this tool on your site</summary>
+    <div class="embed-code" id="embedCode">
+      &lt;iframe src="https://jbhihall-droid.github.io/macro-converter-kit/checker.html"
+  width="560" height="480" frameborder="0"
+  title="Excel Macro Survival Checker"
+  style="border-radius:12px"&gt;&lt;/iframe&gt;
+      <button class="copy-btn" onclick="copyEmbed()">Copy</button>
+    </div>
+  </details>
+</div>
+<p class="powered">Powered by <a href="https://jbhihall-droid.github.io/macro-converter-kit/" target="_blank" rel="noopener">MacroKit.io</a> — free tools for Excel automation</p>
+
+<script>
+const DB = {
+  xlsm: {
+    xlsx: {level:"lost",    title:"Macros LOST",        body:"Converting .xlsm → .xlsx strips the vbaProject.bin binary. All VBA code is silently deleted. The file opens fine — but all macros, buttons, and automation are gone. Use a macro-safe converter or save a separate .xlsm master."},
+    pdf:  {level:"lost",    title:"Macros LOST (but output is static)", body:"A PDF has no executable code. Your macros are gone, but if you're generating a report the PDF itself is the point — run macros first, then export. Never expect to recover macros from a PDF."},
+    gsheet:{level:"lost",   title:"Macros LOST — rewrite required",     body:"Google Sheets does not understand VBA. On import, all .xlsm macro content is stripped. You must rewrite automation using Google Apps Script. There is no automatic migration path."},
+    csv:  {level:"lost",    title:"Macros LOST — data only",            body:"CSV contains only cell values. Formulas, formatting, and all VBA macros are discarded on export. Only appropriate if you need the raw data."},
+    xlsm: {level:"safe",    title:"Macros PRESERVED",                   body:"Saving .xlsm → .xlsm keeps all VBA modules, UserForms, and module references intact. Use this as your archival format any time you need to maintain the macro layer."},
+    xls:  {level:"risky",   title:"Macros PARTIALLY preserved (risky)", body:"Old .xls format supports VBA, but modern API features used in .xlsm may not convert cleanly. Test every macro after conversion. Complex UserForms and references to xlsm-only objects often break silently."},
+    docx: {level:"lost",    title:"Macros LOST",                        body:"Cross-application conversion (Excel→Word) strips all VBA. No converter preserves .xlsm macros into a .docx. Data may import as a table if the tool supports it, but all automation is gone."},
+    html: {level:"lost",    title:"Macros LOST",                        body:"HTML export captures visual layout only. All VBA, formulas, and data models are lost. Suitable only for sharing a static view of spreadsheet data."},
+    ods:  {level:"risky",   title:"Basic macros may survive — risky",   body:"LibreOffice ODS supports Basic macros, not VBA. Some converters attempt auto-translation (e.g., LibreOffice's built-in importer) but complex VBA usually breaks. Treat as needing manual rewrite."},
+  },
+  xls: {
+    xlsx: {level:"risky",   title:"Macros PARTIALLY preserved",         body:".xls → .xlsx via Excel usually preserves VBA modules, but any macro relying on XLM (Excel 4.0 macros) or legacy objects will break. Test all macros post-conversion before discarding the .xls original."},
+    xlsm: {level:"risky",   title:"Macros PARTIALLY preserved",         body:"Saving .xls as .xlsm in Excel typically keeps VBA, but legacy XLM macros and some early-90s Excel 4.0 features don't translate. Review and test every macro."},
+    pdf:  {level:"lost",    title:"Macros LOST",                        body:"PDF export is output-only. All macros are gone. Run all automations first, then export the resulting data."},
+    gsheet:{level:"lost",   title:"Macros LOST",                        body:"VBA from .xls is not imported into Google Sheets. You must rewrite in Apps Script."},
+    csv:  {level:"lost",    title:"Macros LOST — data only",            body:"CSV captures values only."},
+    html: {level:"lost",    title:"Macros LOST",                        body:"HTML export is layout-only."},
+    ods:  {level:"risky",   title:"Macros PARTIALLY preserved",         body:"LibreOffice may attempt Basic macro translation from XLS VBA, but success varies significantly. Verify every macro."},
+  },
+  docm: {
+    docx: {level:"lost",    title:"Macros LOST",                        body:"Converting .docm → .docx explicitly strips the macro project. Word warns you on save. All VBA modules and event handlers are deleted."},
+    pdf:  {level:"lost",    title:"Macros LOST",                        body:"PDF export is static. All document automation is gone."},
+    xlsm: {level:"lost",    title:"Macros LOST",                        body:"Cross-application conversion strips VBA. Data may import as text or table, but automation is gone."},
+    xlsx: {level:"lost",    title:"Macros LOST",                        body:"No path from Word macro document to Excel preserves VBA."},
+    html: {level:"lost",    title:"Macros LOST",                        body:"HTML is layout-only. No macro preservation."},
+  },
+  pptm: {
+    pptx: {level:"lost",    title:"Macros LOST",                        body:"Saving .pptm → .pptx strips the VBA project. All slide automation and event handlers are deleted. PowerPoint warns on save."},
+    pdf:  {level:"lost",    title:"Macros LOST",                        body:"PDF is static presentation export. No macros survive."},
+    html: {level:"lost",    title:"Macros LOST",                        body:"HTML export is visual-only."},
+  },
+  xlsx: {
+    xlsm: {level:"safe",    title:"No macros to lose — safe conversion",body:".xlsx has no VBA. Converting to .xlsm just opens it in macro-enabled format. You can now add new VBA — nothing is lost."},
+    pdf:  {level:"safe",    title:"Safe — no macros in source",         body:".xlsx has no VBA so nothing is lost in PDF export. Formulas are evaluated; only values and formatting survive."},
+    gsheet:{level:"risky",  title:"Formulas may break — no macros lost",body:"No VBA to lose, but complex Excel formulas (XLOOKUP, LET, dynamic arrays) may not be supported in Google Sheets. Review formula compatibility before migrating."},
+    csv:  {level:"risky",   title:"Formulas LOST — data only",          body:"CSV keeps only cell values. All formulas, formatting, and structure are stripped. Fine for data portability, not for live spreadsheets."},
+    xls:  {level:"risky",   title:"Formulas may break",                 body:"Downgrading to .xls loses modern Excel features (dynamic arrays, newer functions). No macros to preserve, but function compatibility is a risk."},
+  }
+};
+
+function check() {
+  const src = document.getElementById('src').value;
+  const dst = document.getElementById('dst').value;
+  const result = document.getElementById('result');
+  const cta = document.getElementById('cta');
+
+  if (src === dst) {
+    result.className = 'result show safe';
+    document.getElementById('icon').textContent = '✅';
+    document.getElementById('title').textContent = 'Same format — no conversion needed';
+    document.getElementById('body').textContent = 'Source and target are identical. No data loss, no macro risk. Just copy the file if you need a duplicate.';
+    cta.className = 'cta';
+    return;
+  }
+
+  const srcDB = DB[src];
+  const entry = srcDB && srcDB[dst];
+
+  if (entry) {
+    const icons = {safe:'✅', risky:'⚠️', lost:'❌'};
+    result.className = 'result show ' + entry.level;
+    document.getElementById('icon').textContent = icons[entry.level];
+    document.getElementById('title').textContent = entry.title;
+    document.getElementById('body').textContent = entry.body;
+    cta.className = entry.level !== 'safe' ? 'cta show' : 'cta';
+  } else {
+    result.className = 'result show risky';
+    document.getElementById('icon').textContent = '⚠️';
+    document.getElementById('title').textContent = 'No data for this pair — assume macros are at risk';
+    document.getElementById('body').textContent = 'We don\'t have specific data for this conversion pair. As a safe default: if your source file contains VBA macros, assume they will be lost unless you have verified the conversion path. Test on a copy before converting your master file.';
+    cta.className = 'cta show';
+  }
+}
+
+function copyEmbed() {
+  const code = `<iframe src="https://jbhihall-droid.github.io/macro-converter-kit/checker.html" width="560" height="480" frameborder="0" title="Excel Macro Survival Checker" style="border-radius:12px"></iframe>`;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+</script>
+</body>
+</html>
