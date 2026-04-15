@@ -1,146 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-<url>
+  <url>
     <loc>https://jbhihall-droid.github.io/macro-converter-kit/</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-<url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/tool.html</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-<url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/checkout.html</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-<url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/membership.html</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/</loc>
     <lastmod>2026-04-15</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/adobe-acrobat-vs-cloudconvert-excel-macros/</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/aspose-cells-vs-libreoffice-excel-macros/</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/batch-convert-doc-to-docx-free/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/best-excel-macro-converter-tools-2026/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/best-macro-safe-excel-converter-tools-2026/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/best-xlsm-to-pdf-converters-2026/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/case-study-accountant-xlsm-macro-loss/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/case-study-nocode-founder-batch-xlsm-migration/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/cloudconvert-vs-zamzar-excel-macros/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-migration-guide-2026/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/macro-safe-converter-vs-ilovepdf/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/macro-safe-converter-vs-zamzar/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/smallpdf-vs-ilovepdf-excel-macros/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/why-converters-destroy-excel-macros/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-pdf-keep-macros/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/how-to-convert-xls-to-xlsx-without-losing-macros/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/convert-xlsx-to-xlsm-keep-macros/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/convert-xls-to-xlsm/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsb-to-xlsm-converter/</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -152,13 +37,43 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/vba-macros-lost-after-conversion-fix/</loc>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/best-excel-macro-converter-tools-2026/</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-safe-converter-online-free/</loc>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/best-macro-safe-excel-converter-tools-2026/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/best-xlsm-to-pdf-converters-2026/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/case-study-accountant-xlsm-macro-loss/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/case-study-nocode-founder-batch-xlsm-migration/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/cloudconvert-vs-zamzar-excel-macros/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/convert-xls-to-xlsm/</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -170,7 +85,121 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/convert-xlsx-to-xlsm-keep-macros/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-backup-strategy/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-migration-guide-2026/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-safe-converter-online-free/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-to-google-sheets-keep-formulas/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/how-to-convert-xls-to-xlsx-without-losing-macros/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/macro-safe-converter-vs-ilovepdf/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/macro-safe-converter-vs-zamzar/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/password-protected-excel-convert-keep-macros/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/smallpdf-vs-ilovepdf-excel-macros/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/vba-macros-lost-after-conversion-fix/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/why-converters-destroy-excel-macros/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsb-to-xlsm-converter/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsb-to-xlsx-converter-guide/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-csv-export-data/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-pdf-keep-macros/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-xls-legacy-conversion/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-xlsx-convert-safely/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/checkout.html</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/membership.html</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -179,7 +208,13 @@
     <loc>https://jbhihall-droid.github.io/macro-converter-kit/tools/macro-inspector/</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/tools/macro-risk-calculator/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-vs-xlsx-difference/</loc>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Import Excel to Google Sheets Without Breaking Formulas (2026)</title>
+  <meta name="description" content="Moving Excel spreadsheets to Google Sheets? Here's what breaks, what survives, and how to fix common formula errors after import.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-to-google-sheets-keep-formulas/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta property="og:title" content="How to Import Excel to Google Sheets Without Breaking Formulas (2026)">
+  <meta property="og:description" content="Moving Excel spreadsheets to Google Sheets? Here's what breaks, what survives, and how to fix common formula errors after import.">
+  <meta property="og:url" content="https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-to-google-sheets-keep-formulas/">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="How to Import Excel to Google Sheets Without Breaking Formulas (2026)">
+  <meta name="twitter:description" content="Moving Excel spreadsheets to Google Sheets? Here's what breaks, what survives, and how to fix common formula errors after import.">
+  <style>
+    :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --accent: #6c5ce7; --accent2: #00cec9; --text: #e2e8f0; --muted: #94a3b8; --green: #00b894; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.7; }
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    nav { border-bottom: 1px solid var(--border); padding: 16px 0; }
+    nav .container { display: flex; align-items: center; gap: 12px; }
+    .logo { font-weight: 700; font-size: 15px; color: var(--text); }
+    .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .breadcrumb { padding: 16px 0; font-size: 13px; color: var(--muted); }
+    article { padding: 48px 0 80px; }
+    .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 16px; }
+    h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.2; letter-spacing: -0.8px; margin-bottom: 20px; }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 22px; font-weight: 700; margin: 40px 0 16px; letter-spacing: -0.3px; }
+    h3 { font-size: 17px; font-weight: 700; margin: 28px 0 10px; }
+    p { margin-bottom: 18px; }
+    ul, ol { padding-left: 24px; margin-bottom: 18px; }
+    li { margin-bottom: 8px; }
+    .callout { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .callout strong { color: #c4b5fd; }
+    .warning { background: #1f1a0e; border: 1px solid #78350f; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .warning strong { color: #fbbf24; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th { background: var(--surface); padding: 10px 14px; text-align: left; border: 1px solid var(--border); font-weight: 600; }
+    td { padding: 10px 14px; border: 1px solid var(--border); color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 500; }
+    .verdict-yes { color: #00b894; font-weight: 700; }
+    .verdict-no { color: #d63031; font-weight: 700; }
+    .cta-box { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 12px; padding: 32px; text-align: center; margin: 40px 0; }
+    .cta-box h3 { color: #c4b5fd; margin-bottom: 8px; font-size: 18px; }
+    .cta-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 8px; font-size: 15px; text-decoration: none; margin-top: 20px; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; font-size: 13px; overflow-x: auto; margin-bottom: 18px; }
+    code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; }
+    .related { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin: 40px 0; }
+    .related h3 { font-size: 15px; color: var(--muted); margin-bottom: 12px; margin-top: 0; }
+    .related ul { list-style: none; padding: 0; margin: 0; }
+    .related li { margin-bottom: 8px; }
+  </style>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does Excel to Google Sheets import preserve all formulas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most standard formulas (SUM, IF, VLOOKUP, INDEX/MATCH) import correctly. Excel-exclusive functions like XLOOKUP, STOCKHISTORY, and Power Query connections do not have direct equivalents in Sheets and will show errors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I import XLSM macros to Google Sheets?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. VBA macros are stripped on import. Google Sheets uses Apps Script (JavaScript-based) as its macro language. You need to rewrite any critical macros in Apps Script after import."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the file size limit for importing Excel to Google Sheets?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Google Sheets supports imports up to 100MB for uploaded files. Very large Excel files (100K+ rows) may import slowly or hit cell limits (10 million cells per spreadsheet)."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Import Excel to Google Sheets Without Breaking Formulas (2026)",
+  "description": "Moving Excel spreadsheets to Google Sheets? Here's what breaks, what survives, and how to fix common formula errors after import.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "What Happens When You Import Excel to Google Sheets",
+      "text": "Google Sheets accepts XLSX, XLS, and XLSM files via upload. The import engine converts most content, but there are predictable failure points. Knowing them before you migrate saves hours of debugging.\n\n<div class='callout'><strong>XLSM note:</strong> Macros (VBA) are stripped on import \u2014 Google Shee"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Compatibility Matrix",
+      "text": "<table><thead><tr><th>Feature</th><th>Survives Import?</th><th>Notes</th></tr></thead><tbody><tr><td>Cell values, text, numbers</td><td class='verdict-yes'>YES</td><td>\u2014</td></tr><tr><td>Basic formulas (SUM, IF, VLOOKUP)</td><td class='verdict-yes'>YES</td><td>Most common functions work</td></tr><tr"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Step-by-Step Import",
+      "text": "<ol><li>Open Google Drive \u2192 click <strong>+ New \u2192 File upload</strong></li><li>Upload your XLSX or XLSM file</li><li>Double-click the uploaded file in Drive \u2014 it opens as a Sheets document</li><li>OR: right-click \u2192 Open with \u2192 Google Sheets \u2192 it auto-converts</li><li>Check the formula error list tha"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Common Formula Errors After Import",
+      "text": "<strong>#NAME? errors</strong> \u2014 Excel functions not available in Sheets (STOCKHISTORY, WEBSERVICE, some statistical functions). Replace with Sheets equivalents.\n\n<strong>XLOOKUP \u2192 not available</strong> \u2014 Replace with INDEX/MATCH in Sheets or use VLOOKUP.\n\n<strong>Array formula syntax</strong> \u2014 Ex"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <a href="/macro-converter-kit/" class="logo">MacroKit</a>
+    <span class="badge">Free Guide</span>
+    <a href="/macro-converter-kit/checkout.html" style="margin-left:auto;background:var(--accent);color:#fff;font-size:13px;font-weight:600;padding:6px 16px;border-radius:6px;">Get the Kit →</a>
+  </div>
+</nav>
+<div class="container">
+  <div class="breadcrumb">
+    <a href="/macro-converter-kit/">Home</a> &rsaquo; <a href="/macro-converter-kit/blog/">Blog</a> &rsaquo; Excel to Google Sheets: Keep Formulas, Fix What Breaks
+  </div>
+</div>
+<div class="container">
+<article>
+  <div class="label">Cross-Platform</div>
+  <h1>Excel to Google Sheets: Keep Formulas, Fix What Breaks</h1>
+  <div class="meta">By MacroKit &nbsp;·&nbsp; Updated April 2026 &nbsp;·&nbsp; 5 min read</div>
+  <h2>What Happens When You Import Excel to Google Sheets</h2>
+Google Sheets accepts XLSX, XLS, and XLSM files via upload. The import engine converts most content, but there are predictable failure points. Knowing them before you migrate saves hours of debugging.
+
+<div class='callout'><strong>XLSM note:</strong> Macros (VBA) are stripped on import — Google Sheets uses Apps Script, not VBA. If macros are critical, see our <a href='/macro-converter-kit/blog/convert-xlsm-to-google-sheets-keep-macros/'>XLSM to Google Sheets macro guide</a>.</div>
+
+<h2>Compatibility Matrix</h2>
+<table><thead><tr><th>Feature</th><th>Survives Import?</th><th>Notes</th></tr></thead><tbody><tr><td>Cell values, text, numbers</td><td class='verdict-yes'>YES</td><td>—</td></tr><tr><td>Basic formulas (SUM, IF, VLOOKUP)</td><td class='verdict-yes'>YES</td><td>Most common functions work</td></tr><tr><td>Charts</td><td class='verdict-yes'>MOSTLY</td><td>Some chart types convert with visual differences</td></tr><tr><td>Pivot tables</td><td class='verdict-yes'>PARTIAL</td><td>Data survives; pivot may need recreation</td></tr><tr><td>VBA macros</td><td class='verdict-no'>NO</td><td>Rewrite in Apps Script</td></tr><tr><td>XLOOKUP, LET, LAMBDA</td><td class='verdict-no'>PARTIAL</td><td>Not all newer Excel functions exist in Sheets</td></tr><tr><td>Power Query connections</td><td class='verdict-no'>NO</td><td>Needs manual recreation</td></tr><tr><td>Array formulas (Ctrl+Shift+Enter)</td><td class='verdict-yes'>MOSTLY</td><td>Sheets uses different array formula syntax</td></tr></tbody></table>
+
+<h2>Step-by-Step Import</h2>
+<ol><li>Open Google Drive → click <strong>+ New → File upload</strong></li><li>Upload your XLSX or XLSM file</li><li>Double-click the uploaded file in Drive — it opens as a Sheets document</li><li>OR: right-click → Open with → Google Sheets → it auto-converts</li><li>Check the formula error list that appears (if any)</li></ol>
+
+<h2>Common Formula Errors After Import</h2>
+<strong>#NAME? errors</strong> — Excel functions not available in Sheets (STOCKHISTORY, WEBSERVICE, some statistical functions). Replace with Sheets equivalents.
+
+<strong>XLOOKUP → not available</strong> — Replace with INDEX/MATCH in Sheets or use VLOOKUP.
+
+<strong>Array formula syntax</strong> — Excel Ctrl+Shift+Enter arrays become single-cell in Sheets. Use ARRAYFORMULA() wrapper.
+
+<pre><code># Excel:
+{=SUM(IF(A1:A10>5, A1:A10, 0))}
+
+# Google Sheets equivalent:
+=SUMIF(A1:A10, ">5", A1:A10)</code></pre>
+
+<h2>Automating XLSX → Sheets via Python + gspread</h2>
+<pre><code>import gspread
+from google.oauth2.service_account import Credentials
+import pandas as pd
+
+# Read Excel
+df = pd.read_excel('report.xlsx')
+
+# Connect to Google Sheets
+creds = Credentials.from_service_account_file('service_account.json',
+    scopes=['https://www.googleapis.com/auth/spreadsheets'])
+gs = gspread.authorize(creds)
+
+# Create or open sheet
+spreadsheet = gs.create('Imported Report')
+worksheet = spreadsheet.sheet1
+worksheet.update([df.columns.tolist()] + df.values.tolist())
+print('Uploaded to Google Sheets')</code></pre>
+
+
+  <div class="cta-box">
+    <h3>Stop Losing Macros on Every Conversion</h3>
+    <p style="color:var(--muted);margin-bottom:0">MacroKit gives you the exact workflow, scripts, and checklist to convert Excel files safely — preserving every line of VBA.</p>
+    <a href="/macro-converter-kit/checkout.html" class="cta-btn">Get MacroKit — $9/month</a>
+  </div>
+  <h2>Frequently Asked Questions</h2>
+  <h3>Does Excel to Google Sheets import preserve all formulas?</h3><p>Most standard formulas (SUM, IF, VLOOKUP, INDEX/MATCH) import correctly. Excel-exclusive functions like XLOOKUP, STOCKHISTORY, and Power Query connections do not have direct equivalents in Sheets and will show errors.</p>
+<h3>Can I import XLSM macros to Google Sheets?</h3><p>No. VBA macros are stripped on import. Google Sheets uses Apps Script (JavaScript-based) as its macro language. You need to rewrite any critical macros in Apps Script after import.</p>
+<h3>What is the file size limit for importing Excel to Google Sheets?</h3><p>Google Sheets supports imports up to 100MB for uploaded files. Very large Excel files (100K+ rows) may import slowly or hit cell limits (10 million cells per spreadsheet).</p>
+
+  <div class="related">
+    <h3>Related Guides</h3>
+    <ul><li><a href="/macro-converter-kit/blog/convert-xlsm-to-google-sheets-keep-macros/">XLSM to Google Sheets — Keep Macros</a></li>
+<li><a href="/macro-converter-kit/blog/excel-macro-migration-guide-2026/">Excel Macro Migration Guide 2026</a></li>
+<li><a href="/macro-converter-kit/blog/batch-convert-excel-keep-macros/">Batch Convert Excel Keep Macros</a></li>
+</ul>
+  </div>
+</article>
+</div>
+<footer>
+  <div class="container">
+    <p>MacroKit &copy; 2026 &nbsp;·&nbsp; <a href="/macro-converter-kit/">Home</a> &nbsp;·&nbsp; <a href="/macro-converter-kit/blog/">All Guides</a> &nbsp;·&nbsp; <a href="/macro-converter-kit/checkout.html">Pricing</a></p>
+  </div>
+</footer>
+</body>
+</html>

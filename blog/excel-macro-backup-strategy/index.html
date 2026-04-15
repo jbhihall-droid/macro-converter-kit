@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel Macro Backup Strategy: Never Lose VBA Code Again (2026)</title>
+  <meta name="description" content="VBA macros are invisible to most backup systems. Here's the only reliable way to version-control your Excel macros and recover from conversion mistakes.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-backup-strategy/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta property="og:title" content="Excel Macro Backup Strategy: Never Lose VBA Code Again (2026)">
+  <meta property="og:description" content="VBA macros are invisible to most backup systems. Here's the only reliable way to version-control your Excel macros and recover from conversion mistakes.">
+  <meta property="og:url" content="https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-backup-strategy/">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Excel Macro Backup Strategy: Never Lose VBA Code Again (2026)">
+  <meta name="twitter:description" content="VBA macros are invisible to most backup systems. Here's the only reliable way to version-control your Excel macros and recover from conversion mistakes.">
+  <style>
+    :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --accent: #6c5ce7; --accent2: #00cec9; --text: #e2e8f0; --muted: #94a3b8; --green: #00b894; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.7; }
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    nav { border-bottom: 1px solid var(--border); padding: 16px 0; }
+    nav .container { display: flex; align-items: center; gap: 12px; }
+    .logo { font-weight: 700; font-size: 15px; color: var(--text); }
+    .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .breadcrumb { padding: 16px 0; font-size: 13px; color: var(--muted); }
+    article { padding: 48px 0 80px; }
+    .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 16px; }
+    h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.2; letter-spacing: -0.8px; margin-bottom: 20px; }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 22px; font-weight: 700; margin: 40px 0 16px; letter-spacing: -0.3px; }
+    h3 { font-size: 17px; font-weight: 700; margin: 28px 0 10px; }
+    p { margin-bottom: 18px; }
+    ul, ol { padding-left: 24px; margin-bottom: 18px; }
+    li { margin-bottom: 8px; }
+    .callout { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .callout strong { color: #c4b5fd; }
+    .warning { background: #1f1a0e; border: 1px solid #78350f; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .warning strong { color: #fbbf24; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th { background: var(--surface); padding: 10px 14px; text-align: left; border: 1px solid var(--border); font-weight: 600; }
+    td { padding: 10px 14px; border: 1px solid var(--border); color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 500; }
+    .verdict-yes { color: #00b894; font-weight: 700; }
+    .verdict-no { color: #d63031; font-weight: 700; }
+    .cta-box { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 12px; padding: 32px; text-align: center; margin: 40px 0; }
+    .cta-box h3 { color: #c4b5fd; margin-bottom: 8px; font-size: 18px; }
+    .cta-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 8px; font-size: 15px; text-decoration: none; margin-top: 20px; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; font-size: 13px; overflow-x: auto; margin-bottom: 18px; }
+    code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; }
+    .related { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin: 40px 0; }
+    .related h3 { font-size: 15px; color: var(--muted); margin-bottom: 12px; margin-top: 0; }
+    .related ul { list-style: none; padding: 0; margin: 0; }
+    .related li { margin-bottom: 8px; }
+  </style>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does OneDrive or Dropbox back up Excel macros?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes \u2014 but with a critical caveat. They back up the file, including macros, as long as the file is saved as XLSM or XLSB. If you accidentally save as XLSX (stripping macros) and it syncs, that stripped version is what gets backed up."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use git to version-control Excel VBA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, by exporting VBA modules to text (.bas files) using xlwings or the VBE File \u2192 Export. Text files are git-trackable. The XLSM binary itself is not meaningful in git diffs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the best way to back up Excel macros before conversion?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Export all VBA modules as .bas files using xlwings before converting. Store them in a timestamped folder or commit to git. This gives you a recoverable copy that survives any format conversion."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Excel Macro Backup Strategy: Never Lose VBA Code Again (2026)",
+  "description": "VBA macros are invisible to most backup systems. Here's the only reliable way to version-control your Excel macros and recover from conversion mistakes.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Why Standard Backups Fail for Macros",
+      "text": "Cloud auto-save (OneDrive, Dropbox) keeps file versions \u2014 but if you accidentally save over your XLSM with an XLSX, all versions after that point have no macros. The macro was lost the moment Excel stripped it, before the backup system saw the file.\n\n<div class='warning'><strong>The problem:</strong"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Step 1: Export All VBA Modules as Text Files",
+      "text": "VBA modules are pure text. Exporting them as .bas files means you can restore macros to any workbook, diff changes with git, and recover from format conversion accidents.\n\n<pre><code># Requires xlwings (Windows + Excel installed)\nimport xlwings as xw\nimport os\n\nwb = xw.Book('report.xlsm')\nexport_dir"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Step 2: Version Control the Exports with Git",
+      "text": "<pre><code># In your project directory:\ngit init vba-backup\ncd vba-backup\n\n# Copy your .bas exports here\ncp ~/vba_backup/*.bas .\n\ngit add .\ngit commit -m 'Initial VBA backup \u2014 report.xlsm module exports'\n\n# After any macro change:\n# Re-export, then:\ngit add -A && git commit -m 'Update: added error h"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Step 3: Pre-Conversion Checklist",
+      "text": "<ol><li>Export all VBA modules to .bas files (script above)</li><li>Commit to git or copy to a safe folder</li><li>Record the macro inventory (module names + function count)</li><li>Proceed with the format conversion</li><li>If macros are missing after conversion, restore from .bas files</li></ol>\n\n"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <a href="/macro-converter-kit/" class="logo">MacroKit</a>
+    <span class="badge">Free Guide</span>
+    <a href="/macro-converter-kit/checkout.html" style="margin-left:auto;background:var(--accent);color:#fff;font-size:13px;font-weight:600;padding:6px 16px;border-radius:6px;">Get the Kit →</a>
+  </div>
+</nav>
+<div class="container">
+  <div class="breadcrumb">
+    <a href="/macro-converter-kit/">Home</a> &rsaquo; <a href="/macro-converter-kit/blog/">Blog</a> &rsaquo; Excel Macro Backup Strategy: Protect Your VBA Before You Convert
+  </div>
+</div>
+<div class="container">
+<article>
+  <div class="label">Risk Prevention</div>
+  <h1>Excel Macro Backup Strategy: Protect Your VBA Before You Convert</h1>
+  <div class="meta">By MacroKit &nbsp;·&nbsp; Updated April 2026 &nbsp;·&nbsp; 5 min read</div>
+  <h2>Why Standard Backups Fail for Macros</h2>
+Cloud auto-save (OneDrive, Dropbox) keeps file versions — but if you accidentally save over your XLSM with an XLSX, all versions after that point have no macros. The macro was lost the moment Excel stripped it, before the backup system saw the file.
+
+<div class='warning'><strong>The problem:</strong> If you save an XLSM as XLSX, and OneDrive syncs immediately, your backup also has no macros. File versioning saves the wrong thing.</div>
+
+<h2>Step 1: Export All VBA Modules as Text Files</h2>
+VBA modules are pure text. Exporting them as .bas files means you can restore macros to any workbook, diff changes with git, and recover from format conversion accidents.
+
+<pre><code># Requires xlwings (Windows + Excel installed)
+import xlwings as xw
+import os
+
+wb = xw.Book('report.xlsm')
+export_dir = 'vba_backup'
+os.makedirs(export_dir, exist_ok=True)
+
+for component in wb.api.VBProject.VBComponents:
+    if component.Type in [1, 2, 3]:  # Module, Class, UserForm
+        ext = {1: '.bas', 2: '.cls', 3: '.frm'}[component.Type]
+        filename = f'{export_dir}/{component.Name}{ext}'
+        component.Export(os.path.abspath(filename))
+        print(f'Exported: {filename}')
+
+print('All VBA modules backed up')</code></pre>
+
+<h2>Step 2: Version Control the Exports with Git</h2>
+<pre><code># In your project directory:
+git init vba-backup
+cd vba-backup
+
+# Copy your .bas exports here
+cp ~/vba_backup/*.bas .
+
+git add .
+git commit -m 'Initial VBA backup — report.xlsm module exports'
+
+# After any macro change:
+# Re-export, then:
+git add -A && git commit -m 'Update: added error handling to DataProcessor module'</code></pre>
+
+<p>Now you have a complete git history of every macro change. Recovering means copying a .bas file back into the VBE.</p>
+
+<h2>Step 3: Pre-Conversion Checklist</h2>
+<ol><li>Export all VBA modules to .bas files (script above)</li><li>Commit to git or copy to a safe folder</li><li>Record the macro inventory (module names + function count)</li><li>Proceed with the format conversion</li><li>If macros are missing after conversion, restore from .bas files</li></ol>
+
+<div class='callout'><strong>MacroKit includes:</strong> A pre-conversion macro inventory checklist that documents every module, function, and event handler before you touch the file format — so you know exactly what to restore if something goes wrong.</div>
+
+<h2>Quick Recovery: Reimporting .bas Files</h2>
+<pre><code># Restore a backed-up module into a workbook
+import xlwings as xw
+
+wb = xw.Book('recovered.xlsm')
+# Import a .bas file back into VBE
+wb.api.VBProject.VBComponents.Import(
+    os.path.abspath('vba_backup/DataProcessor.bas')
+)
+print('Module restored')</code></pre>
+
+
+  <div class="cta-box">
+    <h3>Stop Losing Macros on Every Conversion</h3>
+    <p style="color:var(--muted);margin-bottom:0">MacroKit gives you the exact workflow, scripts, and checklist to convert Excel files safely — preserving every line of VBA.</p>
+    <a href="/macro-converter-kit/checkout.html" class="cta-btn">Get MacroKit — $9/month</a>
+  </div>
+  <h2>Frequently Asked Questions</h2>
+  <h3>Does OneDrive or Dropbox back up Excel macros?</h3><p>Yes — but with a critical caveat. They back up the file, including macros, as long as the file is saved as XLSM or XLSB. If you accidentally save as XLSX (stripping macros) and it syncs, that stripped version is what gets backed up.</p>
+<h3>Can I use git to version-control Excel VBA?</h3><p>Yes, by exporting VBA modules to text (.bas files) using xlwings or the VBE File → Export. Text files are git-trackable. The XLSM binary itself is not meaningful in git diffs.</p>
+<h3>What is the best way to back up Excel macros before conversion?</h3><p>Export all VBA modules as .bas files using xlwings before converting. Store them in a timestamped folder or commit to git. This gives you a recoverable copy that survives any format conversion.</p>
+
+  <div class="related">
+    <h3>Related Guides</h3>
+    <ul><li><a href="/macro-converter-kit/blog/vba-macros-lost-after-conversion-fix/">VBA Macros Lost After Conversion — Fix</a></li>
+<li><a href="/macro-converter-kit/blog/xlsm-to-xlsx-convert-safely/">XLSM to XLSX Conversion Guide</a></li>
+<li><a href="/macro-converter-kit/blog/excel-macro-migration-guide-2026/">Excel Macro Migration Guide 2026</a></li>
+</ul>
+  </div>
+</article>
+</div>
+<footer>
+  <div class="container">
+    <p>MacroKit &copy; 2026 &nbsp;·&nbsp; <a href="/macro-converter-kit/">Home</a> &nbsp;·&nbsp; <a href="/macro-converter-kit/blog/">All Guides</a> &nbsp;·&nbsp; <a href="/macro-converter-kit/checkout.html">Pricing</a></p>
+  </div>
+</footer>
+</body>
+</html>

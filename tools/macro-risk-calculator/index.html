@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel Macro Loss Risk Calculator — MacroKit</title>
+  <meta name="description" content="Free embeddable tool: assess your Excel macro loss risk before format conversion. Add to your blog with one line of HTML.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #0f1117; color: #e2e8f0; padding: 0; }
+    .widget { max-width: 520px; margin: 0 auto; padding: 24px; }
+    h2 { font-size: 18px; font-weight: 700; margin-bottom: 6px; color: #c4b5fd; }
+    .sub { font-size: 13px; color: #94a3b8; margin-bottom: 20px; }
+    .question { margin-bottom: 16px; }
+    label { font-size: 14px; font-weight: 600; display: block; margin-bottom: 6px; }
+    select, input[type=number] { width: 100%; padding: 8px 12px; background: #1a1d27; border: 1px solid #2a2d3a; border-radius: 6px; color: #e2e8f0; font-size: 14px; font-family: inherit; }
+    .btn { width: 100%; padding: 12px; background: #6c5ce7; color: #fff; font-weight: 700; font-size: 15px; border: none; border-radius: 8px; cursor: pointer; margin-top: 8px; }
+    .btn:hover { background: #5b4bd4; }
+    .result { display: none; margin-top: 20px; padding: 20px; border-radius: 10px; border: 1px solid; }
+    .result.low { background: #0a1f0a; border-color: #00b894; }
+    .result.medium { background: #1f1a0e; border-color: #fdcb6e; }
+    .result.high { background: #1f0a0a; border-color: #d63031; }
+    .risk-score { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+    .risk-label { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .risk-detail { font-size: 13px; color: #94a3b8; line-height: 1.6; }
+    .cta-link { display: inline-block; margin-top: 16px; padding: 10px 20px; background: #6c5ce7; color: #fff; border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; }
+    .embed-section { margin-top: 24px; padding: 16px; background: #1a1d27; border: 1px solid #2a2d3a; border-radius: 8px; }
+    .embed-section p { font-size: 12px; color: #94a3b8; margin-bottom: 8px; }
+    .embed-code { font-size: 11px; color: #a78bfa; background: #0f1117; padding: 8px 12px; border-radius: 4px; word-break: break-all; cursor: pointer; }
+    .embed-code:hover { background: #1a1d27; }
+    .copied { font-size: 11px; color: #00b894; display: none; margin-top: 4px; }
+  </style>
+</head>
+<body>
+<div class="widget">
+  <h2>Macro Loss Risk Calculator</h2>
+  <p class="sub">Assess your risk before converting Excel files. Free. No email required.</p>
+
+  <div class="question">
+    <label>Target format after conversion</label>
+    <select id="format">
+      <option value="">— Select target format —</option>
+      <option value="xlsx">XLSX (standard Excel, no macros)</option>
+      <option value="xlsm">XLSM (macro-enabled Excel)</option>
+      <option value="xls">XLS (Excel 97-2003)</option>
+      <option value="csv">CSV (data only)</option>
+      <option value="pdf">PDF (export only)</option>
+      <option value="sheets">Google Sheets</option>
+    </select>
+  </div>
+
+  <div class="question">
+    <label>Conversion method you plan to use</label>
+    <select id="method">
+      <option value="">— Select method —</option>
+      <option value="excel">Excel Save As</option>
+      <option value="online">Online converter (CloudConvert, Zamzar, etc.)</option>
+      <option value="python">Python script (openpyxl/pandas)</option>
+      <option value="libreoffice">LibreOffice</option>
+      <option value="googledrive">Upload to Google Drive</option>
+    </select>
+  </div>
+
+  <div class="question">
+    <label>How many VBA modules does the file contain?</label>
+    <select id="modules">
+      <option value="0">None (no macros)</option>
+      <option value="1">1–3 modules</option>
+      <option value="5">4–10 modules</option>
+      <option value="10">11+ modules / complex VBA</option>
+    </select>
+  </div>
+
+  <div class="question">
+    <label>How critical are the macros? (1 = not critical, 5 = mission critical)</label>
+    <select id="criticality">
+      <option value="1">1 — I don't care if they're lost</option>
+      <option value="2">2 — Would be annoying but workable</option>
+      <option value="3">3 — Significant rework needed</option>
+      <option value="4">4 — Days of work to rebuild</option>
+      <option value="5">5 — Business process depends on them</option>
+    </select>
+  </div>
+
+  <button class="btn" onclick="calculate()">Calculate My Risk →</button>
+
+  <div class="result" id="result">
+    <div class="risk-score" id="score"></div>
+    <div class="risk-label" id="label"></div>
+    <div class="risk-detail" id="detail"></div>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/" class="cta-link" target="_blank">
+      Get the Macro-Safe Conversion Kit →
+    </a>
+  </div>
+
+  <div class="embed-section">
+    <p>Embed this widget on your blog — free, no attribution required:</p>
+    <div class="embed-code" onclick="copyEmbed(this)" title="Click to copy">
+      &lt;iframe src="https://jbhihall-droid.github.io/macro-converter-kit/tools/macro-risk-calculator/" width="540" height="560" frameborder="0" style="border-radius:10px"&gt;&lt;/iframe&gt;
+    </div>
+    <div class="copied" id="copied">Copied to clipboard!</div>
+  </div>
+</div>
+
+<script>
+function calculate() {
+  const format = document.getElementById('format').value;
+  const method = document.getElementById('method').value;
+  const modules = parseInt(document.getElementById('modules').value);
+  const crit = parseInt(document.getElementById('criticality').value);
+
+  if (!format || !method) {
+    alert('Please select your target format and conversion method.');
+    return;
+  }
+
+  // Risk scoring
+  let formatRisk = 0;
+  if (format === 'xlsx') formatRisk = 9; // always strips macros
+  else if (format === 'csv') formatRisk = 10; // no macros possible
+  else if (format === 'pdf') formatRisk = 10;
+  else if (format === 'sheets') formatRisk = 8;
+  else if (format === 'xls') formatRisk = 3; // can hold macros
+  else if (format === 'xlsm') formatRisk = 1; // designed for macros
+
+  let methodRisk = 0;
+  if (method === 'online') methodRisk = 10; // always strips
+  else if (method === 'googledrive') methodRisk = 9;
+  else if (method === 'libreoffice') methodRisk = 7;
+  else if (method === 'python') methodRisk = 5; // depends on library
+  else if (method === 'excel') methodRisk = 2; // native, safest
+
+  const score = Math.round((formatRisk * 0.4 + methodRisk * 0.3 + modules * 0.15 + crit * 0.15));
+  const resultEl = document.getElementById('result');
+  const scoreEl = document.getElementById('score');
+  const labelEl = document.getElementById('label');
+  const detailEl = document.getElementById('detail');
+
+  resultEl.style.display = 'block';
+  resultEl.className = 'result';
+
+  let detail = '';
+  if (modules === 0) {
+    scoreEl.textContent = '✓ No Risk';
+    labelEl.textContent = 'No macros to lose';
+    detailEl.textContent = 'Your file has no VBA macros. Proceed with conversion — no macro loss is possible.';
+    resultEl.classList.add('low');
+    return;
+  }
+
+  if (format === 'xlsm' && method === 'excel') {
+    scoreEl.textContent = '✓ Very Low';
+    labelEl.textContent = 'Safest combination';
+    detailEl.textContent = 'XLSM via Excel Save As is the safest path for macro preservation. Excel will preserve the vbaProject.bin correctly.';
+    resultEl.classList.add('low');
+    return;
+  }
+
+  if (score <= 4) {
+    scoreEl.textContent = '● Low Risk';
+    labelEl.textContent = 'Proceed with care';
+    detail = 'Your selected method and format have low macro loss risk. Test with a copy first and verify all macros run after conversion.';
+    resultEl.classList.add('low');
+  } else if (score <= 7) {
+    scoreEl.textContent = '▲ Medium Risk';
+    labelEl.textContent = 'Take precautions first';
+    detail = 'Your conversion path has moderate macro loss risk. Export all VBA modules as .bas files before proceeding, and test in a non-production copy first.';
+    resultEl.classList.add('medium');
+  } else {
+    scoreEl.textContent = '✕ High Risk';
+    labelEl.textContent = 'Macros WILL be lost';
+    detail = 'This combination will almost certainly destroy your VBA macros. Online converters and format-switching to XLSX/CSV/PDF cannot preserve macros. Export your VBA modules first, or switch to a macro-safe conversion path.';
+    resultEl.classList.add('high');
+  }
+
+  if (crit >= 4) {
+    detail += ' Given your criticality rating (' + crit + '/5), we strongly recommend using MacroKit's backup workflow before proceeding.';
+  }
+
+  scoreEl.textContent = score <= 4 ? '● Low Risk' : score <= 7 ? '▲ Medium Risk' : '✕ High Risk (' + score + '/10)';
+  labelEl.textContent = score <= 4 ? 'Proceed with care' : score <= 7 ? 'Take precautions first' : 'Macros WILL be lost';
+  detailEl.textContent = detail;
+}
+
+function copyEmbed(el) {
+  const text = '<iframe src="https://jbhihall-droid.github.io/macro-converter-kit/tools/macro-risk-calculator/" width="540" height="560" frameborder="0" style="border-radius:10px"></iframe>';
+  navigator.clipboard.writeText(text).then(() => {
+    document.getElementById('copied').style.display = 'block';
+    setTimeout(() => document.getElementById('copied').style.display = 'none', 2000);
+  });
+}
+</script>
+</body>
+</html>

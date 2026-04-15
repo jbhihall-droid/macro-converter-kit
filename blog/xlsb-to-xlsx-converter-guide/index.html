@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Convert XLSB to XLSX (Binary to Standard Excel Format) 2026</title>
+  <meta name="description" content="XLSB is Excel's binary format. Here's how to convert XLSB to XLSX without losing data, formulas, or pivot tables — step by step.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsb-to-xlsx-converter-guide/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta property="og:title" content="How to Convert XLSB to XLSX (Binary to Standard Excel Format) 2026">
+  <meta property="og:description" content="XLSB is Excel's binary format. Here's how to convert XLSB to XLSX without losing data, formulas, or pivot tables — step by step.">
+  <meta property="og:url" content="https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsb-to-xlsx-converter-guide/">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="How to Convert XLSB to XLSX (Binary to Standard Excel Format) 2026">
+  <meta name="twitter:description" content="XLSB is Excel's binary format. Here's how to convert XLSB to XLSX without losing data, formulas, or pivot tables — step by step.">
+  <style>
+    :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --accent: #6c5ce7; --accent2: #00cec9; --text: #e2e8f0; --muted: #94a3b8; --green: #00b894; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.7; }
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    nav { border-bottom: 1px solid var(--border); padding: 16px 0; }
+    nav .container { display: flex; align-items: center; gap: 12px; }
+    .logo { font-weight: 700; font-size: 15px; color: var(--text); }
+    .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .breadcrumb { padding: 16px 0; font-size: 13px; color: var(--muted); }
+    article { padding: 48px 0 80px; }
+    .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 16px; }
+    h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.2; letter-spacing: -0.8px; margin-bottom: 20px; }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 22px; font-weight: 700; margin: 40px 0 16px; letter-spacing: -0.3px; }
+    h3 { font-size: 17px; font-weight: 700; margin: 28px 0 10px; }
+    p { margin-bottom: 18px; }
+    ul, ol { padding-left: 24px; margin-bottom: 18px; }
+    li { margin-bottom: 8px; }
+    .callout { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .callout strong { color: #c4b5fd; }
+    .warning { background: #1f1a0e; border: 1px solid #78350f; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .warning strong { color: #fbbf24; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th { background: var(--surface); padding: 10px 14px; text-align: left; border: 1px solid var(--border); font-weight: 600; }
+    td { padding: 10px 14px; border: 1px solid var(--border); color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 500; }
+    .verdict-yes { color: #00b894; font-weight: 700; }
+    .verdict-no { color: #d63031; font-weight: 700; }
+    .cta-box { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 12px; padding: 32px; text-align: center; margin: 40px 0; }
+    .cta-box h3 { color: #c4b5fd; margin-bottom: 8px; font-size: 18px; }
+    .cta-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 8px; font-size: 15px; text-decoration: none; margin-top: 20px; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; font-size: 13px; overflow-x: auto; margin-bottom: 18px; }
+    code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; }
+    .related { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin: 40px 0; }
+    .related h3 { font-size: 15px; color: var(--muted); margin-bottom: 12px; margin-top: 0; }
+    .related ul { list-style: none; padding: 0; margin: 0; }
+    .related li { margin-bottom: 8px; }
+  </style>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can openpyxl read XLSB files?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. openpyxl does not support XLSB format. Use the pyxlsb library to read XLSB, then openpyxl to write the output as XLSX."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does converting XLSB to XLSX lose any data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cell data, formulas, and most formatting survive. VBA macros do not \u2014 XLSX cannot contain macros. Pivot table definitions may also need reconnecting after conversion."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is XLSB or XLSX better for large files?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "XLSB opens faster and saves smaller for very large files (100K+ rows). XLSX is better for compatibility with non-Excel tools. For pure data interchange, CSV is often the best choice."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Convert XLSB to XLSX (Binary to Standard Excel Format) 2026",
+  "description": "XLSB is Excel's binary format. Here's how to convert XLSB to XLSX without losing data, formulas, or pivot tables \u2014 step by step.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "What Is XLSB and Why Convert to XLSX?",
+      "text": "XLSB (Excel Binary Workbook) is a compressed binary format that opens faster and saves with smaller file sizes than XLSX \u2014 but it's less portable. Many systems, APIs, and BI tools that accept XLSX reject XLSB. Converting to XLSX makes the file universally readable by Google Sheets, LibreOffice, Pand"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "XLSB vs XLSX vs XLSM \u2014 Quick Reference",
+      "text": "<table><thead><tr><th>Format</th><th>Macros</th><th>File Size</th><th>Compatibility</th></tr></thead><tbody><tr><td>XLSB</td><td class='verdict-yes'>Yes</td><td>Smallest</td><td>Excel-only</td></tr><tr><td>XLSX</td><td class='verdict-no'>No</td><td>Medium</td><td>Universal</td></tr><tr><td>XLSM</td>"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Method 1: Excel Save As (Simplest)",
+      "text": "<ol><li>Open the XLSB file in Excel</li><li>File \u2192 Save As</li><li>Format dropdown \u2192 <strong>Excel Workbook (*.xlsx)</strong></li><li>If macros exist, Excel warns they'll be removed \u2014 click <strong>Continue</strong></li><li>Save to new location. Original XLSB untouched.</li></ol>"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Method 2: Python \u2014 openpyxl or xlrd",
+      "text": "openpyxl does not support XLSB. Use <code>pyxlsb</code> to read, then openpyxl to write XLSX:\n\n<pre><code>from pyxlsb import open_workbook as open_xlsb\nimport openpyxl\n\n# Read XLSB\nrows = []\nwith open_xlsb('data.xlsb') as wb:\n    with wb.get_sheet(1) as sheet:\n        for row in sheet.rows():\n      "
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <a href="/macro-converter-kit/" class="logo">MacroKit</a>
+    <span class="badge">Free Guide</span>
+    <a href="/macro-converter-kit/checkout.html" style="margin-left:auto;background:var(--accent);color:#fff;font-size:13px;font-weight:600;padding:6px 16px;border-radius:6px;">Get the Kit →</a>
+  </div>
+</nav>
+<div class="container">
+  <div class="breadcrumb">
+    <a href="/macro-converter-kit/">Home</a> &rsaquo; <a href="/macro-converter-kit/blog/">Blog</a> &rsaquo; XLSB to XLSX: Convert Binary Excel to Standard Format
+  </div>
+</div>
+<div class="container">
+<article>
+  <div class="label">Format Conversion</div>
+  <h1>XLSB to XLSX: Convert Binary Excel to Standard Format</h1>
+  <div class="meta">By MacroKit &nbsp;·&nbsp; Updated April 2026 &nbsp;·&nbsp; 5 min read</div>
+  <h2>What Is XLSB and Why Convert to XLSX?</h2>
+XLSB (Excel Binary Workbook) is a compressed binary format that opens faster and saves with smaller file sizes than XLSX — but it's less portable. Many systems, APIs, and BI tools that accept XLSX reject XLSB. Converting to XLSX makes the file universally readable by Google Sheets, LibreOffice, Pandas, and every data tool that understands Open XML.
+
+<div class='callout'><strong>Key fact:</strong> XLSB can contain VBA macros (unlike XLSX). When you convert to XLSX, macros are permanently removed. If macros matter, convert to XLSM instead.</div>
+
+<h2>XLSB vs XLSX vs XLSM — Quick Reference</h2>
+<table><thead><tr><th>Format</th><th>Macros</th><th>File Size</th><th>Compatibility</th></tr></thead><tbody><tr><td>XLSB</td><td class='verdict-yes'>Yes</td><td>Smallest</td><td>Excel-only</td></tr><tr><td>XLSX</td><td class='verdict-no'>No</td><td>Medium</td><td>Universal</td></tr><tr><td>XLSM</td><td class='verdict-yes'>Yes</td><td>Medium</td><td>Excel + most tools</td></tr></tbody></table>
+
+<h2>Method 1: Excel Save As (Simplest)</h2>
+<ol><li>Open the XLSB file in Excel</li><li>File → Save As</li><li>Format dropdown → <strong>Excel Workbook (*.xlsx)</strong></li><li>If macros exist, Excel warns they'll be removed — click <strong>Continue</strong></li><li>Save to new location. Original XLSB untouched.</li></ol>
+
+<h2>Method 2: Python — openpyxl or xlrd</h2>
+openpyxl does not support XLSB. Use <code>pyxlsb</code> to read, then openpyxl to write XLSX:
+
+<pre><code>from pyxlsb import open_workbook as open_xlsb
+import openpyxl
+
+# Read XLSB
+rows = []
+with open_xlsb('data.xlsb') as wb:
+    with wb.get_sheet(1) as sheet:
+        for row in sheet.rows():
+            rows.append([item.v for item in row])
+
+# Write XLSX
+wb_out = openpyxl.Workbook()
+ws = wb_out.active
+for row in rows:
+    ws.append(row)
+wb_out.save('data.xlsx')
+print('Converted to XLSX')</code></pre>
+
+<p>Install: <code>pip install pyxlsb openpyxl</code></p>
+
+<h2>Batch Convert XLSB Folder to XLSX</h2>
+<pre><code>import glob, os
+from pyxlsb import open_workbook as open_xlsb
+import openpyxl
+
+for path in glob.glob('/path/to/*.xlsb'):
+    rows = []
+    with open_xlsb(path) as wb:
+        with wb.get_sheet(1) as sheet:
+            for row in sheet.rows():
+                rows.append([item.v for item in row])
+    out_path = path.replace('.xlsb', '.xlsx')
+    wb_out = openpyxl.Workbook()
+    ws = wb_out.active
+    for row in rows:
+        ws.append(row)
+    wb_out.save(out_path)
+    print(f'Done: {os.path.basename(out_path)}')</code></pre>
+
+
+  <div class="cta-box">
+    <h3>Stop Losing Macros on Every Conversion</h3>
+    <p style="color:var(--muted);margin-bottom:0">MacroKit gives you the exact workflow, scripts, and checklist to convert Excel files safely — preserving every line of VBA.</p>
+    <a href="/macro-converter-kit/checkout.html" class="cta-btn">Get MacroKit — $9/month</a>
+  </div>
+  <h2>Frequently Asked Questions</h2>
+  <h3>Can openpyxl read XLSB files?</h3><p>No. openpyxl does not support XLSB format. Use the pyxlsb library to read XLSB, then openpyxl to write the output as XLSX.</p>
+<h3>Does converting XLSB to XLSX lose any data?</h3><p>Cell data, formulas, and most formatting survive. VBA macros do not — XLSX cannot contain macros. Pivot table definitions may also need reconnecting after conversion.</p>
+<h3>Is XLSB or XLSX better for large files?</h3><p>XLSB opens faster and saves smaller for very large files (100K+ rows). XLSX is better for compatibility with non-Excel tools. For pure data interchange, CSV is often the best choice.</p>
+
+  <div class="related">
+    <h3>Related Guides</h3>
+    <ul><li><a href="/macro-converter-kit/blog/xlsb-to-xlsm-converter/">XLSB to XLSM Converter</a></li>
+<li><a href="/macro-converter-kit/blog/xlsm-to-xlsx-convert-safely/">XLSM to XLSX Conversion Guide</a></li>
+<li><a href="/macro-converter-kit/blog/batch-convert-excel-keep-macros/">Batch Convert Excel Keep Macros</a></li>
+</ul>
+  </div>
+</article>
+</div>
+<footer>
+  <div class="container">
+    <p>MacroKit &copy; 2026 &nbsp;·&nbsp; <a href="/macro-converter-kit/">Home</a> &nbsp;·&nbsp; <a href="/macro-converter-kit/blog/">All Guides</a> &nbsp;·&nbsp; <a href="/macro-converter-kit/checkout.html">Pricing</a></p>
+  </div>
+</footer>
+</body>
+</html>

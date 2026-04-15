@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Convert XLSM to XLS (Legacy Excel 97-2003 Format) 2026</title>
+  <meta name="description" content="Need to convert XLSM to the old XLS format for legacy systems? Here's what survives, what doesn't, and the Python method that works.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-xls-legacy-conversion/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta property="og:title" content="How to Convert XLSM to XLS (Legacy Excel 97-2003 Format) 2026">
+  <meta property="og:description" content="Need to convert XLSM to the old XLS format for legacy systems? Here's what survives, what doesn't, and the Python method that works.">
+  <meta property="og:url" content="https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-xls-legacy-conversion/">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="How to Convert XLSM to XLS (Legacy Excel 97-2003 Format) 2026">
+  <meta name="twitter:description" content="Need to convert XLSM to the old XLS format for legacy systems? Here's what survives, what doesn't, and the Python method that works.">
+  <style>
+    :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --accent: #6c5ce7; --accent2: #00cec9; --text: #e2e8f0; --muted: #94a3b8; --green: #00b894; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.7; }
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    nav { border-bottom: 1px solid var(--border); padding: 16px 0; }
+    nav .container { display: flex; align-items: center; gap: 12px; }
+    .logo { font-weight: 700; font-size: 15px; color: var(--text); }
+    .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .breadcrumb { padding: 16px 0; font-size: 13px; color: var(--muted); }
+    article { padding: 48px 0 80px; }
+    .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 16px; }
+    h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.2; letter-spacing: -0.8px; margin-bottom: 20px; }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 22px; font-weight: 700; margin: 40px 0 16px; letter-spacing: -0.3px; }
+    h3 { font-size: 17px; font-weight: 700; margin: 28px 0 10px; }
+    p { margin-bottom: 18px; }
+    ul, ol { padding-left: 24px; margin-bottom: 18px; }
+    li { margin-bottom: 8px; }
+    .callout { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .callout strong { color: #c4b5fd; }
+    .warning { background: #1f1a0e; border: 1px solid #78350f; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .warning strong { color: #fbbf24; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th { background: var(--surface); padding: 10px 14px; text-align: left; border: 1px solid var(--border); font-weight: 600; }
+    td { padding: 10px 14px; border: 1px solid var(--border); color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 500; }
+    .verdict-yes { color: #00b894; font-weight: 700; }
+    .verdict-no { color: #d63031; font-weight: 700; }
+    .cta-box { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 12px; padding: 32px; text-align: center; margin: 40px 0; }
+    .cta-box h3 { color: #c4b5fd; margin-bottom: 8px; font-size: 18px; }
+    .cta-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 8px; font-size: 15px; text-decoration: none; margin-top: 20px; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; font-size: 13px; overflow-x: auto; margin-bottom: 18px; }
+    code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; }
+    .related { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin: 40px 0; }
+    .related h3 { font-size: 15px; color: var(--muted); margin-bottom: 12px; margin-top: 0; }
+    .related ul { list-style: none; padding: 0; margin: 0; }
+    .related li { margin-bottom: 8px; }
+  </style>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do VBA macros survive when converting XLSM to XLS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Basic VBA macros generally survive. However, macros using Excel object model features introduced after Office 2003 may break. Test all macro functionality after conversion in the target environment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the maximum row count in XLS format?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "XLS (Excel 97-2003) supports a maximum of 65,536 rows and 256 columns. If your XLSM file has more rows, data will be silently truncated. Modern XLSX/XLSM supports 1,048,576 rows."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why would I use XLS in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Legacy systems that were built before 2007 (when XLSX was introduced) often require XLS input. Common examples: SAP interfaces, older government portals, financial reporting systems with fixed import formats."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Convert XLSM to XLS (Legacy Excel 97-2003 Format) 2026",
+  "description": "Need to convert XLSM to the old XLS format for legacy systems? Here's what survives, what doesn't, and the Python method that works.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Why Convert XLSM to XLS?",
+      "text": "XLS is the Excel 97-2003 binary format. Despite being 30 years old, you still need it for legacy ERP systems, old banking software, government portals, and industry-specific tools that haven't been updated. XLSM \u2192 XLS is a backward-compatibility migration.\n\n<div class='callout'><strong>Good news:</s"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "What Survives XLSM \u2192 XLS?",
+      "text": "<table><thead><tr><th>Element</th><th>Survives?</th><th>Notes</th></tr></thead><tbody><tr><td>Cell data, formulas</td><td class='verdict-yes'>YES</td><td>Mostly \u2014 some new Excel functions not in XLS</td></tr><tr><td>VBA macros</td><td class='verdict-yes'>PARTIAL</td><td>Basic VBA survives; newer API"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Method 1: Excel Save As XLS",
+      "text": "<ol><li>Open your XLSM file in a modern Excel version</li><li>File \u2192 Save As</li><li>Format dropdown \u2192 <strong>Excel 97-2003 Workbook (*.xls)</strong></li><li>Excel compatibility checker runs \u2014 review any flagged issues</li><li>Click <strong>Continue</strong> to save. Resolve flagged issues manually"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Method 2: xlwt (Python \u2014 XLS write library)",
+      "text": "<pre><code># For simple data export to XLS:\nimport xlwt, openpyxl\n\n# Read XLSM\nwb_in = openpyxl.load_workbook('report.xlsm', keep_vba=False)\nws_in = wb_in.active\n\n# Write XLS\nwb_out = xlwt.Workbook()\nws_out = wb_out.add_sheet('Sheet1')\nfor i, row in enumerate(ws_in.iter_rows(values_only=True)):\n    "
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <a href="/macro-converter-kit/" class="logo">MacroKit</a>
+    <span class="badge">Free Guide</span>
+    <a href="/macro-converter-kit/checkout.html" style="margin-left:auto;background:var(--accent);color:#fff;font-size:13px;font-weight:600;padding:6px 16px;border-radius:6px;">Get the Kit →</a>
+  </div>
+</nav>
+<div class="container">
+  <div class="breadcrumb">
+    <a href="/macro-converter-kit/">Home</a> &rsaquo; <a href="/macro-converter-kit/blog/">Blog</a> &rsaquo; XLSM to XLS: Convert Macro-Enabled Excel to Legacy Format
+  </div>
+</div>
+<div class="container">
+<article>
+  <div class="label">Legacy Format</div>
+  <h1>XLSM to XLS: Convert Macro-Enabled Excel to Legacy Format</h1>
+  <div class="meta">By MacroKit &nbsp;·&nbsp; Updated April 2026 &nbsp;·&nbsp; 5 min read</div>
+  <h2>Why Convert XLSM to XLS?</h2>
+XLS is the Excel 97-2003 binary format. Despite being 30 years old, you still need it for legacy ERP systems, old banking software, government portals, and industry-specific tools that haven't been updated. XLSM → XLS is a backward-compatibility migration.
+
+<div class='callout'><strong>Good news:</strong> XLS supports VBA macros via the .xls container. Unlike XLSX, macros can survive this conversion — but with caveats.</div>
+
+<h2>What Survives XLSM → XLS?</h2>
+<table><thead><tr><th>Element</th><th>Survives?</th><th>Notes</th></tr></thead><tbody><tr><td>Cell data, formulas</td><td class='verdict-yes'>YES</td><td>Mostly — some new Excel functions not in XLS</td></tr><tr><td>VBA macros</td><td class='verdict-yes'>PARTIAL</td><td>Basic VBA survives; newer API calls may break</td></tr><tr><td>Charts</td><td class='verdict-yes'>MOSTLY</td><td>Older chart types convert; newer types may downgrade</td></tr><tr><td>Row limit</td><td class='verdict-no'>CAPPED</td><td>XLS max is 65,536 rows vs 1,048,576 in XLSM</td></tr><tr><td>Column limit</td><td class='verdict-no'>CAPPED</td><td>XLS max is 256 columns vs 16,384 in XLSM</td></tr><tr><td>Conditional formatting</td><td class='verdict-yes'>PARTIAL</td><td>Simple rules survive; newer rule types may not</td></tr></tbody></table>
+
+<h2>Method 1: Excel Save As XLS</h2>
+<ol><li>Open your XLSM file in a modern Excel version</li><li>File → Save As</li><li>Format dropdown → <strong>Excel 97-2003 Workbook (*.xls)</strong></li><li>Excel compatibility checker runs — review any flagged issues</li><li>Click <strong>Continue</strong> to save. Resolve flagged issues manually if they matter.</li></ol>
+
+<h2>Method 2: xlwt (Python — XLS write library)</h2>
+<pre><code># For simple data export to XLS:
+import xlwt, openpyxl
+
+# Read XLSM
+wb_in = openpyxl.load_workbook('report.xlsm', keep_vba=False)
+ws_in = wb_in.active
+
+# Write XLS
+wb_out = xlwt.Workbook()
+ws_out = wb_out.add_sheet('Sheet1')
+for i, row in enumerate(ws_in.iter_rows(values_only=True)):
+    for j, val in enumerate(row):
+        ws_out.write(i, j, val if val is not None else '')
+wb_out.save('report.xls')
+print('Saved as XLS')</code></pre>
+
+<p><code>pip install xlwt openpyxl</code> — note: xlwt writes data only, not VBA.</p>
+
+<h2>Row Limit Warning for Large Files</h2>
+If your XLSM has more than 65,536 rows, the conversion to XLS will fail or truncate data silently. Always verify:
+
+<pre><code>import openpyxl
+wb = openpyxl.load_workbook('report.xlsm', read_only=True)
+ws = wb.active
+if ws.max_row > 65536:
+    print(f'WARNING: {ws.max_row} rows — XLS will truncate at 65,536')
+else:
+    print(f'{ws.max_row} rows — safe to convert to XLS')</code></pre>
+
+
+  <div class="cta-box">
+    <h3>Stop Losing Macros on Every Conversion</h3>
+    <p style="color:var(--muted);margin-bottom:0">MacroKit gives you the exact workflow, scripts, and checklist to convert Excel files safely — preserving every line of VBA.</p>
+    <a href="/macro-converter-kit/checkout.html" class="cta-btn">Get MacroKit — $9/month</a>
+  </div>
+  <h2>Frequently Asked Questions</h2>
+  <h3>Do VBA macros survive when converting XLSM to XLS?</h3><p>Basic VBA macros generally survive. However, macros using Excel object model features introduced after Office 2003 may break. Test all macro functionality after conversion in the target environment.</p>
+<h3>What is the maximum row count in XLS format?</h3><p>XLS (Excel 97-2003) supports a maximum of 65,536 rows and 256 columns. If your XLSM file has more rows, data will be silently truncated. Modern XLSX/XLSM supports 1,048,576 rows.</p>
+<h3>Why would I use XLS in 2026?</h3><p>Legacy systems that were built before 2007 (when XLSX was introduced) often require XLS input. Common examples: SAP interfaces, older government portals, financial reporting systems with fixed import formats.</p>
+
+  <div class="related">
+    <h3>Related Guides</h3>
+    <ul><li><a href="/macro-converter-kit/blog/convert-xls-to-xlsm/">Convert XLS to XLSM</a></li>
+<li><a href="/macro-converter-kit/blog/xlsm-to-xlsx-convert-safely/">XLSM to XLSX Conversion Guide</a></li>
+<li><a href="/macro-converter-kit/blog/vba-macros-lost-after-conversion-fix/">VBA Macros Lost After Conversion — Fix</a></li>
+</ul>
+  </div>
+</article>
+</div>
+<footer>
+  <div class="container">
+    <p>MacroKit &copy; 2026 &nbsp;·&nbsp; <a href="/macro-converter-kit/">Home</a> &nbsp;·&nbsp; <a href="/macro-converter-kit/blog/">All Guides</a> &nbsp;·&nbsp; <a href="/macro-converter-kit/checkout.html">Pricing</a></p>
+  </div>
+</footer>
+</body>
+</html>
