@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convert XLSM to Google Sheets Without Losing Macros (2026 Guide)</title>
+  <meta name="description" content="Google Sheets can't run VBA macros. If you're converting XLSM to Google Sheets, here's how to migrate your logic using Apps Script.">
+  <link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/convert-xlsm-to-google-sheets-keep-macros/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Convert XLSM to Google Sheets Without Losing Macros (2026 Guide)",
+    "description": "Google Sheets can't run VBA macros. If you're converting XLSM to Google Sheets, here's how to migrate your logic using Apps Script.",
+    "datePublished": "2026-02-01",
+    "dateModified": "2026-04-01",
+    "author": { "@type": "Organization", "name": "MacroKit" },
+    "publisher": { "@type": "Organization", "name": "MacroKit", "url": "https://jbhihall-droid.github.io/macro-converter-kit/" },
+    "mainEntityOfPage": "https://jbhihall-droid.github.io/macro-converter-kit/blog/convert-xlsm-to-google-sheets-keep-macros/"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can Google Sheets run VBA macros from an XLSM file?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Google Sheets has no VBA runtime. When you import an XLSM file into Google Sheets, the cell data and most formatting is imported, but every VBA module, UserForm, and class module is silently discarded. Google Sheets uses Google Apps Script (JavaScript-based) for automation, which is a completely different language and runtime from VBA."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I migrate VBA macros to Google Apps Script?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The migration process involves three steps: first, audit all your VBA modules and document what each procedure does (its inputs, outputs, and business logic). Second, open the Apps Script editor in your Google Sheet (Extensions → Apps Script) and rewrite each procedure in JavaScript using the Sheets API. Third, attach any automated triggers (equivalent to VBA's Workbook_Open or Worksheet_Change events) using Apps Script's trigger system. There is no automatic VBA-to-Apps Script converter; it requires manual rewriting."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I keep Excel instead of migrating to Google Sheets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Keep Excel if your workbook uses complex VBA with Excel-specific object model calls, ActiveX controls, COM add-ins, or tight Windows API integration. Also keep Excel if your macros depend on local file system access, if performance is critical (VBA in Excel is significantly faster for large data manipulation than Apps Script), or if your team lacks the JavaScript skills to maintain an Apps Script equivalent."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3a;
+      --accent: #6c5ce7;
+      --accent2: #00cec9;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --green: #00b894;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.7; font-size: 16px; }
+    .container { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+    nav .container { display: flex; align-items: center; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .logo { font-weight: 700; font-size: 15px; color: var(--text); text-decoration: none; }
+    .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .breadcrumb { font-size: 13px; color: var(--muted); padding: 16px 0; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--text); }
+    .breadcrumb span { margin: 0 6px; }
+    article { padding: 40px 0 60px; }
+    h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 700; line-height: 1.25; margin-bottom: 16px; color: var(--text); }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 32px; display: flex; gap: 16px; flex-wrap: wrap; }
+    h2 { font-size: 22px; font-weight: 700; margin: 40px 0 16px; color: var(--text); }
+    h3 { font-size: 18px; font-weight: 600; margin: 28px 0 12px; color: var(--text); }
+    p { margin-bottom: 16px; color: var(--text); }
+    ul, ol { padding-left: 24px; margin-bottom: 16px; }
+    li { margin-bottom: 8px; color: var(--text); }
+    code { background: var(--surface); border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'Courier New', monospace; color: var(--accent2); }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; overflow-x: auto; margin-bottom: 20px; }
+    pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
+    .callout { background: var(--surface); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 24px 0; }
+    .callout.warning { border-color: #e17055; }
+    .callout.success { border-color: var(--green); }
+    .callout p { margin: 0; font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th { background: var(--surface); text-align: left; padding: 10px 14px; border: 1px solid var(--border); font-weight: 600; color: var(--text); }
+    td { padding: 10px 14px; border: 1px solid var(--border); color: var(--text); }
+    tr:nth-child(even) td { background: #13151e; }
+    .faq-section { margin: 48px 0; }
+    .faq-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+    .faq-q { font-weight: 600; font-size: 15px; padding: 16px 20px; background: var(--surface); color: var(--text); }
+    .faq-a { padding: 16px 20px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--border); }
+    .related { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin: 48px 0; }
+    .related h3 { margin-top: 0; font-size: 16px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+    .related ul { list-style: none; padding: 0; }
+    .related ul li { border-bottom: 1px solid var(--border); padding: 10px 0; }
+    .related ul li:last-child { border-bottom: none; padding-bottom: 0; }
+    .related ul li a { color: var(--accent2); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .related ul li a:hover { text-decoration: underline; }
+    footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: center; font-size: 13px; color: var(--muted); }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+    .tag { display: inline-block; background: var(--surface); border: 1px solid var(--border); font-size: 12px; padding: 3px 8px; border-radius: 4px; color: var(--muted); margin-right: 6px; }
+    .decision-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin: 24px 0; }
+    .decision-box h4 { font-size: 15px; font-weight: 600; margin-bottom: 12px; color: var(--accent2); }
+    .decision-box p { font-size: 14px; color: var(--muted); margin: 0; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container" style="display:flex;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--border)">
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/" class="logo" style="font-weight:700;font-size:15px;color:var(--text);text-decoration:none">MacroKit</a>
+    <span class="badge" style="background:var(--accent);color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px">Beta</span>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="breadcrumb">
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/">Home</a>
+    <span>›</span>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/">Blog</a>
+    <span>›</span>
+    Convert XLSM to Google Sheets Without Losing Macros
+  </div>
+</div>
+
+<div class="container">
+  <article>
+
+    <h1>Convert XLSM to Google Sheets Without Losing Macros (2026 Guide)</h1>
+    <div class="meta">
+      <span>Updated April 2026</span>
+      <span>·</span>
+      <span>10 min read</span>
+      <span>·</span>
+      <span class="tag">Google Sheets</span>
+      <span class="tag">Apps Script</span>
+      <span class="tag">Migration</span>
+    </div>
+
+    <p>If you are trying to convert an XLSM file to Google Sheets and keep your macros working, this guide starts with the honest answer: it is not possible in the way you might hope. Google Sheets does not run VBA. It never will. The two platforms use fundamentally different automation systems that are not interoperable at the code level.</p>
+
+    <p>But here is what is possible: migrating the logic behind your macros into Google Apps Script, so that your Google Sheet does the same things your Excel macros did — just using a different codebase. This guide explains how to do that migration correctly, when it is worth the effort, and when you should simply keep Excel.</p>
+
+    <h2>The Honest Answer: Google Sheets Does Not Run VBA</h2>
+
+    <p>When you upload or import an XLSM file into Google Drive and open it as a Google Sheet, here is exactly what happens:</p>
+
+    <ul>
+      <li>Cell values, formulas, and most formatting are imported</li>
+      <li>Named ranges are imported</li>
+      <li>Charts are imported with varying fidelity</li>
+      <li>All VBA modules, UserForms, and class modules are silently discarded</li>
+      <li>Worksheet-level event code (e.g., <code>Worksheet_Change</code>) is discarded</li>
+      <li>ActiveX controls are dropped or converted to non-functional placeholders</li>
+    </ul>
+
+    <p>There is no error message, no warning dialog, and no partial execution. Google's import pipeline simply has no VBA runtime — it reads the data and ignores everything else. The <code>vbaProject.bin</code> container inside your XLSM is treated as an unknown binary and discarded.</p>
+
+    <div class="callout warning">
+      <p><strong>There is no tool, converter, or workaround that makes Google Sheets run VBA.</strong> Any article or tool claiming otherwise is either wrong or referring to something other than genuine VBA execution. The migration path is rewriting your logic in Apps Script.</p>
+    </div>
+
+    <h2>Understanding the Platform Difference</h2>
+
+    <p>VBA (Visual Basic for Applications) is a COM-based language that runs inside Microsoft Office applications. It has direct access to the Excel object model, the Windows file system, Windows APIs, COM objects, and ActiveX controls. It runs synchronously in the application process.</p>
+
+    <p>Google Apps Script is a JavaScript ES5-based cloud scripting language. It runs on Google's servers, not in your browser. It has access to Google Workspace APIs (Sheets, Drive, Gmail, Calendar, etc.) but no access to local file systems, Windows APIs, or COM objects. It runs asynchronously with quota limits on execution time and API calls.</p>
+
+    <p>These are not two implementations of the same idea — they are entirely different architectures serving related but distinct purposes.</p>
+
+    <!-- CTA MID -->
+    <div style="background:#1e1b2e;border:1px solid #4a3f8a;border-radius:12px;padding:32px;text-align:center;margin:40px 0">
+      <p style="font-size:18px;font-weight:700;color:#c4b5fd;margin-bottom:8px">Stop losing macros on every conversion</p>
+      <p style="color:var(--muted);margin-bottom:24px;font-size:14px">The Macro-Safe Converter Kit gives you the exact workflow, tested scripts, and decision checklist to convert any Excel file without losing a single line of VBA.</p>
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" style="display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:14px 32px;border-radius:8px;font-size:15px;text-decoration:none">Get the Kit — $9</a>
+      <p style="font-size:12px;color:var(--muted);margin-top:12px">One-time payment · Instant download · 30-day guarantee</p>
+    </div>
+
+    <h2>The Apps Script Migration Path</h2>
+
+    <p>If the business logic in your VBA is the valuable thing — not the VBA itself — then Apps Script migration is viable. Here is the correct process.</p>
+
+    <h3>Step 1: Audit Your VBA Modules</h3>
+
+    <p>Before writing a single line of Apps Script, fully document what your VBA does. Open the VBA editor (<code>Alt + F11</code>) and for each module, write down:</p>
+
+    <ul>
+      <li>The procedure name and purpose</li>
+      <li>What triggers it (button click, Workbook_Open, time-based, etc.)</li>
+      <li>What data it reads and from where</li>
+      <li>What it produces or modifies</li>
+      <li>Any external dependencies (file system, database connections, COM objects)</li>
+    </ul>
+
+    <p>External dependencies are the blockers. If your macro reads from a local SQL Server database, accesses a Windows network share, or calls a COM object, that code cannot be migrated to Apps Script without replacing the data source as well.</p>
+
+    <h3>Step 2: Import the Data into Google Sheets</h3>
+
+    <p>Upload the XLSM to Google Drive, then right-click → Open with → Google Sheets. Review the imported data for accuracy. Pay attention to:</p>
+
+    <ul>
+      <li>Date and number formatting differences</li>
+      <li>Formula syntax differences (most Excel formulas convert automatically, but some advanced functions do not exist in Sheets)</li>
+      <li>Merged cells and conditional formatting fidelity</li>
+    </ul>
+
+    <h3>Step 3: Rewrite in Apps Script</h3>
+
+    <p>Open the Apps Script editor via <code>Extensions → Apps Script</code>. Below is a comparison of common VBA patterns and their Apps Script equivalents.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>VBA Pattern</th>
+          <th>Apps Script Equivalent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Workbook_Open</code></td>
+          <td><code>onOpen()</code> trigger</td>
+        </tr>
+        <tr>
+          <td><code>Worksheet_Change(Target)</code></td>
+          <td><code>onEdit(e)</code> trigger</td>
+        </tr>
+        <tr>
+          <td><code>Range("A1").Value</code></td>
+          <td><code>sheet.getRange("A1").getValue()</code></td>
+        </tr>
+        <tr>
+          <td><code>Cells(i, j).Value</code></td>
+          <td><code>sheet.getRange(i, j).getValue()</code></td>
+        </tr>
+        <tr>
+          <td><code>Range.Copy / Paste</code></td>
+          <td><code>range.copyTo(destination)</code></td>
+        </tr>
+        <tr>
+          <td><code>MsgBox "text"</code></td>
+          <td><code>SpreadsheetApp.getUi().alert("text")</code></td>
+        </tr>
+        <tr>
+          <td><code>Application.InputBox</code></td>
+          <td><code>Browser.inputBox()</code></td>
+        </tr>
+        <tr>
+          <td><code>For Each cell In Range</code></td>
+          <td><code>range.getValues().forEach()</code></td>
+        </tr>
+        <tr>
+          <td><code>Sheets("Sheet1")</code></td>
+          <td><code>ss.getSheetByName("Sheet1")</code></td>
+        </tr>
+        <tr>
+          <td><code>ActiveSheet.Sort</code></td>
+          <td><code>range.sort()</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Here is a minimal Apps Script example of a procedure that mirrors a common VBA task — iterating a column and highlighting rows based on a condition:</p>
+
+    <pre><code>function highlightOverdueRows() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Tasks");
+  var data = sheet.getDataRange().getValues();
+  var today = new Date();
+
+  for (var i = 1; i &lt; data.length; i++) {
+    var dueDate = new Date(data[i][3]); // Column D
+    var status = data[i][4];           // Column E
+
+    if (dueDate &lt; today &amp;&amp; status !== "Complete") {
+      sheet.getRange(i + 1, 1, 1, data[0].length)
+           .setBackground("#3d1515");
+    }
+  }
+}</code></pre>
+
+    <h3>Step 4: Attach Triggers</h3>
+
+    <p>Apps Script triggers replace VBA event procedures. Go to the Apps Script editor → <code>Triggers</code> (clock icon) → <code>Add Trigger</code>. Common trigger mappings:</p>
+
+    <ul>
+      <li><strong>On open</strong> — replaces <code>Workbook_Open</code> and <code>Auto_Open</code></li>
+      <li><strong>On edit</strong> — replaces <code>Worksheet_Change</code>, but note it fires on any cell edit, not just specific ranges</li>
+      <li><strong>Time-driven</strong> — replaces <code>Application.OnTime</code> scheduled procedures</li>
+    </ul>
+
+    <h2>What Cannot Be Migrated</h2>
+
+    <p>Be realistic about the following VBA patterns before committing to a migration:</p>
+
+    <ul>
+      <li><strong>UserForms:</strong> Google Sheets has no equivalent native dialog system. You can build custom HTML dialogs using <code>HtmlService</code>, but it requires HTML/CSS/JavaScript skills and is not a simple port.</li>
+      <li><strong>ActiveX controls:</strong> Buttons, combo boxes, and list boxes embedded in worksheets must be replaced with Google Sheets drawing-based buttons linked to Apps Script functions — a manual process for each control.</li>
+      <li><strong>File system access:</strong> Any VBA that reads or writes local files (<code>Open filepath For Input</code>) cannot be migrated directly. The equivalent is Google Drive API access, which requires OAuth and different file handling logic.</li>
+      <li><strong>Windows API calls:</strong> <code>Declare Function</code> calls into Windows DLLs have no equivalent in Apps Script.</li>
+      <li><strong>Performance-critical loops:</strong> Apps Script has a 6-minute execution limit and significantly lower throughput than VBA for large-range operations. A VBA macro that processes 100,000 rows in 10 seconds may time out in Apps Script.</li>
+    </ul>
+
+    <h2>When to Keep Excel</h2>
+
+    <div class="decision-box">
+      <h4>Keep Excel if any of these apply:</h4>
+      <p>Your VBA uses Windows API calls or COM objects &bull; You have UserForms with complex logic &bull; You access local or network file systems &bull; Performance is critical for large datasets &bull; Your team does not know JavaScript &bull; You have ActiveX controls embedded in worksheets &bull; Your macros depend on Excel-specific object model features with no Sheets equivalent</p>
+    </div>
+
+    <p>Google Sheets is an excellent collaborative tool. But it is not a drop-in replacement for Excel with macros. If your workflow depends on VBA-heavy automation, the migration cost is real and should be estimated carefully before committing.</p>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">Can Google Sheets run VBA macros from an XLSM file?</div>
+        <div class="faq-a">No. Google Sheets has no VBA runtime. When you import an XLSM file into Google Sheets, the cell data and most formatting is imported, but every VBA module, UserForm, and class module is silently discarded. Google Sheets uses Google Apps Script (JavaScript-based) for automation, which is a completely different language and runtime from VBA.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How do I migrate VBA macros to Google Apps Script?</div>
+        <div class="faq-a">The migration process involves three steps: first, audit all your VBA modules and document what each procedure does (its inputs, outputs, and business logic). Second, open the Apps Script editor in your Google Sheet (Extensions → Apps Script) and rewrite each procedure in JavaScript using the Sheets API. Third, attach any automated triggers (equivalent to VBA's Workbook_Open or Worksheet_Change events) using Apps Script's trigger system. There is no automatic VBA-to-Apps Script converter; it requires manual rewriting.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">When should I keep Excel instead of migrating to Google Sheets?</div>
+        <div class="faq-a">Keep Excel if your workbook uses complex VBA with Excel-specific object model calls, ActiveX controls, COM add-ins, or tight Windows API integration. Also keep Excel if your macros depend on local file system access, if performance is critical (VBA in Excel is significantly faster for large data manipulation than Apps Script), or if your team lacks the JavaScript skills to maintain an Apps Script equivalent.</div>
+      </div>
+    </div>
+
+    <!-- CTA BOTTOM -->
+    <div style="background:#1e1b2e;border:1px solid #4a3f8a;border-radius:12px;padding:32px;text-align:center;margin:40px 0">
+      <p style="font-size:18px;font-weight:700;color:#c4b5fd;margin-bottom:8px">Stop losing macros on every conversion</p>
+      <p style="color:var(--muted);margin-bottom:24px;font-size:14px">The Macro-Safe Converter Kit gives you the exact workflow, tested scripts, and decision checklist to convert any Excel file without losing a single line of VBA.</p>
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" style="display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:14px 32px;border-radius:8px;font-size:15px;text-decoration:none">Get the Kit — $9</a>
+      <p style="font-size:12px;color:var(--muted);margin-top:12px">One-time payment · Instant download · 30-day guarantee</p>
+    </div>
+
+    <!-- Related Articles -->
+    <div class="related">
+      <h3>Related Articles</h3>
+      <ul>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/best-macro-safe-excel-converter-tools-2026/">Best Macro-Safe Excel Converter Tools (2026)</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-migration-guide-2026/">Excel Macro Migration Guide 2026</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/how-to-convert-xls-to-xlsx-without-losing-macros/">How to Convert XLS to XLSX Without Losing Macros</a></li>
+      </ul>
+    </div>
+
+  </article>
+</div>
+
+<footer>
+  <div class="container">
+    <p><a href="https://jbhihall-droid.github.io/macro-converter-kit/">MacroKit Home</a> &nbsp;·&nbsp; &copy; 2026 MacroKit. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convert XLS to XLSM: Keep Every Macro in the New Format (2026)</title>
+  <meta name="description" content="XLS files contain VBA macros in an old binary format. Converting to XLSM moves them to the modern format — but most tools destroy them. Here's how to do it right.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/convert-xls-to-xlsm/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --accent: #6c5ce7; --accent2: #00cec9; --text: #e2e8f0; --muted: #94a3b8; --green: #00b894; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.7; }
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    nav { border-bottom: 1px solid var(--border); padding: 16px 0; }
+    nav .container { display: flex; align-items: center; gap: 12px; }
+    .logo { font-weight: 700; font-size: 15px; color: var(--text); }
+    .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .breadcrumb { padding: 16px 0; font-size: 13px; color: var(--muted); }
+    article { padding: 48px 0 80px; }
+    .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 16px; }
+    h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.2; letter-spacing: -0.8px; margin-bottom: 20px; }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 22px; font-weight: 700; margin: 40px 0 16px; letter-spacing: -0.3px; }
+    h3 { font-size: 17px; font-weight: 700; margin: 28px 0 10px; }
+    p { margin-bottom: 18px; }
+    ul, ol { padding-left: 24px; margin-bottom: 18px; }
+    li { margin-bottom: 8px; }
+    .callout { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .callout strong { color: #c4b5fd; }
+    .warning { background: #1f1a0e; border: 1px solid #78350f; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .warning strong { color: #fbbf24; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th { background: var(--surface); padding: 10px 14px; text-align: left; border: 1px solid var(--border); font-weight: 600; }
+    td { padding: 10px 14px; border: 1px solid var(--border); color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 500; }
+    .verdict-yes { color: #00b894; font-weight: 700; }
+    .verdict-no { color: #d63031; font-weight: 700; }
+    .cta-box { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 12px; padding: 32px; text-align: center; margin: 40px 0; }
+    .cta-box h3 { color: #c4b5fd; margin-bottom: 8px; font-size: 18px; }
+    .cta-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 8px; font-size: 15px; text-decoration: none; margin-top: 20px; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; font-size: 13px; overflow-x: auto; margin-bottom: 18px; }
+    code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Convert XLS to XLSM: Keep Every Macro in the New Format (2026)",
+    "description": "XLS files contain VBA macros in an old binary format. Converting to XLSM moves them to the modern format — but most tools destroy them. Here's how to do it right.",
+    "datePublished": "2026-03-14",
+    "dateModified": "2026-04-01",
+    "author": { "@type": "Organization", "name": "MacroKit" },
+    "publisher": { "@type": "Organization", "name": "MacroKit" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://jbhihall-droid.github.io/macro-converter-kit/blog/convert-xls-to-xlsm/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why is converting XLS to XLSM harder than XLSX to XLSM?",
+        "acceptedAnswer": { "@type": "Answer", "text": "XLS uses the BIFF8 (Binary Interchange File Format) binary structure, which is entirely different from the Open XML ZIP architecture used by XLSM. The VBA is embedded directly in the BIFF stream as a separate storage object. Converting to XLSM requires extracting that VBA storage and repackaging it as a vbaProject.bin — a transformation that Excel's own engine handles correctly but most third-party parsers get wrong." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I convert XLS to XLSM without Excel installed?",
+        "acceptedAnswer": { "@type": "Answer", "text": "LibreOffice is the best option without Excel. Run: libreoffice --headless --convert-to xlsm yourfile.xls. VBA compatibility is good for simple macros but degrades with complex Excel-specific objects. Always validate the output in Excel before relying on it in production." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will my XLS macros run without modification in XLSM?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Most will, because XLSM macros run in the same VBA 7.x engine as XLS macros. However, macros that reference the Excel 4 macro language (XLM), use old-style dialog sheets, or call deprecated functions from the Analysis ToolPak may need small updates. Test each macro after conversion." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="/macro-converter-kit/" class="logo">MacroKit</a>
+    <span class="badge">Beta</span>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="breadcrumb">
+    <a href="/macro-converter-kit/">Home</a> &rsaquo; <a href="/macro-converter-kit/blog/">Blog</a> &rsaquo; Convert XLS to XLSM
+  </div>
+</div>
+
+<div class="container">
+<article>
+  <p class="label">Excel Format Guide</p>
+  <h1>Convert XLS to XLSM: Keep Every Macro in the New Format (2026)</h1>
+  <p class="meta">Updated April 2026 &middot; By MacroKit Team &middot; 9 min read</p>
+
+  <p>XLS to XLSM is a more treacherous conversion than most people expect. The naive assumption is: both formats support VBA, so any converter should handle it. The reality is that XLS and XLSM store VBA in fundamentally different ways, and most tools silently drop the macros without warning.</p>
+
+  <p>This guide explains exactly why, gives you two reliable paths to make the conversion correctly, and shows you how to validate that nothing was lost.</p>
+
+  <h2>How XLS Stores VBA (And Why It's Different)</h2>
+
+  <p>The XLS format is officially called BIFF8 — Binary Interchange File Format, version 8. It's a compound document format based on the OLE (Object Linking and Embedding) Structured Storage specification, which Microsoft developed in the early 1990s. Think of it as a miniature filesystem embedded inside a single binary file, with directories ("storages") and files ("streams") inside.</p>
+
+  <p>VBA in an XLS file lives in a storage called <code>_VBA_PROJECT_CUR</code> inside the compound document. Inside that storage are streams including <code>VBA</code> (the compiled p-code and source), <code>_VBA_PROJECT</code> (project metadata), and one stream per module. The source code itself is compressed using a simple run-length scheme defined in the MS-OVBA specification.</p>
+
+  <p>XLSM is entirely different. It's a ZIP archive of XML files, and VBA lives in a file called <code>xl/vbaProject.bin</code> inside that ZIP. This <code>vbaProject.bin</code> is itself a COM Structured Storage document — essentially the same OLE compound document structure extracted from the old XLS binary and dropped into the new container as a binary blob.</p>
+
+  <p>So converting XLS to XLSM means: extract the VBA compound document from the BIFF8 stream, write it as a standalone <code>.bin</code> file, package it inside a ZIP alongside new XML worksheets, and update the content type manifest. This is what Excel's engine does. Most third-party converters do not — they parse the worksheets and data, rebuild the XML, and never touch the VBA storage at all.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Attribute</th>
+        <th>XLS (BIFF8)</th>
+        <th>XLSM (Open XML)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Container format</td>
+        <td>OLE Compound Document</td>
+        <td>ZIP archive</td>
+      </tr>
+      <tr>
+        <td>VBA storage location</td>
+        <td>_VBA_PROJECT_CUR stream</td>
+        <td>xl/vbaProject.bin</td>
+      </tr>
+      <tr>
+        <td>VBA encoding</td>
+        <td>MS-OVBA compressed streams</td>
+        <td>Same (vbaProject.bin is OLE)</td>
+      </tr>
+      <tr>
+        <td>Max file size</td>
+        <td>~256 MB (practical limit)</td>
+        <td>Effectively unlimited</td>
+      </tr>
+      <tr>
+        <td>Max rows</td>
+        <td>65,536</td>
+        <td>1,048,576</td>
+      </tr>
+      <tr>
+        <td>Excel version support</td>
+        <td>All versions</td>
+        <td>Excel 2007+</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Path 1: Excel Save As (Recommended)</h2>
+
+  <p>When Excel opens an XLS file and you Save As XLSM, Excel's engine does the OLE extraction and repackaging correctly. This is the most reliable method available because Microsoft wrote both the XLS parser and the XLSM writer.</p>
+
+  <ol>
+    <li>Open the XLS file in Excel. If you see a compatibility warning about features not available in XLS format, that's normal — click OK.</li>
+    <li>Before doing anything else, press <strong>Alt + F11</strong> to open the VBA editor. In the Project Explorer (left panel), expand the project tree and verify all modules are listed. Take note of how many modules, class modules, and UserForms exist.</li>
+    <li>Close the VBA editor and return to the workbook.</li>
+    <li>Go to <strong>File &rarr; Save As</strong>. In the "Save as type" dropdown, select <strong>Excel Macro-Enabled Workbook (*.xlsm)</strong>.</li>
+    <li>Give the file a new name (do not overwrite the original XLS yet).</li>
+    <li>Click Save. Excel will rewrite the file completely.</li>
+    <li>Close Excel, reopen the new XLSM, and verify:</li>
+  </ol>
+
+  <ul>
+    <li>All modules are present in the VBA editor (same count as before)</li>
+    <li>Module code is intact — scroll through each one</li>
+    <li>Run each macro manually via Developer &rarr; Macros or F5 in the editor</li>
+    <li>Spot-check worksheet data — row count, formula outputs, named ranges</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Why keep the original XLS?</strong> Some legacy XLS files contain Excel 4.0 macro sheets (XLM macros) — a separate macro system that predates VBA. These look like worksheet tabs but contain formula-based macros. Excel carries these through to XLSM in most cases, but they may not execute correctly. Keep the original until you've validated every execution path.
+  </div>
+
+  <h2>Path 2: LibreOffice Headless CLI</h2>
+
+  <p>On Linux or macOS without Excel, LibreOffice is the best available option. Its XLS reader is mature (it's been reading BIFF8 files since the early 2000s), and its XLSM writer correctly packages VBA as a <code>vbaProject.bin</code>.</p>
+
+  <pre><code># Single file conversion
+libreoffice --headless --convert-to xlsm yourfile.xls
+
+# With explicit output directory
+libreoffice --headless --convert-to xlsm --outdir /output/ yourfile.xls
+
+# Batch: all XLS files in current directory
+libreoffice --headless --convert-to xlsm *.xls</code></pre>
+
+  <div class="cta-box">
+    <h3>Stop losing macros on every conversion</h3>
+    <p style="color:var(--muted);font-size:14px;margin:8px 0 0">The Macro-Safe Converter Kit gives you the exact workflow, tested scripts, and decision checklist to convert without losing a single line of VBA.</p>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" class="cta-btn">Get the Kit — $9</a>
+    <p style="font-size:12px;color:var(--muted);margin-top:12px">One-time · Instant download · 30-day guarantee</p>
+  </div>
+
+  <p>The VBA compatibility limitations with LibreOffice are real and worth understanding specifically for the XLS case:</p>
+
+  <ul>
+    <li><strong>Works well:</strong> Procedural VBA (loops, conditionals, string operations), basic Workbook/Worksheet events, simple Range manipulation, MsgBox/InputBox</li>
+    <li><strong>Risky:</strong> UserForms with complex layouts, ActiveX controls embedded in sheets, references to external COM objects (e.g., Scripting.FileSystemObject, ADODB), late-bound object creation via CreateObject</li>
+    <li><strong>Does not work:</strong> Excel-specific constants not defined in LibreOffice's compatibility layer, calls to undocumented Excel API functions, XLM macro sheet references</li>
+  </ul>
+
+  <p>For any macro in the "risky" category, test in Excel after conversion. If a macro fails, you may need to adjust it for the minor differences between Excel's VBA runtime and LibreOffice's compatibility shim.</p>
+
+  <h2>The Two-Step Path for Complex Files</h2>
+
+  <p>For XLS files with complex macros that you know need to run perfectly in Excel, a two-step approach on Windows gives you maximum fidelity:</p>
+
+  <ol>
+    <li><strong>Step 1 — XLS to XLSM via Excel Save As.</strong> This gives you a correctly structured XLSM with VBA intact.</li>
+    <li><strong>Step 2 — Validate with a Python script</strong> that opens the XLSM and confirms the vbaProject.bin is present and non-empty.</li>
+  </ol>
+
+  <pre><code">import zipfile
+from pathlib import Path
+
+def validate_xlsm(path: str) -> dict:
+    p = Path(path)
+    if p.suffix.lower() != '.xlsm':
+        return {"valid": False, "reason": "Not an XLSM file"}
+
+    with zipfile.ZipFile(path, 'r') as z:
+        names = z.namelist()
+        has_vba = 'xl/vbaProject.bin' in names
+        if not has_vba:
+            return {"valid": False, "reason": "vbaProject.bin missing"}
+        vba_size = z.getinfo('xl/vbaProject.bin').file_size
+        return {
+            "valid": True,
+            "vba_bin_size_bytes": vba_size,
+            "files_in_archive": len(names)
+        }
+
+result = validate_xlsm("output.xlsm")
+print(result)</code></pre>
+
+  <p>A valid XLSM will have <code>xl/vbaProject.bin</code> present and its size will be at minimum a few kilobytes (even a minimal VBA project is several KB due to the OLE compound document overhead). If <code>vba_bin_size_bytes</code> is 0 or the key is missing, the conversion failed to preserve VBA.</p>
+
+  <h2>What About XLS Files With No Macros?</h2>
+
+  <p>If your XLS file has no VBA at all, converting to XLSM is unnecessary. Convert to XLSX instead — it's the current standard format, smaller on disk, and more widely supported by modern tools. XLSM should only be your target when you need macro capability in the output.</p>
+
+  <p>If you're not sure whether an XLS file has macros: open it in Excel, press Alt + F11, and look at the Project Explorer. If you see any modules, class modules, or forms listed, macros are present. If the tree is empty, there's nothing to preserve and XLSX is the better target.</p>
+
+  <h2>Validation Steps After Any XLS to XLSM Conversion</h2>
+
+  <p>Run these checks in sequence before retiring the original XLS:</p>
+
+  <ol>
+    <li><strong>File size sanity check.</strong> XLSM files are generally similar in size to the original XLS (often slightly smaller due to ZIP compression of the XML worksheets). If the output file is dramatically smaller (e.g., 500KB XLS becomes 12KB XLSM), something was dropped.</li>
+    <li><strong>Module count check.</strong> Open both the original XLS and the converted XLSM, press Alt + F11 in each, and count modules. They should match exactly.</li>
+    <li><strong>Line count check.</strong> For critical modules, compare the line count of source code between original and converted. In the VBA editor, Ctrl + End moves to the last line — the line number shown in the status bar is your total.</li>
+    <li><strong>Runtime test.</strong> Run each macro with representative data. Note any runtime errors that weren't present in the original XLS.</li>
+    <li><strong>Named ranges and defined names.</strong> Macros often reference named ranges. Go to Formulas &rarr; Name Manager and verify all named ranges survived intact.</li>
+  </ol>
+
+  <h2 id="faq">Frequently Asked Questions</h2>
+
+  <h3>Why is converting XLS to XLSM harder than XLSX to XLSM?</h3>
+  <p>XLS uses the BIFF8 (Binary Interchange File Format) binary structure, which is entirely different from the Open XML ZIP architecture used by XLSM. The VBA is embedded directly in the BIFF stream as a separate storage object. Converting to XLSM requires extracting that VBA storage and repackaging it as a <code>vbaProject.bin</code> — a transformation that Excel's own engine handles correctly but most third-party parsers get wrong.</p>
+
+  <h3>Can I convert XLS to XLSM without Excel installed?</h3>
+  <p>LibreOffice is the best option without Excel. Run: <code>libreoffice --headless --convert-to xlsm yourfile.xls</code>. VBA compatibility is good for simple macros but degrades with complex Excel-specific objects. Always validate the output in Excel before relying on it in production.</p>
+
+  <h3>Will my XLS macros run without modification in XLSM?</h3>
+  <p>Most will, because XLSM macros run in the same VBA 7.x engine as XLS macros. However, macros that reference the Excel 4 macro language (XLM), use old-style dialog sheets, or call deprecated functions from the Analysis ToolPak may need small updates. Test each macro after conversion.</p>
+
+  <section style="margin-top:60px;padding-top:40px;border-top:1px solid var(--border)">
+    <h2 style="margin-bottom:24px">Related Guides</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+      <a href="/macro-converter-kit/blog/best-macro-safe-excel-converter-tools-2026/" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;display:block;color:var(--text);text-decoration:none"><strong style="font-size:14px;display:block;margin-bottom:6px">Best Macro-Safe Excel Converter Tools 2026</strong><span style="font-size:12px;color:var(--muted)">Tool comparison guide</span></a>
+      <a href="/macro-converter-kit/blog/excel-macro-migration-guide-2026/" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;display:block;color:var(--text);text-decoration:none"><strong style="font-size:14px;display:block;margin-bottom:6px">Excel Macro Migration Guide 2026</strong><span style="font-size:12px;color:var(--muted)">Complete migration walkthrough</span></a>
+      <a href="/macro-converter-kit/blog/how-to-convert-xls-to-xlsx-without-losing-macros/" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;display:block;color:var(--text);text-decoration:none"><strong style="font-size:14px;display:block;margin-bottom:6px">Convert XLS to XLSX Without Losing Macros</strong><span style="font-size:12px;color:var(--muted)">Step-by-step guide</span></a>
+    </div>
+  </section>
+
+  <div class="cta-box">
+    <h3>Stop losing macros on every conversion</h3>
+    <p style="color:var(--muted);font-size:14px;margin:8px 0 0">The Macro-Safe Converter Kit gives you the exact workflow, tested scripts, and decision checklist to convert without losing a single line of VBA.</p>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" class="cta-btn">Get the Kit — $9</a>
+    <p style="font-size:12px;color:var(--muted);margin-top:12px">One-time · Instant download · 30-day guarantee</p>
+  </div>
+
+</article>
+</div>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 MacroKit &middot; <a href="/macro-converter-kit/">Home</a> &middot; <a href="/macro-converter-kit/blog/">Blog</a> &middot; <a href="/macro-converter-kit/checkout.html">Get the Kit</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

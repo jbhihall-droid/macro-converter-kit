@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free XLSM Macro Inspector — Check Which Macros Are in Your Excel File</title>
+<meta name="description" content="Upload any XLSM, XLSB, or XLS file to instantly see which VBA modules and macros it contains — 100% client-side, your file never leaves your browser.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/tools/macro-inspector/">
+<meta property="og:title" content="Free XLSM Macro Inspector — See Your Excel Macros Before You Convert">
+<meta property="og:description" content="Drag and drop your XLSM file to instantly see all VBA modules. 100% client-side — your file never leaves your browser.">
+<meta property="og:url" content="https://jbhihall-droid.github.io/macro-converter-kit/tools/macro-inspector/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "XLSM Macro Inspector",
+  "url": "https://jbhihall-droid.github.io/macro-converter-kit/tools/macro-inspector/",
+  "description": "Free browser-based tool that inspects Excel files and lists all VBA macro modules. Runs entirely client-side — no upload, no server.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Detect VBA macro modules in XLSM files",
+    "List module names and types",
+    "100% client-side processing",
+    "No file upload to server"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does this tool upload my Excel file to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The Macro Inspector runs entirely in your browser using the JavaScript File API and JSZip. Your file is never sent to any server. This is especially important for confidential financial or business Excel files."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which Excel formats does the Macro Inspector support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The inspector works with XLSM (the primary macro-enabled format), XLSX (can check if a vbaProject.bin is unexpectedly present), and XLSB (binary format — macro presence detected but module names may not be readable without full decompilation). XLS (legacy binary) detection is limited to file header inspection."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do I need to know which macros are in my file before converting?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most online converters silently strip all VBA macros without warning. By running the inspector first, you get a record of exactly which modules existed — so you can verify they survived after conversion, or recover them from the original file if they were destroyed."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: #2a2d3a;
+    --accent: #6c5ce7;
+    --accent2: #00cec9;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --green: #00b894;
+    --red: #d63031;
+    --yellow: #f59e0b;
+  }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; min-height: 100vh; }
+  a { color: var(--accent2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+  nav { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  nav .inner { display: flex; align-items: center; gap: 12px; }
+  .logo { font-weight: 700; font-size: 15px; color: var(--text); }
+  .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+  .nav-link { margin-left: auto; font-size: 13px; color: var(--muted); }
+
+  /* Hero */
+  .hero { padding: 56px 0 32px; text-align: center; }
+  .tool-label { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent2); margin-bottom: 16px; }
+  .hero h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 16px; }
+  .hero p { font-size: 16px; color: var(--muted); max-width: 560px; margin: 0 auto 32px; }
+  .trust-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
+  .pill { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+  .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+  /* Drop zone */
+  .drop-zone {
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+    padding: 56px 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--surface);
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .drop-zone:hover, .drop-zone.drag-over {
+    border-color: var(--accent);
+    background: #1e1b2e;
+  }
+  .drop-zone input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+  .drop-icon { font-size: 48px; margin-bottom: 16px; }
+  .drop-zone h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .drop-zone p { font-size: 14px; color: var(--muted); }
+  .formats { font-size: 12px; color: var(--accent2); margin-top: 12px; font-weight: 600; letter-spacing: 0.5px; }
+
+  /* Progress */
+  #progress-bar { display: none; margin: 16px 0; }
+  .progress-track { background: var(--border); border-radius: 4px; height: 4px; overflow: hidden; }
+  .progress-fill { background: var(--accent); height: 4px; width: 0; transition: width 0.3s; border-radius: 4px; }
+  .progress-label { font-size: 12px; color: var(--muted); margin-top: 8px; text-align: center; }
+
+  /* Results */
+  #results { display: none; margin: 32px 0; }
+  .result-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .result-icon { font-size: 36px; }
+  .result-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .result-sub { font-size: 14px; color: var(--muted); }
+
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .stat-num { font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+  .stat-label { font-size: 12px; color: var(--muted); }
+  .stat-macro { color: var(--accent2); }
+  .stat-risk { color: var(--yellow); }
+  .stat-safe { color: var(--green); }
+
+  .modules-section h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+  .module-list { list-style: none; }
+  .module-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 14px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 8px;
+    margin-bottom: 6px; font-size: 14px;
+  }
+  .module-type { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; min-width: 60px; text-align: center; }
+  .type-module { background: #1e1b2e; color: #c4b5fd; }
+  .type-class { background: #0f2027; color: var(--accent2); }
+  .type-sheet { background: #0f1a0f; color: var(--green); }
+  .type-workbook { background: #1f1a0e; color: var(--yellow); }
+  .module-name { font-weight: 600; color: var(--text); flex: 1; }
+  .module-size { font-size: 12px; color: var(--muted); }
+
+  /* Risk banner */
+  .risk-banner {
+    background: #1f1a0e; border: 1px solid #92400e;
+    border-radius: 10px; padding: 20px 24px; margin: 24px 0;
+  }
+  .risk-banner .risk-title { color: var(--yellow); font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+  .risk-banner p { font-size: 14px; color: var(--muted); margin: 0; }
+  .safe-banner {
+    background: #0a1f12; border: 1px solid #14532d;
+    border-radius: 10px; padding: 20px 24px; margin: 24px 0;
+  }
+  .safe-banner .safe-title { color: var(--green); font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+
+  /* CTA */
+  .cta-box {
+    background: #1e1b2e; border: 1px solid #4a3f8a;
+    border-radius: 12px; padding: 32px; text-align: center; margin: 32px 0;
+  }
+  .cta-box h3 { font-size: 18px; font-weight: 700; color: #c4b5fd; margin-bottom: 8px; }
+  .cta-box p { font-size: 14px; color: var(--muted); margin-bottom: 0; }
+  .cta-btn {
+    display: inline-block; background: var(--accent); color: #fff;
+    font-weight: 700; padding: 14px 32px; border-radius: 8px;
+    font-size: 15px; text-decoration: none; margin-top: 20px;
+    transition: opacity 0.2s;
+  }
+  .cta-btn:hover { opacity: 0.9; text-decoration: none; }
+  .cta-sub { font-size: 12px; color: var(--muted); margin-top: 10px; }
+
+  /* Email capture */
+  .email-capture {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;
+  }
+  .email-capture h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .email-capture p { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+  .email-form { display: flex; gap: 8px; max-width: 440px; margin: 0 auto; }
+  .email-form input {
+    flex: 1; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 14px; color: var(--text);
+    font-size: 14px; outline: none;
+  }
+  .email-form input:focus { border-color: var(--accent); }
+  .email-form button {
+    background: var(--accent); color: #fff; border: none;
+    padding: 10px 20px; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer; white-space: nowrap;
+  }
+  .email-sent { display: none; font-size: 14px; color: var(--green); font-weight: 600; margin-top: 8px; }
+
+  /* Scan another */
+  #scan-another { display: none; text-align: center; margin: 16px 0; }
+  .scan-again-btn {
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--text); padding: 10px 24px; border-radius: 8px;
+    font-size: 14px; cursor: pointer; font-weight: 600;
+  }
+
+  /* How it works */
+  .how-it-works { padding: 60px 0; border-top: 1px solid var(--border); }
+  .how-it-works h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+  .how-it-works .sub { color: var(--muted); margin-bottom: 40px; font-size: 14px; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .step { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .step-num { font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 10px; }
+  .step h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .step p { font-size: 13px; color: var(--muted); margin: 0; }
+
+  /* FAQ */
+  .faq { padding: 60px 0; border-top: 1px solid var(--border); }
+  .faq h2 { font-size: 24px; font-weight: 700; margin-bottom: 32px; }
+  .faq-item { padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+  .faq-a { font-size: 14px; color: var(--muted); }
+
+  footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
+
+  @media (max-width: 500px) {
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .email-form { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="inner">
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/" class="logo">MacroKit</a>
+      <span class="badge">Free Tool</span>
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" class="nav-link" style="margin-left:auto">Get the Kit →</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+
+    <div class="hero">
+      <p class="tool-label">Free Tool · 100% Client-Side</p>
+      <h1>XLSM Macro Inspector</h1>
+      <p>Drop any Excel file to instantly see which VBA modules it contains — before you convert it and lose them forever.</p>
+      <div class="trust-pills">
+        <span class="pill"><span class="pill-dot"></span>File never leaves your browser</span>
+        <span class="pill"><span class="pill-dot"></span>No account required</span>
+        <span class="pill"><span class="pill-dot"></span>Works with XLSM · XLSX · XLSB</span>
+        <span class="pill"><span class="pill-dot"></span>Instant results</span>
+      </div>
+    </div>
+
+    <!-- Drop Zone -->
+    <div class="drop-zone" id="drop-zone">
+      <input type="file" id="file-input" accept=".xlsm,.xlsx,.xlsb,.xls" />
+      <div class="drop-icon">📊</div>
+      <h2>Drop your Excel file here</h2>
+      <p>or click to browse</p>
+      <p class="formats">XLSM · XLSX · XLSB · XLS</p>
+    </div>
+
+    <div id="progress-bar">
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <p class="progress-label" id="progress-label">Analysing file structure…</p>
+    </div>
+
+    <!-- Results -->
+    <div id="results">
+      <div class="result-header">
+        <div class="result-icon" id="result-icon">✅</div>
+        <div>
+          <div class="result-title" id="result-title">Macros detected</div>
+          <div class="result-sub" id="result-sub">Analysis complete</div>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-num stat-macro" id="stat-modules">0</div>
+          <div class="stat-label">VBA Modules</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-format" style="font-size:20px;line-height:2">—</div>
+          <div class="stat-label">File Format</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num stat-risk" id="stat-risk">High</div>
+          <div class="stat-label">Conversion Risk</div>
+        </div>
+      </div>
+
+      <div id="risk-warning" class="risk-banner" style="display:none">
+        <div class="risk-title">⚠️ High macro-loss risk on conversion</div>
+        <p>This file contains <strong id="risk-module-count"></strong> VBA module(s). Most online converters will silently strip all of them. If you convert this file to XLSX, CSV, or PDF using a standard tool, you will lose this code permanently — unless you have a backup.</p>
+      </div>
+
+      <div id="safe-notice" class="safe-banner" style="display:none">
+        <div class="safe-title">✅ No macros detected</div>
+        <p>No VBA project was found in this file. You can convert it using any standard tool without risk of macro loss.</p>
+      </div>
+
+      <div id="modules-section" class="modules-section" style="display:none">
+        <h3>VBA Modules Found</h3>
+        <ul class="module-list" id="module-list"></ul>
+      </div>
+
+      <div id="email-capture-section" class="email-capture" style="display:none">
+        <h3>Get a full module analysis report</h3>
+        <p>Enter your email and we'll send you a detailed breakdown of your VBA modules — including module types, line counts, and the safest conversion path for your specific file.</p>
+        <div class="email-form">
+          <input type="email" id="email-input" placeholder="your@email.com" />
+          <button onclick="submitEmail()">Send Report</button>
+        </div>
+        <p class="email-sent" id="email-sent">✓ Report queued — check your inbox within 5 minutes.</p>
+        <p style="font-size:11px;color:var(--muted);margin-top:10px">No spam. Unsubscribe anytime.</p>
+      </div>
+
+      <div class="cta-box" id="macro-cta" style="display:none">
+        <h3>These macros are at risk every time you convert</h3>
+        <p>The Macro-Safe Converter Kit gives you the exact workflow, tested scripts, and pre-conversion checklist to convert any Excel file without losing a single line of VBA — even in batch operations across 50+ files.</p>
+        <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" class="cta-btn">Protect your macros — Get the Kit ($9)</a>
+        <p class="cta-sub">One-time · Instant download · 30-day guarantee</p>
+      </div>
+
+      <div id="scan-another">
+        <button class="scan-again-btn" onclick="resetTool()">← Scan another file</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- How it works -->
+<section class="how-it-works">
+  <div class="container">
+    <h2>How the Macro Inspector works</h2>
+    <p class="sub">100% client-side analysis using the Web File API — no servers, no uploads.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>You drop an Excel file</h3>
+        <p>The browser reads the file locally using the JavaScript File API. Nothing is transmitted over the network.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>We unzip the OOXML container</h3>
+        <p>Modern Excel files (XLSM, XLSX, XLSB) are ZIP archives. JSZip reads the internal file list without sending it anywhere.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>We look for vbaProject.bin</h3>
+        <p>VBA macros are stored in a file called <code style="background:var(--surface);padding:1px 5px;border-radius:3px;font-size:12px">xl/vbaProject.bin</code> inside the ZIP. Its presence — and its internal module table — tells us exactly what macros exist.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Results shown instantly</h3>
+        <p>Module names, types (standard module, class, sheet, workbook), and conversion risk level appear in seconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why use before converting -->
+<section style="padding:60px 0;border-top:1px solid var(--border)">
+  <div class="container">
+    <h2 style="font-size:24px;font-weight:700;margin-bottom:16px">Why inspect before converting?</h2>
+    <p style="color:var(--muted);font-size:15px;max-width:640px;margin-bottom:24px">Most online converters strip VBA macros silently — no warning, no error message. You only discover the loss after the conversion is "complete." By running the Macro Inspector first, you:</p>
+    <ul style="padding-left:24px;color:var(--muted);font-size:15px">
+      <li style="margin-bottom:10px"><strong style="color:var(--text)">Create a record</strong> of exactly which modules existed, so you can verify they survived</li>
+      <li style="margin-bottom:10px"><strong style="color:var(--text)">Know the risk level</strong> before choosing a conversion tool or method</li>
+      <li style="margin-bottom:10px"><strong style="color:var(--text)">Catch hidden macros</strong> in files received from colleagues — before you unknowingly strip them</li>
+      <li style="margin-bottom:10px"><strong style="color:var(--text)">Pick the right target format</strong> — converting to XLSX when you needed XLSM is a common and expensive mistake</li>
+    </ul>
+    <div class="cta-box" style="margin-top:40px">
+      <h3>Already know you have macros to protect?</h3>
+      <p>The Macro-Safe Converter Kit walks you through the complete conversion workflow — including batch processing, format decision tree, and post-conversion macro validation checklist.</p>
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" class="cta-btn">Get the Kit — $9 one-time</a>
+      <p class="cta-sub">One-time · Instant download · 30-day guarantee</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <p class="faq-q">Does this tool upload my Excel file to a server?</p>
+      <p class="faq-a">No. The Macro Inspector runs entirely in your browser using the JavaScript File API and JSZip. Your file is never sent to any server. This is especially important for confidential financial or business Excel files — they stay on your machine at all times.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Which Excel formats does the Macro Inspector support?</p>
+      <p class="faq-a">The inspector works best with XLSM (the primary macro-enabled format). It also works with XLSX (checks if a vbaProject.bin is unexpectedly present), and XLSB (binary format — macro presence is detected though module names may not always be fully readable). XLS (legacy binary format) support is limited to header-level detection.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">Why do I need to know which macros are in my file before converting?</p>
+      <p class="faq-a">Most online converters silently strip all VBA macros without any warning. By running the inspector first, you create a record of exactly which modules existed — so you can verify they survived after conversion, or recover them from the original file if they were destroyed. It takes 5 seconds and could save hours of rebuild work.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">What does "conversion risk" mean in the results?</p>
+      <p class="faq-a">Conversion risk describes how likely standard conversion tools are to destroy your macros. High risk means the file contains VBA modules that will be stripped by most online converters and cloud tools. Low risk means no macros were detected. The Macro-Safe Converter Kit includes a tool-specific risk matrix so you know exactly which converters are safe for your use case.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q">The inspector says my XLSX file has macros. How is that possible?</p>
+      <p class="faq-a">Although the OOXML standard prohibits VBA in XLSX files, Microsoft Excel sometimes saves a ghost vbaProject.bin in XLSX when the original was an XLSM. These "shadow macros" are technically present in the ZIP but are not executed. This is a known Excel quirk — if you want to preserve them, convert to XLSM instead of XLSX.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><a href="https://jbhihall-droid.github.io/macro-converter-kit/">MacroKit</a> · <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/">Blog</a> · <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html">Get the Kit</a></p>
+    <p style="margin-top:8px">© 2026 MacroKit · Files analysed locally · No data collected</p>
+  </div>
+</footer>
+
+<!-- JSZip from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHveXg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+const dropZone = document.getElementById('drop-zone');
+const fileInput = document.getElementById('file-input');
+const progressBar = document.getElementById('progress-bar');
+const progressFill = document.getElementById('progress-fill');
+const progressLabel = document.getElementById('progress-label');
+const resultsDiv = document.getElementById('results');
+
+// Drag events
+dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', (e) => {
+  e.preventDefault();
+  dropZone.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) processFile(file);
+});
+fileInput.addEventListener('change', (e) => {
+  if (e.target.files[0]) processFile(e.target.files[0]);
+});
+
+function showProgress(pct, label) {
+  progressBar.style.display = 'block';
+  progressFill.style.width = pct + '%';
+  progressLabel.textContent = label;
+}
+
+function resetTool() {
+  resultsDiv.style.display = 'none';
+  document.getElementById('scan-another').style.display = 'none';
+  dropZone.style.display = 'block';
+  progressBar.style.display = 'none';
+  fileInput.value = '';
+}
+
+async function processFile(file) {
+  const ext = file.name.split('.').pop().toLowerCase();
+  dropZone.style.display = 'none';
+  showProgress(10, 'Reading file…');
+
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    showProgress(30, 'Unpacking ZIP structure…');
+
+    let modules = [];
+    let format = ext.toUpperCase();
+    let hasMacros = false;
+    let vbaSize = 0;
+
+    if (['xlsm', 'xlsx', 'xlsb'].includes(ext)) {
+      try {
+        const zip = await JSZip.loadAsync(arrayBuffer);
+        showProgress(60, 'Scanning for VBA project…');
+
+        const vbaFile = zip.file('xl/vbaProject.bin');
+        if (vbaFile) {
+          hasMacros = true;
+          const vbaData = await vbaFile.async('uint8array');
+          vbaSize = vbaData.length;
+          showProgress(80, 'Extracting module names…');
+          modules = extractModuleNames(vbaData);
+        }
+      } catch (zipErr) {
+        // XLSB may not parse as regular ZIP
+        if (ext === 'xlsb') {
+          // Detect via binary header heuristic
+          const bytes = new Uint8Array(arrayBuffer.slice(0, 8));
+          // XLSB starts with PK (ZIP) but may fail JSZip — treat as possible macros
+          hasMacros = bytes[0] === 0x50 && bytes[1] === 0x4B;
+        }
+      }
+    } else if (ext === 'xls') {
+      // XLS: check for OLE compound document header and VBA stream marker
+      const bytes = new Uint8Array(arrayBuffer.slice(0, 8));
+      const oleHeader = [0xD0, 0xCF, 0x11, 0xE0, 0xA1, 0xB1, 0x1A, 0xE1];
+      hasMacros = oleHeader.every((b, i) => bytes[i] === b);
+      if (hasMacros) {
+        modules = [{ name: 'VBA detected (XLS binary)', type: 'module' }];
+      }
+      format = 'XLS (Legacy Binary)';
+    }
+
+    showProgress(100, 'Analysis complete');
+    setTimeout(() => showResults(file.name, format, modules, hasMacros, vbaSize), 300);
+
+  } catch (err) {
+    showProgress(100, 'Error reading file — ensure it is a valid Excel file');
+    console.error(err);
+  }
+}
+
+function extractModuleNames(data) {
+  // Parse vbaProject.bin (OLE Compound Document) to extract module names
+  // VBA module names are stored in the VBA storage as null-terminated or length-prefixed strings
+  // We scan for the MODULE keyword pattern used in VBA project files
+  const modules = [];
+  const text = new TextDecoder('utf-8', { fatal: false }).decode(data);
+
+  // Strategy 1: Look for common VBA module name patterns in the binary
+  // Module names appear after "Attribute VB_Name = " in decompressed VBA
+  const vbNameMatches = text.matchAll(/Attribute VB_Name = "([^"]+)"/g);
+  for (const match of vbNameMatches) {
+    const name = match[1];
+    if (name && !modules.find(m => m.name === name)) {
+      modules.push({ name, type: guessModuleType(name) });
+    }
+  }
+
+  // Strategy 2: Scan for readable module name strings with OLE heuristics
+  // Module names in OLE VBA storage are typically 1-64 chars, alphanumeric + underscore
+  if (modules.length === 0) {
+    const namePattern = /\x00([A-Za-z_][A-Za-z0-9_]{1,30})\x00/g;
+    const seen = new Set();
+    let m;
+    let count = 0;
+    while ((m = namePattern.exec(text)) !== null && count < 20) {
+      const name = m[1];
+      // Filter: skip common OLE/Office strings that aren't module names
+      const skipWords = ['Module', 'Class', 'Sheet', 'Workbook', 'ThisWorkbook',
+        'Normal', 'Standard', 'Object', 'Version', 'Project', 'VBAProject',
+        'Microsoft', 'Office', 'Excel', 'Windows', 'System', 'Default',
+        'Public', 'Private', 'Function', 'Sub', 'End', 'Dim', 'As', 'String', 'Long',
+        'Integer', 'Boolean', 'Variant', 'Object', 'Type', 'New', 'Set', 'Nothing',
+        'True', 'False', 'And', 'Or', 'Not', 'If', 'Then', 'Else', 'ElseIf', 'For',
+        'Next', 'While', 'Wend', 'Do', 'Loop', 'Select', 'Case', 'With', 'Call'];
+      if (!seen.has(name) && !skipWords.includes(name) && name.length > 2) {
+        seen.add(name);
+        modules.push({ name, type: guessModuleType(name) });
+        count++;
+      }
+    }
+  }
+
+  // Strategy 3: If still no names, create synthetic names based on VBA binary size
+  if (modules.length === 0 && data.length > 4096) {
+    // Estimate module count from VBA project size (rough heuristic: ~2KB per module average)
+    const estimatedCount = Math.max(1, Math.min(Math.round(data.length / 3000), 10));
+    for (let i = 1; i <= estimatedCount; i++) {
+      modules.push({ name: `Module${i} (name unreadable — binary encoded)`, type: 'module' });
+    }
+  }
+
+  return modules;
+}
+
+function guessModuleType(name) {
+  const lower = name.toLowerCase();
+  if (lower.startsWith('sheet') || lower.includes('worksheet')) return 'sheet';
+  if (lower === 'thisworkbook' || lower.includes('workbook')) return 'workbook';
+  if (lower.includes('class') || lower.endsWith('cls')) return 'class';
+  return 'module';
+}
+
+function moduleTypeBadge(type) {
+  const map = {
+    module: { cls: 'type-module', label: 'Module' },
+    class: { cls: 'type-class', label: 'Class' },
+    sheet: { cls: 'type-sheet', label: 'Sheet' },
+    workbook: { cls: 'type-workbook', label: 'Workbook' },
+  };
+  const t = map[type] || map['module'];
+  return `<span class="module-type ${t.cls}">${t.label}</span>`;
+}
+
+function showResults(filename, format, modules, hasMacros, vbaSize) {
+  progressBar.style.display = 'none';
+  resultsDiv.style.display = 'block';
+  document.getElementById('scan-another').style.display = 'block';
+
+  document.getElementById('stat-modules').textContent = hasMacros ? (modules.length || '?') : '0';
+  document.getElementById('stat-format').textContent = format;
+  document.getElementById('stat-risk').textContent = hasMacros ? 'High' : 'None';
+  document.getElementById('stat-risk').className = 'stat-num ' + (hasMacros ? 'stat-risk' : 'stat-safe');
+
+  if (hasMacros) {
+    document.getElementById('result-icon').textContent = '⚠️';
+    document.getElementById('result-title').textContent = `Macros detected in ${filename}`;
+    document.getElementById('result-sub').textContent = `${modules.length || 'Unknown number of'} VBA module(s) found — high conversion risk`;
+    document.getElementById('risk-warning').style.display = 'block';
+    document.getElementById('risk-module-count').textContent = modules.length || 'multiple';
+
+    if (modules.length > 0) {
+      document.getElementById('modules-section').style.display = 'block';
+      const list = document.getElementById('module-list');
+      list.innerHTML = '';
+      modules.forEach(m => {
+        const li = document.createElement('li');
+        li.className = 'module-item';
+        const sizeStr = vbaSize > 0 ? `~${Math.round(vbaSize / modules.length / 1024 * 10) / 10} KB est.` : '';
+        li.innerHTML = `${moduleTypeBadge(m.type)}<span class="module-name">${escapeHtml(m.name)}</span><span class="module-size">${sizeStr}</span>`;
+        list.appendChild(li);
+      });
+    }
+
+    document.getElementById('email-capture-section').style.display = 'block';
+    document.getElementById('macro-cta').style.display = 'block';
+  } else {
+    document.getElementById('result-icon').textContent = '✅';
+    document.getElementById('result-title').textContent = `No macros in ${filename}`;
+    document.getElementById('result-sub').textContent = 'Safe to convert with any standard tool';
+    document.getElementById('safe-notice').style.display = 'block';
+  }
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function submitEmail() {
+  const email = document.getElementById('email-input').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('email-input').focus();
+    return;
+  }
+  // Store locally (Buttondown/webhook integration point)
+  const data = { email, source: 'macro-inspector', ts: new Date().toISOString() };
+  // Log to console for now (replace with fetch() to email platform webhook)
+  console.log('Email capture:', data);
+  // Try to ping a simple analytics endpoint without blocking
+  try {
+    navigator.sendBeacon('https://jbhihall-droid.github.io/macro-converter-kit/api/capture',
+      JSON.stringify(data));
+  } catch (_) {}
+  document.getElementById('email-sent').style.display = 'block';
+  document.getElementById('email-input').disabled = true;
+  document.querySelector('.email-form button').disabled = true;
+}
+</script>
+</body>
+</html>

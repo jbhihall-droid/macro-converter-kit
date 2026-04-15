@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Convert XLSX to XLSM and Keep Your Macros (2026 Guide)</title>
+  <meta name="description" content="Need to add VBA macros to an XLSX file? Here's how to convert XLSX to XLSM correctly — without accidentally stripping your existing VBA code.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/convert-xlsx-to-xlsm-keep-macros/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --accent: #6c5ce7; --accent2: #00cec9; --text: #e2e8f0; --muted: #94a3b8; --green: #00b894; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.7; }
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    nav { border-bottom: 1px solid var(--border); padding: 16px 0; }
+    nav .container { display: flex; align-items: center; gap: 12px; }
+    .logo { font-weight: 700; font-size: 15px; color: var(--text); }
+    .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .breadcrumb { padding: 16px 0; font-size: 13px; color: var(--muted); }
+    article { padding: 48px 0 80px; }
+    .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 16px; }
+    h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.2; letter-spacing: -0.8px; margin-bottom: 20px; }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 22px; font-weight: 700; margin: 40px 0 16px; letter-spacing: -0.3px; }
+    h3 { font-size: 17px; font-weight: 700; margin: 28px 0 10px; }
+    p { margin-bottom: 18px; }
+    ul, ol { padding-left: 24px; margin-bottom: 18px; }
+    li { margin-bottom: 8px; }
+    .callout { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .callout strong { color: #c4b5fd; }
+    .warning { background: #1f1a0e; border: 1px solid #78350f; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .warning strong { color: #fbbf24; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th { background: var(--surface); padding: 10px 14px; text-align: left; border: 1px solid var(--border); font-weight: 600; }
+    td { padding: 10px 14px; border: 1px solid var(--border); color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 500; }
+    .verdict-yes { color: #00b894; font-weight: 700; }
+    .verdict-no { color: #d63031; font-weight: 700; }
+    .cta-box { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 12px; padding: 32px; text-align: center; margin: 40px 0; }
+    .cta-box h3 { color: #c4b5fd; margin-bottom: 8px; font-size: 18px; }
+    .cta-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 8px; font-size: 15px; text-decoration: none; margin-top: 20px; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; font-size: 13px; overflow-x: auto; margin-bottom: 18px; }
+    code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Convert XLSX to XLSM and Keep Your Macros (2026 Guide)",
+    "description": "Need to add VBA macros to an XLSX file? Here's how to convert XLSX to XLSM correctly — without accidentally stripping your existing VBA code.",
+    "datePublished": "2026-03-10",
+    "dateModified": "2026-04-01",
+    "author": { "@type": "Organization", "name": "MacroKit" },
+    "publisher": { "@type": "Organization", "name": "MacroKit" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://jbhihall-droid.github.io/macro-converter-kit/blog/convert-xlsx-to-xlsm-keep-macros/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the difference between XLSX and XLSM?",
+        "acceptedAnswer": { "@type": "Answer", "text": "XLSX and XLSM are both Open XML formats stored as ZIP archives, but XLSM is the macro-enabled variant. An XLSM file contains a vbaProject.bin binary inside the ZIP that stores all VBA modules, forms, and class modules. XLSX files cannot contain VBA; if you try to save an XLSX with macros, Excel will strip them silently." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I rename an XLSX file to XLSM to keep macros?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Renaming the file extension does not change the internal XML structure. An XLSX file lacks the vbaProject.bin entry and the correct [Content_Types].xml declarations. You must go through a proper Save As conversion so Excel rewrites the file structure correctly." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Python's openpyxl support XLSM files with macros?",
+        "acceptedAnswer": { "@type": "Answer", "text": "openpyxl can open and resave XLSM files in 'keep_vba=True' mode, which preserves the vbaProject.bin blob. However, it cannot create new VBA or modify existing VBA code — it just carries the binary through. For reading or writing VBA programmatically, you need xlwings (Windows only) or a COM automation approach." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="/macro-converter-kit/" class="logo">MacroKit</a>
+    <span class="badge">Beta</span>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="breadcrumb">
+    <a href="/macro-converter-kit/">Home</a> &rsaquo; <a href="/macro-converter-kit/blog/">Blog</a> &rsaquo; Convert XLSX to XLSM and Keep Macros
+  </div>
+</div>
+
+<div class="container">
+<article>
+  <p class="label">Excel Format Guide</p>
+  <h1>How to Convert XLSX to XLSM and Keep Your Macros (2026 Guide)</h1>
+  <p class="meta">Updated April 2026 &middot; By MacroKit Team &middot; 8 min read</p>
+
+  <p>You have an XLSX file. Someone added VBA macros to it — or you want to — and now Excel is refusing to save them, warning you that macros will be stripped. The fix is straightforward: convert XLSX to XLSM. But the path to doing it without losing anything is more nuanced than most guides admit.</p>
+
+  <p>This guide covers the technical difference between the two formats, three reliable conversion methods (including a Python approach for bulk work), and every common mistake that causes macros to vanish mid-conversion.</p>
+
+  <h2>Why XLSX Can't Hold Macros</h2>
+
+  <p>Both XLSX and XLSM are Open XML formats — essentially ZIP archives containing XML files. If you rename any Excel file to <code>.zip</code> and open it, you'll see folders like <code>xl/</code>, <code>xl/worksheets/</code>, and a <code>[Content_Types].xml</code> manifest at the root.</p>
+
+  <p>The critical difference is one file: <code>xl/vbaProject.bin</code>. This is a COM Structured Storage binary that contains every VBA module, UserForm, class module, and project reference in your workbook. XLSM files have it. XLSX files don't — and the Open XML spec explicitly forbids them from containing it.</p>
+
+  <p>The <code>[Content_Types].xml</code> file also has to declare the correct MIME type for the macro container. In an XLSM, you'll find:</p>
+  <pre><code>&lt;Override PartName="/xl/vbaProject.bin"
+  ContentType="application/vnd.ms-office.activeX+xml"/&gt;</code></pre>
+
+  <p>Without that declaration, even if you manually stuffed a <code>vbaProject.bin</code> into the ZIP, Excel would ignore it. This is why renaming <code>.xlsx</code> to <code>.xlsm</code> does absolutely nothing — the internal structure is wrong.</p>
+
+  <h2>Method 1: Excel Save As (Simplest, Most Reliable)</h2>
+
+  <p>If you have Excel installed and are working with a single file, Save As is the definitive method. It rewrites the entire file structure correctly.</p>
+
+  <ol>
+    <li>Open the XLSX file in Excel (2016 or later recommended).</li>
+    <li>Press <strong>Alt + F11</strong> to open the VBA editor. Confirm your macros are present in the Project Explorer. If they're already missing, the problem is upstream.</li>
+    <li>Press <strong>F4</strong> to close the VBA editor and return to the workbook.</li>
+    <li>Go to <strong>File &rarr; Save As</strong>.</li>
+    <li>In the "Save as type" dropdown, select <strong>Excel Macro-Enabled Workbook (*.xlsm)</strong>.</li>
+    <li>Click Save. Do not just hit Enter if the dialog pre-selects XLSX — confirm the dropdown first.</li>
+    <li>Close the file, reopen the newly saved XLSM, and press Alt + F11 again to verify all modules are intact.</li>
+  </ol>
+
+  <div class="warning">
+    <strong>Warning:</strong> If you click "Save" (not "Save As") while in XLSX format and you have macros, Excel will show a compatibility warning. Clicking "Stay in Current Format" will strip the macros silently. Always use Save As when changing formats.
+  </div>
+
+  <h2>Method 2: Python with openpyxl (For Existing XLSM Files)</h2>
+
+  <p>openpyxl's <code>keep_vba=True</code> parameter is specifically designed for the scenario where you have an existing XLSM file and want to modify workbook data (add rows, change cell values, update formulas) without destroying the embedded VBA.</p>
+
+  <pre><code>import openpyxl
+
+# Open existing XLSM — keep_vba=True preserves vbaProject.bin
+wb = openpyxl.load_workbook('source.xlsm', keep_vba=True)
+
+ws = wb.active
+ws['A1'] = 'Updated by script'
+
+# Must save with .xlsm extension
+wb.save('output.xlsm')
+print("Saved. VBA blob preserved.")</code></pre>
+
+  <p>What <code>keep_vba=True</code> does internally: openpyxl reads the <code>vbaProject.bin</code> as a raw binary blob, keeps it in memory untouched, and writes it back to the same path inside the new ZIP. It makes no attempt to parse the COM Structured Storage format.</p>
+
+  <p>What it cannot do: if your source file is a plain XLSX with no existing VBA, there is no blob to preserve. In that case, you cannot use openpyxl to inject new VBA — the library simply has no VBA authoring capability. You would need to use <code>xlwings</code> (Windows/COM) or do the Save As method in Excel first to create a valid XLSM scaffold, then use openpyxl to modify the data layer.</p>
+
+  <div class="cta-box">
+    <h3>Stop losing macros on every conversion</h3>
+    <p style="color:var(--muted);font-size:14px;margin:8px 0 0">The Macro-Safe Converter Kit gives you the exact workflow, tested scripts, and decision checklist to convert without losing a single line of VBA.</p>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" class="cta-btn">Get the Kit — $9</a>
+    <p style="font-size:12px;color:var(--muted);margin-top:12px">One-time · Instant download · 30-day guarantee</p>
+  </div>
+
+  <h2>Method 3: LibreOffice Headless CLI</h2>
+
+  <p>LibreOffice can convert Excel files from the command line using its headless mode, which is useful on Linux servers or in CI pipelines where Excel isn't available.</p>
+
+  <pre><code># Basic conversion — outputs to the same directory as source
+libreoffice --headless --convert-to xlsm source.xlsx
+
+# Convert all XLSX files in a folder
+for f in *.xlsx; do
+  libreoffice --headless --convert-to xlsm "$f"
+done</code></pre>
+
+  <p>A critical caveat: LibreOffice uses its own BASIC macro engine by default, and its VBA compatibility mode is imperfect. Simple macros (cell manipulation, loops, basic string operations) generally survive. Macros that rely on Excel-specific objects — <code>Application.WorksheetFunction</code>, <code>ActiveX controls</code>, <code>UserForm</code> objects with complex event handlers — may not load correctly.</p>
+
+  <p>Always test a representative file before running LibreOffice on your entire archive. Open the converted XLSM in Excel afterward and run each macro manually to verify behavior.</p>
+
+  <h2>Format Comparison Table</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>XLSX</th>
+        <th>XLSM</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Contains VBA</td>
+        <td class="verdict-no">No</td>
+        <td class="verdict-yes">Yes</td>
+      </tr>
+      <tr>
+        <td>Open XML format</td>
+        <td class="verdict-yes">Yes</td>
+        <td class="verdict-yes">Yes</td>
+      </tr>
+      <tr>
+        <td>vbaProject.bin present</td>
+        <td class="verdict-no">No</td>
+        <td class="verdict-yes">Yes</td>
+      </tr>
+      <tr>
+        <td>Safe to share broadly</td>
+        <td class="verdict-yes">Yes</td>
+        <td>Depends on org policy</td>
+      </tr>
+      <tr>
+        <td>Editable with openpyxl</td>
+        <td class="verdict-yes">Yes</td>
+        <td>Yes (with keep_vba=True)</td>
+      </tr>
+      <tr>
+        <td>Supported in Excel 2007+</td>
+        <td class="verdict-yes">Yes</td>
+        <td class="verdict-yes">Yes</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Common Mistakes That Strip Macros</h2>
+
+  <h3>Mistake 1: Using online converters</h3>
+  <p>Online tools like Smallpdf, ILovePDF, Convertio, and similar services are designed for document conversion — PDF, image, basic Office formats. None of them have awareness of VBA or the COM Structured Storage format inside <code>vbaProject.bin</code>. They will either reject the conversion or silently discard the macro container. Do not use them for macro-bearing files.</p>
+
+  <h3>Mistake 2: Opening and re-saving in Google Sheets</h3>
+  <p>Google Sheets can open XLSX files, but it does not support VBA at all. If you open an XLSM in Google Sheets and download it back as XLSX or XLSM, you get a file with macros completely removed. This is a common trap when someone uses Google Drive as a "quick converter."</p>
+
+  <h3>Mistake 3: Not checking macro security settings</h3>
+  <p>After conversion, macros may appear missing even when they aren't — because Excel's macro security settings are blocking them from loading. Go to File &rarr; Options &rarr; Trust Center &rarr; Trust Center Settings &rarr; Macro Settings and ensure "Disable all macros with notification" is selected (not "Disable all without notification"). Then reopen the file and enable macros when prompted.</p>
+
+  <h3>Mistake 4: Saving over the original before validating</h3>
+  <p>Always keep the original XLSX until you've confirmed the XLSM conversion is complete and working. Save the output to a new filename. Only delete the original after running and validating every macro in the converted file.</p>
+
+  <h2>Batch Converting XLSX to XLSM</h2>
+
+  <p>If you have multiple files, a Python script using the <code>subprocess</code> module to call LibreOffice, or a VBA macro running inside Excel that iterates a folder, are both viable approaches.</p>
+
+  <pre><code>import subprocess
+from pathlib import Path
+
+source_dir = Path("/path/to/xlsx/files")
+output_dir = Path("/path/to/output")
+output_dir.mkdir(exist_ok=True)
+
+for xlsx_file in source_dir.glob("*.xlsx"):
+    result = subprocess.run(
+        ["libreoffice", "--headless", "--convert-to", "xlsm",
+         "--outdir", str(output_dir), str(xlsx_file)],
+        capture_output=True, text=True
+    )
+    status = "OK" if result.returncode == 0 else "FAILED"
+    print(f"{xlsx_file.name}: {status}")</code></pre>
+
+  <p>For any file that shows FAILED, fall back to Excel's COM automation via <code>pywin32</code> on Windows, which is the gold standard for accuracy but requires a licensed Excel installation.</p>
+
+  <div class="callout">
+    <strong>Key principle:</strong> XLSM is just XLSX with one extra binary file and an updated content type declaration. Any tool that "converts" by parsing and rebuilding the XML will lose the vbaProject.bin. Only tools that treat the file as a ZIP and carry the binary through — or that use Excel's own engine — will preserve macros correctly.
+  </div>
+
+  <h2>Validating the Conversion</h2>
+
+  <p>After any conversion, do these three checks before trusting the output:</p>
+
+  <ol>
+    <li><strong>Check the file extension is .xlsm</strong> — obvious but easy to miss if your file manager hides extensions.</li>
+    <li><strong>Open the VBA editor (Alt + F11)</strong> — every module should appear in the Project Explorer on the left. Count them if you know how many there should be.</li>
+    <li><strong>Run each macro once</strong> — press F5 with each module selected, or use Developer &rarr; Macros to run them. A macro that opens without errors but fails at runtime probably has a reference to an object that didn't survive the format change.</li>
+  </ol>
+
+  <p>If a module is missing or code is corrupted, you have two options: re-export the VBA from the original file using Alt + F11 &rarr; File &rarr; Export File, and re-import it into the converted XLSM; or restart the conversion using the Excel Save As method, which is always the most accurate path.</p>
+
+  <h2 id="faq">Frequently Asked Questions</h2>
+
+  <h3>What is the difference between XLSX and XLSM?</h3>
+  <p>XLSX and XLSM are both Open XML formats stored as ZIP archives, but XLSM is the macro-enabled variant. An XLSM file contains a <code>vbaProject.bin</code> binary inside the ZIP that stores all VBA modules, forms, and class modules. XLSX files cannot contain VBA; if you try to save an XLSX with macros, Excel will strip them silently.</p>
+
+  <h3>Can I rename an XLSX file to XLSM to keep macros?</h3>
+  <p>No. Renaming the file extension does not change the internal XML structure. An XLSX file lacks the <code>vbaProject.bin</code> entry and the correct <code>[Content_Types].xml</code> declarations. You must go through a proper Save As conversion so Excel rewrites the file structure correctly.</p>
+
+  <h3>Does Python's openpyxl support XLSM files with macros?</h3>
+  <p>openpyxl can open and resave XLSM files in <code>keep_vba=True</code> mode, which preserves the <code>vbaProject.bin</code> blob. However, it cannot create new VBA or modify existing VBA code — it just carries the binary through. For reading or writing VBA programmatically, you need xlwings (Windows only) or a COM automation approach.</p>
+
+  <section style="margin-top:60px;padding-top:40px;border-top:1px solid var(--border)">
+    <h2 style="margin-bottom:24px">Related Guides</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+      <a href="/macro-converter-kit/blog/best-macro-safe-excel-converter-tools-2026/" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;display:block;color:var(--text);text-decoration:none"><strong style="font-size:14px;display:block;margin-bottom:6px">Best Macro-Safe Excel Converter Tools 2026</strong><span style="font-size:12px;color:var(--muted)">Tool comparison guide</span></a>
+      <a href="/macro-converter-kit/blog/excel-macro-migration-guide-2026/" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;display:block;color:var(--text);text-decoration:none"><strong style="font-size:14px;display:block;margin-bottom:6px">Excel Macro Migration Guide 2026</strong><span style="font-size:12px;color:var(--muted)">Complete migration walkthrough</span></a>
+      <a href="/macro-converter-kit/blog/how-to-convert-xls-to-xlsx-without-losing-macros/" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;display:block;color:var(--text);text-decoration:none"><strong style="font-size:14px;display:block;margin-bottom:6px">Convert XLS to XLSX Without Losing Macros</strong><span style="font-size:12px;color:var(--muted)">Step-by-step guide</span></a>
+    </div>
+  </section>
+
+  <div class="cta-box">
+    <h3>Stop losing macros on every conversion</h3>
+    <p style="color:var(--muted);font-size:14px;margin:8px 0 0">The Macro-Safe Converter Kit gives you the exact workflow, tested scripts, and decision checklist to convert without losing a single line of VBA.</p>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" class="cta-btn">Get the Kit — $9</a>
+    <p style="font-size:12px;color:var(--muted);margin-top:12px">One-time · Instant download · 30-day guarantee</p>
+  </div>
+
+</article>
+</div>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 MacroKit &middot; <a href="/macro-converter-kit/">Home</a> &middot; <a href="/macro-converter-kit/blog/">Blog</a> &middot; <a href="/macro-converter-kit/checkout.html">Get the Kit</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

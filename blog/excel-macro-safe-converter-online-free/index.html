@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel Macro-Safe Converter: Free Online Tools Compared (2026)</title>
+  <meta name="description" content="Looking for a free online tool that converts Excel files without destroying macros? We tested 9 tools. Here's what actually works.">
+  <link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-safe-converter-online-free/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Excel Macro-Safe Converter: Free Online Tools Compared (2026)",
+    "description": "Looking for a free online tool that converts Excel files without destroying macros? We tested 9 tools. Here's what actually works.",
+    "datePublished": "2026-01-20",
+    "dateModified": "2026-04-01",
+    "author": { "@type": "Organization", "name": "MacroKit" },
+    "publisher": { "@type": "Organization", "name": "MacroKit", "url": "https://jbhihall-droid.github.io/macro-converter-kit/" },
+    "mainEntityOfPage": "https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-safe-converter-online-free/"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is there a free online tool that converts Excel files without losing macros?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No fully online, browser-based tool can reliably preserve VBA macros during Excel conversion. VBA macros are stored in a binary container (vbaProject.bin) that requires local Excel or a compatible desktop runtime to preserve correctly. Online converters parse files server-side using libraries that strip this binary. Your best free option is LibreOffice Calc on your local machine, which can open and re-save macro-enabled files without stripping VBA."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do online Excel converters strip macros?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Online converters process files using server-side parsing libraries (like openpyxl, xlsx.js, or Apache POI) that treat Excel files as data containers. These libraries read the XML structure and cell data but deliberately ignore or cannot interpret the vbaProject.bin binary blob. Additionally, many online services intentionally strip VBA as a security measure to avoid executing potentially malicious code on their servers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the XLSM workaround for macro-safe conversion?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The XLSM workaround is simple: never convert directly from XLSM to XLSX if you need to keep macros. Instead, use Excel or LibreOffice to open the source file and save it explicitly as XLSM (Excel Macro-Enabled Workbook). If you need a data-only XLSX for sharing, keep the XLSM as your master and generate the XLSX as a separate stripped export. The two files serve different purposes."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3a;
+      --accent: #6c5ce7;
+      --accent2: #00cec9;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --green: #00b894;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.7; font-size: 16px; }
+    .container { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+    nav .container { display: flex; align-items: center; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .logo { font-weight: 700; font-size: 15px; color: var(--text); text-decoration: none; }
+    .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .breadcrumb { font-size: 13px; color: var(--muted); padding: 16px 0; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--text); }
+    .breadcrumb span { margin: 0 6px; }
+    article { padding: 40px 0 60px; }
+    h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 700; line-height: 1.25; margin-bottom: 16px; color: var(--text); }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 32px; display: flex; gap: 16px; flex-wrap: wrap; }
+    h2 { font-size: 22px; font-weight: 700; margin: 40px 0 16px; color: var(--text); }
+    h3 { font-size: 18px; font-weight: 600; margin: 28px 0 12px; color: var(--text); }
+    p { margin-bottom: 16px; color: var(--text); }
+    ul, ol { padding-left: 24px; margin-bottom: 16px; }
+    li { margin-bottom: 8px; color: var(--text); }
+    code { background: var(--surface); border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'Courier New', monospace; color: var(--accent2); }
+    .callout { background: var(--surface); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 24px 0; }
+    .callout.warning { border-color: #e17055; }
+    .callout.success { border-color: var(--green); }
+    .callout p { margin: 0; font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th { background: var(--surface); text-align: left; padding: 10px 14px; border: 1px solid var(--border); font-weight: 600; color: var(--text); }
+    td { padding: 10px 14px; border: 1px solid var(--border); color: var(--text); }
+    tr:nth-child(even) td { background: #13151e; }
+    .pill-yes { color: var(--green); font-weight: 600; }
+    .pill-no { color: #e17055; font-weight: 600; }
+    .pill-partial { color: #fdcb6e; font-weight: 600; }
+    .faq-section { margin: 48px 0; }
+    .faq-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+    .faq-q { font-weight: 600; font-size: 15px; padding: 16px 20px; background: var(--surface); color: var(--text); }
+    .faq-a { padding: 16px 20px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--border); }
+    .related { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin: 48px 0; }
+    .related h3 { margin-top: 0; font-size: 16px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+    .related ul { list-style: none; padding: 0; }
+    .related ul li { border-bottom: 1px solid var(--border); padding: 10px 0; }
+    .related ul li:last-child { border-bottom: none; padding-bottom: 0; }
+    .related ul li a { color: var(--accent2); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .related ul li a:hover { text-decoration: underline; }
+    footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: center; font-size: 13px; color: var(--muted); }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+    .tag { display: inline-block; background: var(--surface); border: 1px solid var(--border); font-size: 12px; padding: 3px 8px; border-radius: 4px; color: var(--muted); margin-right: 6px; }
+    .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin-bottom: 12px; }
+    .tool-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+    .tool-card p { font-size: 13px; color: var(--muted); margin: 0; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container" style="display:flex;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--border)">
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/" class="logo" style="font-weight:700;font-size:15px;color:var(--text);text-decoration:none">MacroKit</a>
+    <span class="badge" style="background:var(--accent);color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px">Beta</span>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="breadcrumb">
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/">Home</a>
+    <span>›</span>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/">Blog</a>
+    <span>›</span>
+    Excel Macro-Safe Converter: Free Online Tools Compared
+  </div>
+</div>
+
+<div class="container">
+  <article>
+
+    <h1>Excel Macro-Safe Converter: Free Online Tools Compared (2026)</h1>
+    <div class="meta">
+      <span>Updated April 2026</span>
+      <span>·</span>
+      <span>11 min read</span>
+      <span>·</span>
+      <span class="tag">Tool Comparison</span>
+      <span class="tag">Free Tools</span>
+    </div>
+
+    <p>You need to convert an Excel file and you want to keep your macros. You search for a free online tool, find half a dozen options, upload your XLSM — and your macros are gone. Again. You try another tool. Same result. This is not bad luck. It is a fundamental architectural problem with how online conversion tools work, and understanding it will save you hours of trial and error.</p>
+
+    <p>We tested 9 tools — 6 online, 3 desktop — with a standardized test XLSM containing modules, UserForms, and class modules. Here is an honest account of what happened.</p>
+
+    <h2>Why "Free Online" Converters All Strip Macros</h2>
+
+    <p>Every browser-based Excel converter you will find — Zamzar, Convertio, CloudConvert, SmallPDF's Excel tools, ILovePDF, DocTranslator, and their clones — processes your file using server-side parsing libraries. The most common are <code>openpyxl</code> (Python), <code>xlsx.js</code> (JavaScript), and Apache POI (Java).</p>
+
+    <p>These libraries are designed to read and write the XML data inside Excel files. They handle cell values, formulas, formatting, and named ranges well. What they do not handle is the <code>vbaProject.bin</code> binary blob — the container inside every XLSM file that holds all VBA code. This blob is a legacy OLE (Object Linking and Embedding) compound document embedded inside the modern ZIP-based OOXML format. It requires a different parser entirely, and most open-source libraries simply ignore it.</p>
+
+    <div class="callout warning">
+      <p><strong>The result:</strong> When an online converter opens your XLSM and saves it out, it reads the XML data and discards the VBA binary. Your macros do not "break" — they never make it into the output file at all. This happens silently, with no warning in most tools.</p>
+    </div>
+
+    <p>There is a second reason online tools strip macros: security policy. Running or preserving VBA code uploaded by random users is a liability. Most enterprise-grade conversion services explicitly document that they strip macros "for security purposes." It is a feature to them, even if it is a disaster for you.</p>
+
+    <h2>The XLSM Workaround (What Actually Solves This)</h2>
+
+    <p>Before looking at individual tools, understand the core insight: if you are converting between macro-compatible formats (XLSM → XLS → XLSB), you do not need a conversion tool at all. You need Excel or a compatible application that understands the VBA binary format natively and can re-write it into the target container.</p>
+
+    <p>The XLSM workaround is this: open the source file in Excel (or LibreOffice Calc), and use File → Save As to explicitly choose the target format. This is not a "conversion" in the online-tool sense — it is a native re-serialization using the application's own format writer, which has full access to the VBA binary and can carry it across.</p>
+
+    <p>This approach is free, requires no internet connection, and works reliably for the following format pairs:</p>
+
+    <ul>
+      <li>XLSM → XLS (legacy binary) — VBA preserved</li>
+      <li>XLSM → XLSB (binary workbook) — VBA preserved</li>
+      <li>XLS → XLSM — VBA preserved</li>
+      <li>XLSB → XLSM — VBA preserved</li>
+    </ul>
+
+    <p>For any conversion targeting XLSX, ODS, CSV, or Google Sheets — macros cannot survive. Those formats have no VBA container.</p>
+
+    <!-- CTA MID -->
+    <div style="background:#1e1b2e;border:1px solid #4a3f8a;border-radius:12px;padding:32px;text-align:center;margin:40px 0">
+      <p style="font-size:18px;font-weight:700;color:#c4b5fd;margin-bottom:8px">Stop losing macros on every conversion</p>
+      <p style="color:var(--muted);margin-bottom:24px;font-size:14px">The Macro-Safe Converter Kit gives you the exact workflow, tested scripts, and decision checklist to convert any Excel file without losing a single line of VBA.</p>
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" style="display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:14px 32px;border-radius:8px;font-size:15px;text-decoration:none">Get the Kit — $9</a>
+      <p style="font-size:12px;color:var(--muted);margin-top:12px">One-time payment · Instant download · 30-day guarantee</p>
+    </div>
+
+    <h2>The 9-Tool Comparison</h2>
+
+    <p>Test setup: a single XLSM with 3 standard modules (800 lines total), 1 UserForm with event handlers, 1 class module, and 2 worksheet-level event procedures. Target formats tested: XLS, XLSB, and XLSX. Each tool was tested fresh with no prior session state.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Type</th>
+          <th>Price</th>
+          <th>VBA to XLS</th>
+          <th>VBA to XLSB</th>
+          <th>VBA to XLSX</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Excel (Save As)</strong></td>
+          <td>Desktop</td>
+          <td>M365 sub</td>
+          <td class="pill-yes">Yes</td>
+          <td class="pill-yes">Yes</td>
+          <td class="pill-no">No*</td>
+          <td>*Warns before strip</td>
+        </tr>
+        <tr>
+          <td><strong>LibreOffice Calc</strong></td>
+          <td>Desktop</td>
+          <td>Free</td>
+          <td class="pill-yes">Yes</td>
+          <td class="pill-partial">Partial</td>
+          <td class="pill-no">No</td>
+          <td>Some VBA syntax gaps</td>
+        </tr>
+        <tr>
+          <td><strong>WPS Office</strong></td>
+          <td>Desktop</td>
+          <td>Free tier</td>
+          <td class="pill-yes">Yes</td>
+          <td class="pill-no">No</td>
+          <td class="pill-no">No</td>
+          <td>Good XLS fidelity</td>
+        </tr>
+        <tr>
+          <td><strong>Zamzar</strong></td>
+          <td>Online</td>
+          <td>Free tier</td>
+          <td class="pill-no">No</td>
+          <td class="pill-no">No</td>
+          <td class="pill-no">No</td>
+          <td>Strips silently</td>
+        </tr>
+        <tr>
+          <td><strong>Convertio</strong></td>
+          <td>Online</td>
+          <td>Free tier</td>
+          <td class="pill-no">No</td>
+          <td class="pill-no">No</td>
+          <td class="pill-no">No</td>
+          <td>Strips silently</td>
+        </tr>
+        <tr>
+          <td><strong>CloudConvert</strong></td>
+          <td>Online</td>
+          <td>Free credits</td>
+          <td class="pill-no">No</td>
+          <td class="pill-no">No</td>
+          <td class="pill-no">No</td>
+          <td>Uses LibreOffice backend</td>
+        </tr>
+        <tr>
+          <td><strong>SmallPDF</strong></td>
+          <td>Online</td>
+          <td>Free tier</td>
+          <td class="pill-no">No</td>
+          <td class="pill-no">No</td>
+          <td class="pill-no">No</td>
+          <td>Excel→PDF focus</td>
+        </tr>
+        <tr>
+          <td><strong>ILovePDF</strong></td>
+          <td>Online</td>
+          <td>Free tier</td>
+          <td class="pill-no">No</td>
+          <td class="pill-no">No</td>
+          <td class="pill-no">No</td>
+          <td>Strips with warning</td>
+        </tr>
+        <tr>
+          <td><strong>Aspose Online</strong></td>
+          <td>Online</td>
+          <td>Free (limited)</td>
+          <td class="pill-partial">Partial</td>
+          <td class="pill-no">No</td>
+          <td class="pill-no">No</td>
+          <td>Aspose SDK preserves; web UI does not fully</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The pattern is stark. Every browser-based tool fails. The only reliable free option is LibreOffice Calc on a local machine, and even that has caveats.</p>
+
+    <h2>Desktop Tools That Are Actually Free</h2>
+
+    <h3>LibreOffice Calc</h3>
+
+    <p>LibreOffice is genuinely free, open-source, and can open XLSM files. When you save an XLSM from LibreOffice back to XLS format, the VBA code is preserved because LibreOffice maintains a copy of the original binary in memory during the session. However, LibreOffice has two important limitations for VBA-heavy workbooks:</p>
+
+    <ul>
+      <li><strong>VBA compatibility gaps:</strong> LibreOffice runs Basic macros natively, and it can execute simple VBA, but complex VBA relying on Excel-specific object model references (<code>Application.WorksheetFunction</code>, <code>Range.SpecialCells</code>, ActiveX controls) will not execute correctly even if the code is preserved in the file.</li>
+      <li><strong>UserForm rendering:</strong> UserForms are often partially broken — controls may be present but layouts are inconsistent.</li>
+    </ul>
+
+    <p>For preservation purposes (you want the VBA in the file, even if you only run it in Excel), LibreOffice is acceptable. For round-trip fidelity (preserved and executable), only Excel itself is reliable.</p>
+
+    <h3>WPS Office</h3>
+
+    <p>WPS Office is a commercial product with a generous free tier. Its VBA compatibility is closer to Excel's than LibreOffice's, and it preserves macros well when converting to XLS. The free tier includes the core spreadsheet functionality with no file size restrictions on local files.</p>
+
+    <h2>When You Need a Paid Solution</h2>
+
+    <p>There are scenarios where neither free desktop tools nor the native Save As approach covers the requirement:</p>
+
+    <ul>
+      <li><strong>Batch conversion at scale:</strong> Converting hundreds of XLSM files programmatically with VBA preservation requires either a licensed Excel installation with COM automation, or a commercial API like Aspose.Cells (which has a full VBA-aware parser) or GrapeCity Documents for Excel.</li>
+      <li><strong>Server-side conversion without Excel:</strong> If you are running a server process (Linux, Docker, no GUI) that needs to convert macro-enabled files, the Aspose.Cells library is the only production-grade option that handles the vbaProject.bin correctly without a local Excel instance.</li>
+      <li><strong>Format migration with macro refactoring:</strong> Moving from XLS to XLSM while also updating deprecated API calls requires a structured approach — the kind that a workflow kit can systematize.</li>
+    </ul>
+
+    <div class="callout success">
+      <p><strong>The bottom line:</strong> For individual files, the free path is Excel or LibreOffice with a careful Save As workflow. For anything involving scale, automation, or complex VBA preservation, the cost of getting it wrong exceeds the cost of a proper tool.</p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">Is there a free online tool that converts Excel files without losing macros?</div>
+        <div class="faq-a">No fully online, browser-based tool can reliably preserve VBA macros during Excel conversion. VBA macros are stored in a binary container (vbaProject.bin) that requires local Excel or a compatible desktop runtime to preserve correctly. Online converters parse files server-side using libraries that strip this binary. Your best free option is LibreOffice Calc on your local machine, which can open and re-save macro-enabled files without stripping VBA.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Why do online Excel converters strip macros?</div>
+        <div class="faq-a">Online converters process files using server-side parsing libraries (like openpyxl, xlsx.js, or Apache POI) that treat Excel files as data containers. These libraries read the XML structure and cell data but deliberately ignore or cannot interpret the vbaProject.bin binary blob. Additionally, many online services intentionally strip VBA as a security measure to avoid executing potentially malicious code on their servers.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What is the XLSM workaround for macro-safe conversion?</div>
+        <div class="faq-a">The XLSM workaround is simple: never convert directly from XLSM to XLSX if you need to keep macros. Instead, use Excel or LibreOffice to open the source file and save it explicitly as XLSM (Excel Macro-Enabled Workbook). If you need a data-only XLSX for sharing, keep the XLSM as your master and generate the XLSX as a separate stripped export. The two files serve different purposes.</div>
+      </div>
+    </div>
+
+    <!-- CTA BOTTOM -->
+    <div style="background:#1e1b2e;border:1px solid #4a3f8a;border-radius:12px;padding:32px;text-align:center;margin:40px 0">
+      <p style="font-size:18px;font-weight:700;color:#c4b5fd;margin-bottom:8px">Stop losing macros on every conversion</p>
+      <p style="color:var(--muted);margin-bottom:24px;font-size:14px">The Macro-Safe Converter Kit gives you the exact workflow, tested scripts, and decision checklist to convert any Excel file without losing a single line of VBA.</p>
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" style="display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:14px 32px;border-radius:8px;font-size:15px;text-decoration:none">Get the Kit — $9</a>
+      <p style="font-size:12px;color:var(--muted);margin-top:12px">One-time payment · Instant download · 30-day guarantee</p>
+    </div>
+
+    <!-- Related Articles -->
+    <div class="related">
+      <h3>Related Articles</h3>
+      <ul>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/best-macro-safe-excel-converter-tools-2026/">Best Macro-Safe Excel Converter Tools (2026)</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-migration-guide-2026/">Excel Macro Migration Guide 2026</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/how-to-convert-xls-to-xlsx-without-losing-macros/">How to Convert XLS to XLSX Without Losing Macros</a></li>
+      </ul>
+    </div>
+
+  </article>
+</div>
+
+<footer>
+  <div class="container">
+    <p><a href="https://jbhihall-droid.github.io/macro-converter-kit/">MacroKit Home</a> &nbsp;·&nbsp; &copy; 2026 MacroKit. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

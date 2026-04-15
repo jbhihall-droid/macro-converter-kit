@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convert Password-Protected Excel Files While Keeping Macros (2026)</title>
+  <meta name="description" content="Converting a password-protected XLSM is trickier than a normal file. Here's the correct order of operations to keep your VBA intact.">
+  <link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/password-protected-excel-convert-keep-macros/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Convert Password-Protected Excel Files While Keeping Macros (2026)",
+    "description": "Converting a password-protected XLSM is trickier than a normal file. Here's the correct order of operations to keep your VBA intact.",
+    "datePublished": "2026-02-15",
+    "dateModified": "2026-04-01",
+    "author": { "@type": "Organization", "name": "MacroKit" },
+    "publisher": { "@type": "Organization", "name": "MacroKit", "url": "https://jbhihall-droid.github.io/macro-converter-kit/" },
+    "mainEntityOfPage": "https://jbhihall-droid.github.io/macro-converter-kit/blog/password-protected-excel-convert-keep-macros/"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why can't converters handle password-protected Excel files?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Password-protected Excel files encrypt their content using AES-128 or AES-256. Conversion tools that use standard parsing libraries cannot read the encrypted file contents without the correct password. Even if the tool accepts the file upload, it will either fail silently (producing an empty or corrupt output) or throw an error. The encryption must be removed before any format conversion can happen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Worksheet protection and Workbook protection in Excel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Worksheet protection locks specific cells or ranges within a single sheet from editing. It does not encrypt the file. Workbook protection locks the structure of the workbook (preventing sheet renaming, deletion, or addition) but also does not encrypt the file. File-level password protection (set via File → Info → Protect Workbook → Encrypt with Password) is the only protection type that encrypts the entire file and blocks conversion tools. The other two types do not prevent conversion."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I batch convert multiple password-protected XLSM files?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but only if you know the passwords. With Excel and a VBA macro (ironic but correct), you can loop through a folder of files, supply the known password to open each one, remove the file-level password, convert to the target format, and re-apply protection if needed. Alternatively, the Macro-Safe Converter Kit includes a batch processing script that handles this sequence automatically for folders of protected files."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3a;
+      --accent: #6c5ce7;
+      --accent2: #00cec9;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --green: #00b894;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.7; font-size: 16px; }
+    .container { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+    nav .container { display: flex; align-items: center; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .logo { font-weight: 700; font-size: 15px; color: var(--text); text-decoration: none; }
+    .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .breadcrumb { font-size: 13px; color: var(--muted); padding: 16px 0; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--text); }
+    .breadcrumb span { margin: 0 6px; }
+    article { padding: 40px 0 60px; }
+    h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 700; line-height: 1.25; margin-bottom: 16px; color: var(--text); }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 32px; display: flex; gap: 16px; flex-wrap: wrap; }
+    h2 { font-size: 22px; font-weight: 700; margin: 40px 0 16px; color: var(--text); }
+    h3 { font-size: 18px; font-weight: 600; margin: 28px 0 12px; color: var(--text); }
+    p { margin-bottom: 16px; color: var(--text); }
+    ul, ol { padding-left: 24px; margin-bottom: 16px; }
+    li { margin-bottom: 8px; color: var(--text); }
+    code { background: var(--surface); border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'Courier New', monospace; color: var(--accent2); }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; overflow-x: auto; margin-bottom: 20px; }
+    pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
+    .callout { background: var(--surface); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 24px 0; }
+    .callout.warning { border-color: #e17055; }
+    .callout.success { border-color: var(--green); }
+    .callout p { margin: 0; font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th { background: var(--surface); text-align: left; padding: 10px 14px; border: 1px solid var(--border); font-weight: 600; color: var(--text); }
+    td { padding: 10px 14px; border: 1px solid var(--border); color: var(--text); }
+    tr:nth-child(even) td { background: #13151e; }
+    .step-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--accent); border-radius: 50%; font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0; margin-right: 10px; }
+    .step { display: flex; align-items: flex-start; margin-bottom: 20px; gap: 0; }
+    .step-content { flex: 1; padding-top: 3px; }
+    .faq-section { margin: 48px 0; }
+    .faq-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+    .faq-q { font-weight: 600; font-size: 15px; padding: 16px 20px; background: var(--surface); color: var(--text); }
+    .faq-a { padding: 16px 20px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--border); }
+    .related { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin: 48px 0; }
+    .related h3 { margin-top: 0; font-size: 16px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+    .related ul { list-style: none; padding: 0; }
+    .related ul li { border-bottom: 1px solid var(--border); padding: 10px 0; }
+    .related ul li:last-child { border-bottom: none; padding-bottom: 0; }
+    .related ul li a { color: var(--accent2); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .related ul li a:hover { text-decoration: underline; }
+    footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: center; font-size: 13px; color: var(--muted); }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+    .tag { display: inline-block; background: var(--surface); border: 1px solid var(--border); font-size: 12px; padding: 3px 8px; border-radius: 4px; color: var(--muted); margin-right: 6px; }
+    .protection-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 24px 0; }
+    @media (max-width: 600px) { .protection-grid { grid-template-columns: 1fr; } }
+    .prot-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+    .prot-card h4 { font-size: 14px; font-weight: 600; color: var(--accent2); margin-bottom: 8px; }
+    .prot-card p { font-size: 13px; color: var(--muted); margin: 0; }
+    .prot-card .blocks { display: inline-block; font-size: 12px; font-weight: 600; margin-top: 8px; padding: 2px 8px; border-radius: 4px; }
+    .blocks-yes { background: rgba(231,105,85,0.15); color: #e17055; }
+    .blocks-no { background: rgba(0,184,148,0.15); color: var(--green); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container" style="display:flex;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--border)">
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/" class="logo" style="font-weight:700;font-size:15px;color:var(--text);text-decoration:none">MacroKit</a>
+    <span class="badge" style="background:var(--accent);color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px">Beta</span>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="breadcrumb">
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/">Home</a>
+    <span>›</span>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/">Blog</a>
+    <span>›</span>
+    Convert Password-Protected Excel Files While Keeping Macros
+  </div>
+</div>
+
+<div class="container">
+  <article>
+
+    <h1>Convert Password-Protected Excel Files While Keeping Macros (2026)</h1>
+    <div class="meta">
+      <span>Updated April 2026</span>
+      <span>·</span>
+      <span>10 min read</span>
+      <span>·</span>
+      <span class="tag">Password Protection</span>
+      <span class="tag">VBA</span>
+      <span class="tag">Batch Conversion</span>
+    </div>
+
+    <p>Converting a password-protected Excel file with VBA macros is a two-problem challenge. First, you have to deal with the encryption that blocks conversion tools. Second, you have to ensure the VBA is preserved through the conversion process. Get the order of operations wrong, and you end up with either a failed conversion or a successful format change with no macros.</p>
+
+    <p>This guide covers why password protection blocks converters, the correct unlock-then-convert workflow, how to handle different protection types (worksheet vs workbook vs file), and how to batch-process folders of protected files without doing it manually one by one.</p>
+
+    <h2>Why Password Protection Blocks Converters</h2>
+
+    <p>Excel offers three distinct types of protection, and they behave very differently when it comes to conversion:</p>
+
+    <div class="protection-grid">
+      <div class="prot-card">
+        <h4>File Encryption</h4>
+        <p>Set via File → Info → Protect Workbook → Encrypt with Password. Encrypts the entire file with AES-128/256. The file is unreadable without the password.</p>
+        <span class="blocks blocks-yes">Blocks conversion</span>
+      </div>
+      <div class="prot-card">
+        <h4>Workbook Protection</h4>
+        <p>Locks workbook structure (sheet names, order, adding/deleting sheets). Does not encrypt the file. The file is readable but structurally locked.</p>
+        <span class="blocks blocks-no">Does not block conversion</span>
+      </div>
+      <div class="prot-card">
+        <h4>Worksheet Protection</h4>
+        <p>Locks individual cells or ranges in a specific sheet from editing. Does not encrypt the file. Data is fully readable by parsers.</p>
+        <span class="blocks blocks-no">Does not block conversion</span>
+      </div>
+    </div>
+
+    <p>The critical distinction: only file-level encryption (Encrypt with Password) actually blocks conversion tools. This encrypts the entire ZIP container that the XLSM format is based on, so parsing libraries cannot read any content — cell data, VBA binary, or formatting — without decrypting first.</p>
+
+    <p>If your file opens without a password prompt, you have workbook or worksheet protection (not file encryption), and the conversion process for your macros is the same as for any unprotected file. See the <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/vba-macros-lost-after-conversion-fix/" style="color:var(--accent2)">VBA macros lost after conversion guide</a> for that workflow.</p>
+
+    <div class="callout warning">
+      <p><strong>If your file prompts for a password when you try to open it</strong>, it has file-level encryption. That is what this guide addresses. Worksheet and workbook protection do not trigger an open-time password prompt.</p>
+    </div>
+
+    <h2>The Unlock-Then-Convert Workflow</h2>
+
+    <p>The correct sequence for a file-encrypted XLSM with VBA macros is always: unlock first, verify macros, then convert. Never attempt conversion on an encrypted file.</p>
+
+    <div class="step">
+      <span class="step-num">1</span>
+      <div class="step-content">
+        <strong>Open the encrypted file in Excel.</strong> You will be prompted for the password. Enter it. The file opens in Excel with the encryption decrypted in memory — the file on disk is still encrypted until you save it.
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">2</span>
+      <div class="step-content">
+        <strong>Verify the VBA is present.</strong> Press <code>Alt + F11</code>. The Project Explorer should show your modules. If the VBA project itself has a separate password (you see a locked padlock icon on the project), you will need to unlock it separately via Tools → VBAProject Properties → Protection tab.
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">3</span>
+      <div class="step-content">
+        <strong>Remove the file encryption.</strong> Go to File → Info → Protect Workbook → Encrypt with Password. Delete the password from the field and click OK. This marks the file as unencrypted — but only when saved.
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">4</span>
+      <div class="step-content">
+        <strong>Save to a new filename.</strong> Use File → Save As, give it a new name (e.g., <code>original_decrypted.xlsm</code>), and save as XLSM. Do not overwrite the original encrypted file unless you are certain you will not need it again.
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">5</span>
+      <div class="step-content">
+        <strong>Convert the decrypted XLSM.</strong> Now that the file is unencrypted, the normal macro-safe conversion process applies. Use File → Save As and choose your target format (XLSM for a format change with macros, XLS for legacy compatibility, etc.).
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-num">6</span>
+      <div class="step-content">
+        <strong>Verify the converted file.</strong> Open the output, press <code>Alt + F11</code> to confirm VBA is present, and test at least one macro to confirm execution.
+      </div>
+    </div>
+
+    <!-- CTA MID -->
+    <div style="background:#1e1b2e;border:1px solid #4a3f8a;border-radius:12px;padding:32px;text-align:center;margin:40px 0">
+      <p style="font-size:18px;font-weight:700;color:#c4b5fd;margin-bottom:8px">Stop losing macros on every conversion</p>
+      <p style="color:var(--muted);margin-bottom:24px;font-size:14px">The Macro-Safe Converter Kit gives you the exact workflow, tested scripts, and decision checklist to convert any Excel file without losing a single line of VBA.</p>
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" style="display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:14px 32px;border-radius:8px;font-size:15px;text-decoration:none">Get the Kit — $9</a>
+      <p style="font-size:12px;color:var(--muted);margin-top:12px">One-time payment · Instant download · 30-day guarantee</p>
+    </div>
+
+    <h2>Worksheet vs Workbook Protection: What Changes During Conversion</h2>
+
+    <p>Even though worksheet and workbook protection do not block conversion, they interact with the converted file in ways you should understand.</p>
+
+    <h3>Worksheet Protection After Conversion</h3>
+
+    <p>When you convert from XLSM to XLS, worksheet protection is generally preserved. The same cells remain locked or unlocked. However, the protection password itself is stored differently in XLS vs XLSM format, and some legacy XLS tools have known weaknesses in how they store the hash — meaning protection that was reasonably robust in XLSM may be trivially removable in the XLS output.</p>
+
+    <p>If worksheet protection is a security requirement (not just an accidental-edit guard), verify it is working correctly in the converted format before distributing the file.</p>
+
+    <h3>Workbook Protection After Conversion</h3>
+
+    <p>Workbook structure protection (preventing sheet renaming/deletion) is also generally preserved across XLSM → XLS and XLSM → XLSB conversions. However, it is sometimes dropped by third-party converters that do not fully implement the format spec.</p>
+
+    <p>After any conversion involving protected files, always check: Review → Protect Workbook — the button should appear highlighted/active if workbook protection is enabled.</p>
+
+    <h3>VBA Project Password vs File Encryption</h3>
+
+    <p>The VBA project password (set via VBA editor → Tools → VBAProject Properties → Protection) is separate from the file encryption password. A file can have:</p>
+
+    <ul>
+      <li>File encryption only — file requires a password to open, but VBA code is readable once opened</li>
+      <li>VBA project password only — file opens without a password, but the VBA editor shows a locked project</li>
+      <li>Both — you need to enter a password to open the file AND the VBA editor is separately locked</li>
+      <li>Neither — no passwords anywhere</li>
+    </ul>
+
+    <p>The VBA project password does not block conversion (the VBA binary is copied as-is, password and all). But if you need to inspect or modify the VBA code during a migration, you will need to unlock the project password separately.</p>
+
+    <h2>Batch Handling Protected Files</h2>
+
+    <p>If you have a folder of protected XLSM files that all share the same password — a common scenario for templated workbooks generated by a system — you can automate the unlock-convert sequence using VBA itself. Here is the structure of such a script:</p>
+
+    <pre><code>Sub BatchDecryptAndConvert()
+    Dim folderPath As String
+    Dim outputPath As String
+    Dim password As String
+    Dim fname As String
+
+    folderPath = "C:\Protected_Files\"
+    outputPath = "C:\Converted_Files\"
+    password = "your_password_here"
+
+    fname = Dir(folderPath &amp; "*.xlsm")
+
+    Do While fname &lt;&gt; ""
+        Dim wb As Workbook
+
+        ' Open with password
+        Set wb = Workbooks.Open( _
+            Filename:=folderPath &amp; fname, _
+            Password:=password)
+
+        ' Remove file encryption
+        wb.Password = ""
+
+        ' Save as new XLSM (macro-safe conversion)
+        Dim newName As String
+        newName = outputPath &amp; Left(fname, Len(fname) - 5) &amp; "_converted.xlsm"
+
+        Application.DisplayAlerts = False
+        wb.SaveAs Filename:=newName, _
+                  FileFormat:=xlOpenXMLMacroEnabled
+        Application.DisplayAlerts = True
+
+        wb.Close SaveChanges:=False
+        fname = Dir
+    Loop
+
+    MsgBox "Batch conversion complete."
+End Sub</code></pre>
+
+    <div class="callout">
+      <p><strong>Note:</strong> This script runs inside a separate trusted Excel workbook — not inside the protected files themselves. Open a new blank workbook, paste the script, adjust the folder paths and password, then run it. The script opens each protected file, removes encryption, saves a new unencrypted copy, and moves to the next.</p>
+    </div>
+
+    <h2>Common Errors and What They Mean</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Error / Symptom</th>
+          <th>Cause</th>
+          <th>Fix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>"Password is incorrect"</td>
+          <td>Wrong file password entered</td>
+          <td>Confirm the exact password; check for case/special characters</td>
+        </tr>
+        <tr>
+          <td>VBA editor shows locked padlock</td>
+          <td>Separate VBA project password</td>
+          <td>Tools → VBAProject Properties → Protection → uncheck and remove</td>
+        </tr>
+        <tr>
+          <td>Converted file opens but has no macros</td>
+          <td>Target format was XLSX, not XLSM</td>
+          <td>Re-save using XLSM format; never use XLSX as macro output</td>
+        </tr>
+        <tr>
+          <td>Output file is still encrypted</td>
+          <td>Encryption removed but file saved incorrectly</td>
+          <td>Confirm wb.Password = "" was set BEFORE SaveAs, not after</td>
+        </tr>
+        <tr>
+          <td>Batch script fails on one file</td>
+          <td>File has a different password</td>
+          <td>Use On Error Resume Next with logging to skip and report</td>
+        </tr>
+        <tr>
+          <td>Macros disabled in converted file</td>
+          <td>Macro security settings / Trust Center</td>
+          <td>File → Options → Trust Center → Macro Settings → enable for trusted locations</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Re-Applying Protection After Conversion</h2>
+
+    <p>If your converted files need to be re-protected after conversion — for example, you converted a protected template and need to redistribute it — apply protection as the last step, after verifying the conversion result:</p>
+
+    <ol>
+      <li>Confirm macros are working in the converted XLSM</li>
+      <li>Re-apply worksheet protection if needed: Review → Protect Sheet → set password and options</li>
+      <li>Re-apply workbook protection if needed: Review → Protect Workbook → set password</li>
+      <li>Re-apply file encryption last: File → Info → Protect Workbook → Encrypt with Password</li>
+      <li>Save and verify the file requires the password to open</li>
+    </ol>
+
+    <p>Apply file encryption last because it makes the file unreadable to any parser including your own scripts — if you need to do any post-processing, do it before encrypting.</p>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">Why can't converters handle password-protected Excel files?</div>
+        <div class="faq-a">Password-protected Excel files encrypt their content using AES-128 or AES-256. Conversion tools that use standard parsing libraries cannot read the encrypted file contents without the correct password. Even if the tool accepts the file upload, it will either fail silently (producing an empty or corrupt output) or throw an error. The encryption must be removed before any format conversion can happen.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What is the difference between Worksheet protection and Workbook protection in Excel?</div>
+        <div class="faq-a">Worksheet protection locks specific cells or ranges within a single sheet from editing. It does not encrypt the file. Workbook protection locks the structure of the workbook (preventing sheet renaming, deletion, or addition) but also does not encrypt the file. File-level password protection (set via File → Info → Protect Workbook → Encrypt with Password) is the only protection type that encrypts the entire file and blocks conversion tools. The other two types do not prevent conversion.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I batch convert multiple password-protected XLSM files?</div>
+        <div class="faq-a">Yes, but only if you know the passwords. With Excel and a VBA macro (ironic but correct), you can loop through a folder of files, supply the known password to open each one, remove the file-level password, convert to the target format, and re-apply protection if needed. Alternatively, the Macro-Safe Converter Kit includes a batch processing script that handles this sequence automatically for folders of protected files.</div>
+      </div>
+    </div>
+
+    <!-- CTA BOTTOM -->
+    <div style="background:#1e1b2e;border:1px solid #4a3f8a;border-radius:12px;padding:32px;text-align:center;margin:40px 0">
+      <p style="font-size:18px;font-weight:700;color:#c4b5fd;margin-bottom:8px">Stop losing macros on every conversion</p>
+      <p style="color:var(--muted);margin-bottom:24px;font-size:14px">The Macro-Safe Converter Kit gives you the exact workflow, tested scripts, and decision checklist to convert any Excel file without losing a single line of VBA.</p>
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" style="display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:14px 32px;border-radius:8px;font-size:15px;text-decoration:none">Get the Kit — $9</a>
+      <p style="font-size:12px;color:var(--muted);margin-top:12px">One-time payment · Instant download · 30-day guarantee</p>
+    </div>
+
+    <!-- Related Articles -->
+    <div class="related">
+      <h3>Related Articles</h3>
+      <ul>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/best-macro-safe-excel-converter-tools-2026/">Best Macro-Safe Excel Converter Tools (2026)</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-migration-guide-2026/">Excel Macro Migration Guide 2026</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/how-to-convert-xls-to-xlsx-without-losing-macros/">How to Convert XLS to XLSX Without Losing Macros</a></li>
+      </ul>
+    </div>
+
+  </article>
+</div>
+
+<footer>
+  <div class="container">
+    <p><a href="https://jbhihall-droid.github.io/macro-converter-kit/">MacroKit Home</a> &nbsp;·&nbsp; &copy; 2026 MacroKit. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

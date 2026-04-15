@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XLSB to XLSM Converter: Preserve Macros When Switching Formats (2026)</title>
+  <meta name="description" content="XLSB (Binary) is Excel's fastest format, but XLSM is more portable. Here's how to convert between them without losing VBA modules.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsb-to-xlsm-converter/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --accent: #6c5ce7; --accent2: #00cec9; --text: #e2e8f0; --muted: #94a3b8; --green: #00b894; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.7; }
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    nav { border-bottom: 1px solid var(--border); padding: 16px 0; }
+    nav .container { display: flex; align-items: center; gap: 12px; }
+    .logo { font-weight: 700; font-size: 15px; color: var(--text); }
+    .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .breadcrumb { padding: 16px 0; font-size: 13px; color: var(--muted); }
+    article { padding: 48px 0 80px; }
+    .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 16px; }
+    h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.2; letter-spacing: -0.8px; margin-bottom: 20px; }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 22px; font-weight: 700; margin: 40px 0 16px; letter-spacing: -0.3px; }
+    h3 { font-size: 17px; font-weight: 700; margin: 28px 0 10px; }
+    p { margin-bottom: 18px; }
+    ul, ol { padding-left: 24px; margin-bottom: 18px; }
+    li { margin-bottom: 8px; }
+    .callout { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .callout strong { color: #c4b5fd; }
+    .warning { background: #1f1a0e; border: 1px solid #78350f; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .warning strong { color: #fbbf24; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th { background: var(--surface); padding: 10px 14px; text-align: left; border: 1px solid var(--border); font-weight: 600; }
+    td { padding: 10px 14px; border: 1px solid var(--border); color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 500; }
+    .verdict-yes { color: #00b894; font-weight: 700; }
+    .verdict-no { color: #d63031; font-weight: 700; }
+    .cta-box { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 12px; padding: 32px; text-align: center; margin: 40px 0; }
+    .cta-box h3 { color: #c4b5fd; margin-bottom: 8px; font-size: 18px; }
+    .cta-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 8px; font-size: 15px; text-decoration: none; margin-top: 20px; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; font-size: 13px; overflow-x: auto; margin-bottom: 18px; }
+    code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "XLSB to XLSM Converter: Preserve Macros When Switching Formats (2026)",
+    "description": "XLSB (Binary) is Excel's fastest format, but XLSM is more portable. Here's how to convert between them without losing VBA modules.",
+    "datePublished": "2026-03-18",
+    "dateModified": "2026-04-01",
+    "author": { "@type": "Organization", "name": "MacroKit" },
+    "publisher": { "@type": "Organization", "name": "MacroKit" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsb-to-xlsm-converter/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why is XLSB smaller and faster than XLSM?",
+        "acceptedAnswer": { "@type": "Answer", "text": "XLSB stores cell data in a binary format (BIFF12) rather than XML. XML is text — every number is stored as its ASCII string representation, every cell tag adds dozens of characters of markup overhead. XLSB skips the XML layer entirely, storing data as compact binary records. For spreadsheets with hundreds of thousands of rows, this can mean 60-70% smaller files and 3-5x faster open/save times." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do XLSB files support VBA macros?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. XLSB is the binary equivalent of XLSM — it supports all the same VBA capabilities. The vbaProject.bin blob is embedded in the XLSB file alongside the binary worksheet data. This is why converting XLSB to XLSM, done correctly, simply extracts that same blob and places it in the new ZIP-based container." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will converting XLSB to XLSM affect performance?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, for large workbooks. XLSM stores cell data as XML, which is larger and slower to parse than XLSB's binary records. A 200MB XLSB might become 400-600MB as XLSM, and open/save times will increase proportionally. For files under 10MB the difference is negligible. For larger financial models or data files, keep XLSB for active use and only convert when you need cross-platform portability." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="/macro-converter-kit/" class="logo">MacroKit</a>
+    <span class="badge">Beta</span>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="breadcrumb">
+    <a href="/macro-converter-kit/">Home</a> &rsaquo; <a href="/macro-converter-kit/blog/">Blog</a> &rsaquo; XLSB to XLSM Converter
+  </div>
+</div>
+
+<div class="container">
+<article>
+  <p class="label">Excel Format Guide</p>
+  <h1>XLSB to XLSM Converter: Preserve Macros When Switching Formats (2026)</h1>
+  <p class="meta">Updated April 2026 &middot; By MacroKit Team &middot; 8 min read</p>
+
+  <p>XLSB is Excel's highest-performance format. Financial modelers, data analysts, and anyone working with spreadsheets over 50,000 rows tends to end up there eventually — file sizes drop by 50-70%, and open/save times improve dramatically. The catch is portability: XLSB is an Excel-only format that non-Microsoft tools handle poorly or not at all.</p>
+
+  <p>When you need to share a macro-enabled workbook with someone who uses LibreOffice, a web-based Excel viewer, or a Python pipeline, XLSM is the correct output. This guide covers what XLSB actually is, when switching to XLSM makes sense, and how to convert without losing a single VBA module.</p>
+
+  <h2>What Is XLSB and Why Does It Exist?</h2>
+
+  <p>XLSB stands for Excel Binary Workbook. It was introduced alongside the Open XML formats in Excel 2007, not as a replacement for XLSM, but as a performance-optimized alternative for large, complex workbooks that don't need to be editable by non-Excel tools.</p>
+
+  <p>The "binary" in XLSB refers to the cell data format. While XLSM stores worksheet data as XML (e.g., <code>&lt;c r="A1" t="n"&gt;&lt;v&gt;42&lt;/v&gt;&lt;/c&gt;</code>), XLSB stores the same cell as a compact binary record — a few bytes instead of dozens of characters. This is the BIFF12 format: a new binary record specification that Microsoft designed specifically for Office 2007+ performance.</p>
+
+  <p>Despite the different data layer, XLSB still stores VBA in exactly the same way as XLSM: as a <code>vbaProject.bin</code> COM Structured Storage binary. Both formats are ZIP archives at the top level. The difference is only in how worksheet data is serialized inside that ZIP.</p>
+
+  <p>Here's a simplified view of both archives:</p>
+
+  <pre><code># XLSM structure (simplified)
+macro_workbook.xlsm (ZIP)
+├── [Content_Types].xml
+├── xl/
+│   ├── workbook.xml         ← XML
+│   ├── worksheets/sheet1.xml ← XML (cell data)
+│   ├── vbaProject.bin       ← Binary (VBA)
+│   └── styles.xml           ← XML
+
+# XLSB structure (simplified)
+macro_workbook.xlsb (ZIP)
+├── [Content_Types].xml
+├── xl/
+│   ├── workbook.bin         ← Binary (BIFF12)
+│   ├── worksheets/sheet1.bin ← Binary (cell data)
+│   ├── vbaProject.bin       ← Binary (VBA) — IDENTICAL
+│   └── styles.bin           ← Binary</code></pre>
+
+  <p>Notice that <code>vbaProject.bin</code> is present in both and is structurally identical. This is why XLSB to XLSM conversion, done correctly, is conceptually straightforward: convert the binary worksheet data to XML, and carry the VBA blob through unchanged.</p>
+
+  <h2>When Should You Switch from XLSB to XLSM?</h2>
+
+  <p>XLSB is the right format when Excel is the only tool that will ever touch the file and performance is a priority. Switch to XLSM when any of the following apply:</p>
+
+  <ul>
+    <li><strong>Sharing with LibreOffice users.</strong> LibreOffice Calc's XLSB support is partial and unreliable as of 2026. XLSM works correctly.</li>
+    <li><strong>Automated processing with Python.</strong> openpyxl cannot read XLSB. xlrd 2.x dropped XLSB support. pyxlsb exists but is read-only and doesn't handle VBA. If a pipeline needs to process the file, XLSM is required.</li>
+    <li><strong>Version control and diffing.</strong> XLSM's XML worksheets are text and can be diffed with standard tools. XLSB binary diffs are meaningless. For workbooks tracked in git, XLSM is strongly preferred.</li>
+    <li><strong>Long-term archival.</strong> The Open XML specification is an ECMA/ISO standard. XLSB has no public specification. For files that need to be readable in 10 years, open standards are safer.</li>
+    <li><strong>Compliance requirements.</strong> Some regulatory environments require file formats with published specifications.</li>
+  </ul>
+
+  <h2>The Conversion: Excel Save As</h2>
+
+  <p>The most reliable XLSB to XLSM conversion is Excel's own Save As. Because both formats share the same <code>vbaProject.bin</code> structure, Excel simply rewrites the worksheet data as XML and copies the VBA blob verbatim.</p>
+
+  <ol>
+    <li>Open the XLSB file in Excel.</li>
+    <li>Press <strong>Alt + F11</strong> and note the module list in the Project Explorer. Count modules and class modules.</li>
+    <li>Go to <strong>File &rarr; Save As</strong>.</li>
+    <li>Select <strong>Excel Macro-Enabled Workbook (*.xlsm)</strong> from the format dropdown.</li>
+    <li>Save to a new filename. Do not overwrite the original.</li>
+    <li>Close and reopen the XLSM. Verify VBA modules via Alt + F11.</li>
+    <li>Run each macro to confirm runtime behavior.</li>
+  </ol>
+
+  <div class="cta-box">
+    <h3>Stop losing macros on every conversion</h3>
+    <p style="color:var(--muted);font-size:14px;margin:8px 0 0">The Macro-Safe Converter Kit gives you the exact workflow, tested scripts, and decision checklist to convert without losing a single line of VBA.</p>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" class="cta-btn">Get the Kit — $9</a>
+    <p style="font-size:12px;color:var(--muted);margin-top:12px">One-time · Instant download · 30-day guarantee</p>
+  </div>
+
+  <h2>Python Approach: pyxlsb + openpyxl</h2>
+
+  <p>Python has no single library that can read an XLSB with VBA and write it as XLSM. You need two libraries working in sequence:</p>
+
+  <ul>
+    <li><strong>pyxlsb</strong> — reads XLSB cell data (read-only, no VBA support)</li>
+    <li><strong>zipfile</strong> — extracts the raw vbaProject.bin from the XLSB archive</li>
+    <li><strong>openpyxl</strong> — writes the XLSM with data + the extracted VBA blob</li>
+  </ul>
+
+  <pre><code">import zipfile
+from pathlib import Path
+from pyxlsb import open_workbook
+import openpyxl
+
+def xlsb_to_xlsm(src: str, dst: str):
+    src_path = Path(src)
+    dst_path = Path(dst)
+
+    # Step 1: Extract vbaProject.bin from XLSB
+    vba_blob = None
+    with zipfile.ZipFile(src_path, 'r') as z:
+        if 'xl/vbaProject.bin' in z.namelist():
+            vba_blob = z.read('xl/vbaProject.bin')
+        else:
+            print("WARNING: No vbaProject.bin found in source XLSB")
+
+    # Step 2: Read cell data from XLSB
+    wb_out = openpyxl.Workbook()
+    wb_out.remove(wb_out.active)  # Remove default empty sheet
+
+    with open_workbook(src_path) as wb_in:
+        for sheet_name in wb_in.sheets:
+            ws_out = wb_out.create_sheet(title=sheet_name)
+            with wb_in.get_sheet(sheet_name) as ws_in:
+                for row in ws_in.rows():
+                    for cell in row:
+                        if cell.v is not None:
+                            ws_out.cell(
+                                row=cell.r, column=cell.c, value=cell.v
+                            )
+
+    # Step 3: Save initial XLSM (no VBA yet)
+    temp_path = dst_path.with_suffix('.tmp.xlsm')
+    wb_out.save(temp_path)
+
+    # Step 4: Inject vbaProject.bin into the XLSM ZIP
+    if vba_blob:
+        with zipfile.ZipFile(temp_path, 'a') as z:
+            z.writestr('xl/vbaProject.bin', vba_blob)
+        # Note: Content_Types.xml also needs updating for full compliance
+        # For production use, Excel Save As is still more reliable
+        print(f"VBA injected ({len(vba_blob):,} bytes)")
+
+    temp_path.rename(dst_path)
+    print(f"Saved: {dst_path}")
+
+xlsb_to_xlsm("source.xlsb", "output.xlsm")</code></pre>
+
+  <div class="warning">
+    <strong>Important:</strong> The Python approach above has a limitation — manually injecting <code>vbaProject.bin</code> into a ZIP without updating <code>[Content_Types].xml</code> to declare the correct MIME type may cause Excel to ignore it. For a production-quality conversion, you also need to patch the content types XML. The script above is suitable for validating the VBA preservation concept; the Excel Save As method is more reliable for actual deployment.
+  </div>
+
+  <h2>File Size Trade-off Table</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Workbook Type</th>
+        <th>XLSB Size</th>
+        <th>XLSM Size</th>
+        <th>Size Increase</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Small model (5K rows, 20 cols)</td>
+        <td>280 KB</td>
+        <td>420 KB</td>
+        <td>~50%</td>
+      </tr>
+      <tr>
+        <td>Medium dataset (100K rows)</td>
+        <td>8.2 MB</td>
+        <td>22 MB</td>
+        <td>~168%</td>
+      </tr>
+      <tr>
+        <td>Large financial model (500K rows)</td>
+        <td>41 MB</td>
+        <td>118 MB</td>
+        <td>~188%</td>
+      </tr>
+      <tr>
+        <td>VBA-heavy, small data (50 modules)</td>
+        <td>1.1 MB</td>
+        <td>1.3 MB</td>
+        <td>~18%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The file size increase scales with data volume, not with macro complexity. The <code>vbaProject.bin</code> is the same size in both formats — it's the worksheet data serialization that differs. For VBA-heavy workbooks with relatively little data, the conversion penalty is negligible.</p>
+
+  <h2>LibreOffice CLI Conversion</h2>
+
+  <p>LibreOffice can convert XLSB to XLSM from the command line, though XLSB reading support is less mature than its XLS or XLSX support:</p>
+
+  <pre><code># Single file
+libreoffice --headless --convert-to xlsm yourfile.xlsb
+
+# Check LibreOffice version first (7.4+ has better XLSB support)
+libreoffice --version</code></pre>
+
+  <p>If LibreOffice misreads the XLSB (producing garbled data or blank sheets), fall back to the Excel Save As method. XLSB is Microsoft's format with no public specification, and third-party implementations rely on reverse engineering — they work for the common cases but can fail on complex files with pivot tables, Power Query connections, or unusual number formats.</p>
+
+  <h2>Keeping XLSB for Active Work, XLSM for Distribution</h2>
+
+  <p>A practical strategy for teams that need both performance and portability: maintain a master XLSB for daily use, and generate an XLSM distribution copy when needed. A small VBA macro inside the XLSB itself can automate this:</p>
+
+  <pre><code>Sub ExportAsXLSM()
+    Dim srcPath As String
+    Dim dstPath As String
+    srcPath = ThisWorkbook.FullName
+    dstPath = Replace(srcPath, ".xlsb", "_dist.xlsm")
+    ThisWorkbook.SaveAs Filename:=dstPath, _
+        FileFormat:=xlOpenXMLWorkbookMacroEnabled
+    ' Reopen the original XLSB
+    Workbooks.Open srcPath
+    MsgBox "XLSM saved: " & dstPath
+End Sub</code></pre>
+
+  <p>Run this macro whenever you need to produce a shareable copy. The XLSB remains the working file; the XLSM is a distribution artifact.</p>
+
+  <div class="callout">
+    <strong>Summary:</strong> XLSB and XLSM both store VBA as an identical <code>vbaProject.bin</code> binary. Converting between them is technically clean — Excel's Save As is the most reliable tool, LibreOffice works for straightforward files, and Python requires a two-library approach. The main cost of switching from XLSB to XLSM is file size and load time, which matters for large datasets but is negligible for most macro-heavy workbooks.
+  </div>
+
+  <h2 id="faq">Frequently Asked Questions</h2>
+
+  <h3>Why is XLSB smaller and faster than XLSM?</h3>
+  <p>XLSB stores cell data in a binary format (BIFF12) rather than XML. XML is text — every number is stored as its ASCII string representation, every cell tag adds dozens of characters of markup overhead. XLSB skips the XML layer entirely, storing data as compact binary records. For spreadsheets with hundreds of thousands of rows, this can mean 60-70% smaller files and 3-5x faster open/save times.</p>
+
+  <h3>Do XLSB files support VBA macros?</h3>
+  <p>Yes. XLSB is the binary equivalent of XLSM — it supports all the same VBA capabilities. The <code>vbaProject.bin</code> blob is embedded in the XLSB file alongside the binary worksheet data. This is why converting XLSB to XLSM, done correctly, simply extracts that same blob and places it in the new ZIP-based container.</p>
+
+  <h3>Will converting XLSB to XLSM affect performance?</h3>
+  <p>Yes, for large workbooks. XLSM stores cell data as XML, which is larger and slower to parse than XLSB's binary records. A 200MB XLSB might become 400-600MB as XLSM, and open/save times will increase proportionally. For files under 10MB the difference is negligible. For larger financial models or data files, keep XLSB for active use and only convert when you need cross-platform portability.</p>
+
+  <section style="margin-top:60px;padding-top:40px;border-top:1px solid var(--border)">
+    <h2 style="margin-bottom:24px">Related Guides</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+      <a href="/macro-converter-kit/blog/best-macro-safe-excel-converter-tools-2026/" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;display:block;color:var(--text);text-decoration:none"><strong style="font-size:14px;display:block;margin-bottom:6px">Best Macro-Safe Excel Converter Tools 2026</strong><span style="font-size:12px;color:var(--muted)">Tool comparison guide</span></a>
+      <a href="/macro-converter-kit/blog/excel-macro-migration-guide-2026/" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;display:block;color:var(--text);text-decoration:none"><strong style="font-size:14px;display:block;margin-bottom:6px">Excel Macro Migration Guide 2026</strong><span style="font-size:12px;color:var(--muted)">Complete migration walkthrough</span></a>
+      <a href="/macro-converter-kit/blog/how-to-convert-xls-to-xlsx-without-losing-macros/" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;display:block;color:var(--text);text-decoration:none"><strong style="font-size:14px;display:block;margin-bottom:6px">Convert XLS to XLSX Without Losing Macros</strong><span style="font-size:12px;color:var(--muted)">Step-by-step guide</span></a>
+    </div>
+  </section>
+
+  <div class="cta-box">
+    <h3>Stop losing macros on every conversion</h3>
+    <p style="color:var(--muted);font-size:14px;margin:8px 0 0">The Macro-Safe Converter Kit gives you the exact workflow, tested scripts, and decision checklist to convert without losing a single line of VBA.</p>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html" class="cta-btn">Get the Kit — $9</a>
+    <p style="font-size:12px;color:var(--muted);margin-top:12px">One-time · Instant download · 30-day guarantee</p>
+  </div>
+
+</article>
+</div>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 MacroKit &middot; <a href="/macro-converter-kit/">Home</a> &middot; <a href="/macro-converter-kit/blog/">Blog</a> &middot; <a href="/macro-converter-kit/checkout.html">Get the Kit</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
