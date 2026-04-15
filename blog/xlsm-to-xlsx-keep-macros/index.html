@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convert XLSM to XLSX Without Losing Macros — Safe Workflow (2026)</title>
+  <meta name="description" content="Converting XLSM to XLSX will strip VBA macros — but there's a safe workflow. Learn how to export, archive, and convert without losing a single line of macro code.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-xlsx-keep-macros/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --accent: #6c5ce7; --accent2: #00cec9; --text: #e2e8f0; --muted: #94a3b8; --green: #00b894; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.7; }
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    nav { border-bottom: 1px solid var(--border); padding: 16px 0; }
+    nav .container { display: flex; align-items: center; gap: 12px; }
+    .logo { font-weight: 700; font-size: 15px; color: var(--text); }
+    .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .breadcrumb { padding: 16px 0; font-size: 13px; color: var(--muted); }
+    article { padding: 48px 0 80px; }
+    .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 16px; }
+    h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.2; letter-spacing: -0.8px; margin-bottom: 20px; }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 22px; font-weight: 700; margin: 40px 0 16px; letter-spacing: -0.3px; }
+    h3 { font-size: 17px; font-weight: 700; margin: 28px 0 10px; }
+    p { margin-bottom: 18px; }
+    ul, ol { padding-left: 24px; margin-bottom: 18px; }
+    li { margin-bottom: 8px; }
+    .callout { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .callout strong { color: #c4b5fd; }
+    .warning { background: #1f1a0e; border: 1px solid #78350f; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .warning strong { color: #fbbf24; }
+    .step { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+    .step-num { font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th { background: var(--surface); padding: 10px 14px; text-align: left; border: 1px solid var(--border); font-weight: 600; }
+    td { padding: 10px 14px; border: 1px solid var(--border); color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 500; }
+    .verdict-yes { color: #00b894; font-weight: 700; }
+    .verdict-no { color: #d63031; font-weight: 700; }
+    .cta-box { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 12px; padding: 32px; text-align: center; margin: 40px 0; }
+    .cta-box h3 { color: #c4b5fd; margin-bottom: 8px; font-size: 18px; }
+    .cta-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 8px; font-size: 15px; text-decoration: none; margin-top: 20px; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; font-size: 13px; overflow-x: auto; margin-bottom: 18px; }
+    code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; background: var(--surface); padding: 2px 6px; border-radius: 3px; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Convert XLSM to XLSX Without Losing Macros — Safe Workflow (2026)",
+    "description": "Converting XLSM to XLSX will strip VBA macros — but there's a safe workflow. Learn how to export, archive, and convert without losing a single line of macro code.",
+    "datePublished": "2026-04-05",
+    "dateModified": "2026-04-15",
+    "author": { "@type": "Organization", "name": "MacroKit" },
+    "publisher": { "@type": "Organization", "name": "MacroKit" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-xlsx-keep-macros/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Convert XLSM to XLSX without losing macros",
+    "description": "Export VBA modules from XLSM, create an XLSX copy, and archive macro code for recovery.",
+    "step": [
+      { "@type": "HowToStep", "name": "Audit macro contents", "text": "Open VBA editor (Alt+F11) and list all modules, class modules, and UserForms in the project." },
+      { "@type": "HowToStep", "name": "Export all VBA modules", "text": "Right-click each module in the Project Explorer and select Export File. Save .bas (modules), .cls (classes), .frm (forms)." },
+      { "@type": "HowToStep", "name": "Save As XLSX", "text": "File → Save As → Excel Workbook (.xlsx). This creates the macro-free copy for sharing." },
+      { "@type": "HowToStep", "name": "Archive original XLSM", "text": "Never overwrite or delete the original XLSM. Keep it as the master workbook." },
+      { "@type": "HowToStep", "name": "Verify XLSX is complete", "text": "Open the XLSX and verify all data, formulas, and formatting transferred correctly. VBA-dependent cells will show errors — expected behaviour." }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <span class="logo">MacroKit</span>
+      <span class="badge">Safe Workflow</span>
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/" style="margin-left:auto;font-size:13px;color:var(--muted)">← Home</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/">Home</a> →
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/">Blog</a> →
+      Convert XLSM to XLSX
+    </div>
+  </div>
+
+  <div class="container">
+    <article>
+      <div class="label">Conversion Workflow</div>
+      <h1>Convert XLSM to XLSX Without Losing Macros</h1>
+      <div class="meta">By MacroKit · Updated April 2026 · 10 min read</div>
+
+      <p>Here's the uncomfortable truth: you <em>cannot</em> convert XLSM to XLSX and keep macros intact. XLSX is structurally incapable of storing VBA code — it's a format limitation, not a software bug.</p>
+
+      <p>But there <em>is</em> a safe workflow. You can preserve all VBA code as exported files, create an XLSX copy for sharing, and keep the original XLSM as your working master. This guide walks you through the full process — manually and via script for bulk operations.</p>
+
+      <div class="warning">
+        <strong>If you used CloudConvert, Zamzar, or any online converter:</strong> Your macros are already gone. Online converters don't warn you. They silently drop the <code>vbaProject.bin</code> binary. If you haven't overwritten the original XLSM, you can still recover. See the <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/vba-macros-lost-after-conversion-fix/">recovery guide</a>.
+      </div>
+
+      <h2>Why XLSM → XLSX Always Strips Macros</h2>
+
+      <p>XLSM stores VBA code in a binary file called <code>vbaProject.bin</code> inside the ZIP archive. XLSX's format specification explicitly prohibits this binary — there's no slot for it. When any tool converts XLSM to XLSX, it must choose:</p>
+      <ul>
+        <li><strong>Include vbaProject.bin</strong> → produces an invalid XLSX that most viewers reject</li>
+        <li><strong>Drop vbaProject.bin</strong> → produces a valid XLSX with no macros (what every tool does)</li>
+      </ul>
+
+      <p>The only way to "keep" your macros is to archive them separately before the conversion.</p>
+
+      <h2>The Safe 5-Step Workflow</h2>
+
+      <div class="step">
+        <div class="step-num">Step 1 of 5</div>
+        <h3>Audit What Macros Exist</h3>
+        <p>Before touching the file, know what you're working with. Open the VBA Editor (Alt+F11 in Excel) and look at the Project Explorer panel on the left.</p>
+        <p>Count and name every item under your workbook's project:</p>
+        <ul>
+          <li><strong>Modules</strong> (Module1, Module2, etc.) — standard VBA code</li>
+          <li><strong>Class Modules</strong> (clsInvoice, etc.) — object-oriented VBA</li>
+          <li><strong>Forms</strong> (UserForm1, etc.) — dialog boxes</li>
+          <li><strong>ThisWorkbook / Sheet objects</strong> — event handlers</li>
+        </ul>
+        <p>Alternatively, use the free <a href="https://jbhihall-droid.github.io/macro-converter-kit/tools/macro-inspector/">Macro Inspector</a> to get a full module list without opening Excel.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">Step 2 of 5</div>
+        <h3>Export All VBA Modules</h3>
+        <p>In the VBA Editor Project Explorer, right-click each module/class/form → <strong>Export File</strong>.</p>
+        <p>Save to a folder named after the workbook. Use these extensions:</p>
+        <table>
+          <thead><tr><th>Module type</th><th>Extension</th><th>What it contains</th></tr></thead>
+          <tbody>
+            <tr><td>Standard module</td><td>.bas</td><td>All Sub and Function procedures</td></tr>
+            <tr><td>Class module</td><td>.cls</td><td>Class definition and methods</td></tr>
+            <tr><td>UserForm</td><td>.frm</td><td>Form layout (+ .frx binary for controls)</td></tr>
+            <tr><td>ThisWorkbook / Sheet</td><td>.cls</td><td>Workbook and sheet event handlers</td></tr>
+          </tbody>
+        </table>
+        <p>Also copy any macros from <strong>Sheet code modules</strong> (right-click the sheet tab → View Code). These are often missed.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">Step 3 of 5</div>
+        <h3>Create the XLSX Copy</h3>
+        <p>With the XLSM open in Excel:</p>
+        <ol>
+          <li>File → Save As</li>
+          <li>Change "Save as type" to <strong>Excel Workbook (*.xlsx)</strong></li>
+          <li>Save to a different location or add <code>_sharing</code> to the filename</li>
+          <li>Click Yes when Excel warns that macros will be removed</li>
+        </ol>
+        <div class="callout">
+          <strong>Never click Save over your XLSM.</strong> Always use Save As to a new filename. One misclick and the master workbook is gone.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">Step 4 of 5</div>
+        <h3>Archive the Original XLSM</h3>
+        <p>Move the original XLSM (not the new XLSX) to a dated archive folder:</p>
+        <pre><code>archive/
+  2026-04-15_report-automation-v3.xlsm
+  modules/
+    Module1.bas
+    DataProcessor.cls
+    InputForm.frm
+    InputForm.frx</code></pre>
+        <p>Zip it. Add a README noting what the macros do and when they were last verified. This is your recovery kit if the XLSX version needs macros re-enabled later.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">Step 5 of 5</div>
+        <h3>Verify the XLSX Output</h3>
+        <p>Open the new XLSX and verify:</p>
+        <ul>
+          <li>All worksheets are present with correct data</li>
+          <li>Formulas that relied on VBA-defined functions now show <code>#NAME?</code> — this is expected</li>
+          <li>Formatting, tables, and charts transferred correctly</li>
+          <li>The file size is smaller than the XLSM (expected — vbaProject.bin removed)</li>
+        </ul>
+      </div>
+
+      <h2>Batch Conversion: Multiple XLSM Files at Once</h2>
+
+      <p>If you have dozens of XLSM files to convert, doing this manually for each is impractical. The Python script below automates the export + conversion:</p>
+
+      <pre><code>"""
+batch_xlsm_to_xlsx.py — Safe XLSM → XLSX converter with module archiving
+Requires: openpyxl, zipfile (standard library)
+Usage: python batch_xlsm_to_xlsx.py /path/to/xlsm/files
+"""
+import os, sys, shutil, zipfile
+from pathlib import Path
+
+def extract_vba_project(xlsm_path, archive_dir):
+    """Extract vbaProject.bin from XLSM for archiving."""
+    archive_dir.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(xlsm_path, 'r') as z:
+        entries = z.namelist()
+        vba = [e for e in entries if 'vbaProject' in e]
+        for entry in vba:
+            z.extract(entry, archive_dir)
+            print(f"  Archived: {entry}")
+    return len(vba)
+
+def convert_xlsm_to_xlsx(xlsm_path, output_dir, archive_base):
+    """Convert a single XLSM to XLSX with VBA archiving."""
+    p = Path(xlsm_path)
+    out_name = p.stem + '.xlsx'
+    out_path = Path(output_dir) / out_name
+    archive_dir = Path(archive_base) / p.stem
+
+    # Archive VBA binary
+    vba_count = extract_vba_project(p, archive_dir)
+    print(f"  Archived {vba_count} VBA component(s)")
+
+    # Copy XLSM as ZIP, rebuild without vbaProject.bin
+    with zipfile.ZipFile(p, 'r') as src_zip:
+        with zipfile.ZipFile(out_path, 'w', zipfile.ZIP_DEFLATED) as dst_zip:
+            for item in src_zip.infolist():
+                if 'vbaProject' not in item.filename:
+                    dst_zip.writestr(item, src_zip.read(item.filename))
+
+    # Fix Content_Types to remove vba reference
+    # (simplified — for production, use openpyxl to re-save properly)
+    print(f"  Converted: {out_name}")
+    return out_path
+
+if __name__ == '__main__':
+    src_dir = sys.argv[1] if len(sys.argv) > 1 else '.'
+    output_dir = Path(src_dir) / 'xlsx_output'
+    archive_dir = Path(src_dir) / 'vba_archive'
+    output_dir.mkdir(exist_ok=True)
+
+    files = list(Path(src_dir).glob('*.xlsm'))
+    print(f"Found {len(files)} XLSM files to convert")
+
+    for f in files:
+        print(f"Processing: {f.name}")
+        convert_xlsm_to_xlsx(f, output_dir, archive_dir)
+
+    print(f"\nDone. XLSX files in: {output_dir}")
+    print(f"VBA archives in: {archive_dir}")</code></pre>
+
+      <div class="callout">
+        <strong>Note:</strong> The script above archives the vbaProject.bin binary. To get readable VBA source code from this binary, you need to import it back into Excel's VBA editor. The <a href="https://jbhihall-droid.github.io/macro-converter-kit/">MacroKit workflow guide</a> includes a more complete script using <code>xlrd</code> and <code>oletools</code> to extract human-readable module source from the binary.
+      </div>
+
+      <h2>Re-importing Macros Later</h2>
+
+      <p>If you later need the macros back in a file, here's how to re-import from your .bas / .cls exports:</p>
+      <ol>
+        <li>Open the target workbook</li>
+        <li>Save as XLSM (it must be XLSM to hold macros)</li>
+        <li>Open VBA Editor (Alt+F11)</li>
+        <li>File → Import File → select your .bas / .cls files</li>
+        <li>For UserForms: import the .frm file (the .frx must be in the same folder)</li>
+        <li>Test all macros — some may need worksheet or workbook references updated</li>
+      </ol>
+
+      <h2>Common Mistakes</h2>
+
+      <table>
+        <thead><tr><th>Mistake</th><th>Consequence</th><th>Prevention</th></tr></thead>
+        <tbody>
+          <tr><td>Using Save (not Save As) when converting</td><td>Overwrites the XLSM master</td><td>Always Save As to a new filename/location</td></tr>
+          <tr><td>Skipping sheet event handlers</td><td>Worksheet_Change, Workbook_Open events lost</td><td>Export ThisWorkbook and each sheet module explicitly</td></tr>
+          <tr><td>Forgetting .frx files with .frm</td><td>UserForms won't import correctly</td><td>Export both .frm and .frx; they're always paired</td></tr>
+          <tr><td>Sending XLSX to users who expect automation</td><td>VBA-driven formulas return #NAME?</td><td>Document which features require the macro version</td></tr>
+        </tbody>
+      </table>
+
+      <div class="cta-box">
+        <h3>Need to convert dozens of XLSM files?</h3>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:4px;">MacroKit includes a complete batch conversion workflow with automated VBA export, conversion scripts, and a post-conversion validation checklist. One purchase covers every file, forever.</p>
+        <a class="cta-btn" href="https://jbhihall-droid.github.io/macro-converter-kit/#pricing">Get MacroKit — $9</a>
+      </div>
+
+      <h2>Related Guides</h2>
+      <ul>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-vs-xlsx-difference/">XLSM vs XLSX: What's the Technical Difference?</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-backup-before-conversion/">How to Backup Excel Macros Before Any Conversion</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/vba-macros-lost-after-conversion-fix/">VBA Macros Lost After Conversion — Recovery Guide</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/batch-convert-excel-keep-macros/">Batch Convert Excel Files While Keeping Macros</a></li>
+      </ul>
+    </article>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 MacroKit · <a href="https://jbhihall-droid.github.io/macro-converter-kit/">Home</a> · <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/">Blog</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Backup Excel Macros Before Any Conversion (Never Lose VBA Again)</title>
+  <meta name="description" content="One command backs up every VBA module in your Excel file before you run any converter. Here's the exact backup workflow for XLSM, XLS, and XLSB files.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-backup-before-conversion/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --accent: #6c5ce7; --accent2: #00cec9; --text: #e2e8f0; --muted: #94a3b8; --green: #00b894; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.7; }
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    nav { border-bottom: 1px solid var(--border); padding: 16px 0; }
+    nav .container { display: flex; align-items: center; gap: 12px; }
+    .logo { font-weight: 700; font-size: 15px; color: var(--text); }
+    .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .breadcrumb { padding: 16px 0; font-size: 13px; color: var(--muted); }
+    article { padding: 48px 0 80px; }
+    .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 16px; }
+    h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.2; letter-spacing: -0.8px; margin-bottom: 20px; }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 22px; font-weight: 700; margin: 40px 0 16px; letter-spacing: -0.3px; }
+    h3 { font-size: 17px; font-weight: 700; margin: 28px 0 10px; }
+    p { margin-bottom: 18px; }
+    ul, ol { padding-left: 24px; margin-bottom: 18px; }
+    li { margin-bottom: 8px; }
+    .callout { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .callout strong { color: #c4b5fd; }
+    .warning { background: #1f1a0e; border: 1px solid #78350f; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .warning strong { color: #fbbf24; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th { background: var(--surface); padding: 10px 14px; text-align: left; border: 1px solid var(--border); font-weight: 600; }
+    td { padding: 10px 14px; border: 1px solid var(--border); color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 500; }
+    .verdict-yes { color: #00b894; font-weight: 700; }
+    .verdict-no { color: #d63031; font-weight: 700; }
+    .cta-box { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 12px; padding: 32px; text-align: center; margin: 40px 0; }
+    .cta-box h3 { color: #c4b5fd; margin-bottom: 8px; font-size: 18px; }
+    .cta-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 8px; font-size: 15px; text-decoration: none; margin-top: 20px; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; font-size: 13px; overflow-x: auto; margin-bottom: 18px; }
+    code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; background: var(--surface); padding: 2px 6px; border-radius: 3px; }
+    .checklist li { list-style: none; padding-left: 0; }
+    .checklist li::before { content: "☐ "; color: var(--accent2); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Backup Excel Macros Before Any Conversion (Never Lose VBA Again)",
+    "description": "One command backs up every VBA module in your Excel file before you run any converter. Here's the exact backup workflow for XLSM, XLS, and XLSB files.",
+    "datePublished": "2026-04-08",
+    "dateModified": "2026-04-15",
+    "author": { "@type": "Organization", "name": "MacroKit" },
+    "publisher": { "@type": "Organization", "name": "MacroKit" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-backup-before-conversion/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I backup Excel macros before converting?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The safest method is to open the VBA editor (Alt+F11), right-click each module and select Export File, then save .bas files for standard modules and .cls files for class modules. Alternatively, use a Python script with the oletools library to extract all VBA source code programmatically from the binary." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I recover macros if I already converted without backing up?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If you still have the original XLSM file, yes. If you overwrote it with an XLSX, recovery depends on whether your OS or backup system has a previous version (Windows File History, Time Machine on Mac, OneDrive version history). If no backup exists, the macros are unrecoverable from the converted file." }
+      },
+      {
+        "@type": "Question",
+        "name": "Where are Excel macros stored in the file?",
+        "acceptedAnswer": { "@type": "Answer", "text": "In XLSM files, macros are stored in xl/vbaProject.bin inside the ZIP archive. This is a Compound Document Binary Format (OLE2) file that holds all VBA modules, class modules, UserForms, and project properties. In legacy .xls files, VBA is embedded in the BIFF8 binary format." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <span class="logo">MacroKit</span>
+      <span class="badge">Pre-Conversion Checklist</span>
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/" style="margin-left:auto;font-size:13px;color:var(--muted)">← Home</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/">Home</a> →
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/">Blog</a> →
+      Excel Macro Backup
+    </div>
+  </div>
+
+  <div class="container">
+    <article>
+      <div class="label">Pre-Conversion Protocol</div>
+      <h1>How to Backup Excel Macros Before Any Conversion<br><span style="color:var(--muted);font-size:0.75em">(Never Lose VBA Again)</span></h1>
+      <div class="meta">By MacroKit · Updated April 2026 · 9 min read</div>
+
+      <p>Most macro loss happens in the 90 seconds before conversion. Someone opens a converter, drags in the file, downloads the result, and moves on. The macros vanish silently. No error. No warning. Just gone.</p>
+
+      <p>The fix is a 2-minute pre-conversion backup routine. Do it once before every format change and you'll never lose VBA code again. This guide gives you three methods: manual (Excel built-in), scripted (Python), and automated (one-click batch).</p>
+
+      <div class="callout">
+        <strong>Before you start:</strong> Use the <a href="https://jbhihall-droid.github.io/macro-converter-kit/tools/macro-inspector/">free Macro Inspector</a> to confirm your file actually contains macros. Many files are named .xlsm without any VBA — no backup needed, convert freely.
+      </div>
+
+      <h2>Method 1 — Manual Backup (Excel VBA Editor)</h2>
+
+      <p>This method works without any scripts or third-party tools. Takes 2-5 minutes per file.</p>
+
+      <ol>
+        <li>Open the XLSM file in Excel</li>
+        <li>Open the VBA Editor: <strong>Alt + F11</strong></li>
+        <li>In the Project Explorer (left panel), expand your workbook's project</li>
+        <li>For each module/class/form, right-click → <strong>Export File</strong></li>
+        <li>Save to a folder named <code>[workbook-name]_vba_backup_YYYY-MM-DD</code></li>
+      </ol>
+
+      <table>
+        <thead>
+          <tr><th>Project item</th><th>File extension</th><th>Contains</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Standard Module</td><td>.bas</td><td>Sub and Function procedures</td></tr>
+          <tr><td>Class Module</td><td>.cls</td><td>Class definitions, properties, methods</td></tr>
+          <tr><td>UserForm</td><td>.frm + .frx</td><td>.frm = layout code; .frx = binary control data</td></tr>
+          <tr><td>ThisWorkbook</td><td>.cls</td><td>Workbook-level event handlers</td></tr>
+          <tr><td>Sheet1, Sheet2…</td><td>.cls</td><td>Sheet-level event handlers (often missed!)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="warning">
+        <strong>Don't miss sheet modules:</strong> The modules under individual sheet names (Sheet1, Sheet2) contain critical event handlers like <code>Worksheet_Change</code> and <code>Worksheet_SelectionChange</code>. These are easy to overlook in the Project Explorer and are almost never exported by automated tools.
+      </div>
+
+      <h2>Method 2 — Python Script (Automated Extract)</h2>
+
+      <p>For more than 3 files, do this programmatically. The script below uses only the standard library for the ZIP extraction part, with an optional <code>oletools</code> enhancement for readable source code.</p>
+
+      <h3>Option A — Extract vbaProject.bin (fast, any file)</h3>
+      <pre><code>"""
+vba_backup.py — Extract VBA binary from XLSM for archiving
+No dependencies beyond stdlib. Run before any format conversion.
+Usage: python vba_backup.py workbook.xlsm
+"""
+import sys, zipfile, shutil
+from pathlib import Path
+from datetime import date
+
+def backup_vba(xlsm_path):
+    p = Path(xlsm_path).resolve()
+    if not p.exists():
+        print(f"Error: {p} not found"); return
+
+    today = date.today().isoformat()
+    backup_dir = p.parent / f"{p.stem}_vba_backup_{today}"
+    backup_dir.mkdir(exist_ok=True)
+
+    # Copy original XLSM to backup
+    shutil.copy2(p, backup_dir / p.name)
+    print(f"Original archived: {backup_dir / p.name}")
+
+    # Extract vbaProject.bin
+    found = False
+    with zipfile.ZipFile(p, 'r') as z:
+        for entry in z.namelist():
+            if 'vbaProject' in entry:
+                z.extract(entry, backup_dir)
+                print(f"VBA binary extracted: {entry}")
+                found = True
+
+    if not found:
+        print("No VBA found in this file — safe to convert without backup")
+    else:
+        print(f"Backup complete: {backup_dir}")
+        print("To restore: re-import vbaProject.bin via the MacroKit restore script")
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print("Usage: python vba_backup.py <file.xlsm>")
+        sys.exit(1)
+    backup_vba(sys.argv[1])</code></pre>
+
+      <h3>Option B — Extract readable source code (requires oletools)</h3>
+      <pre><code># pip install oletools
+from oletools.olevba import VBA_Parser
+
+def extract_vba_source(xlsm_path, output_dir):
+    """Extract VBA source code as readable .bas/.cls files."""
+    from pathlib import Path
+    out = Path(output_dir)
+    out.mkdir(exist_ok=True)
+
+    vba_parser = VBA_Parser(xlsm_path)
+    if not vba_parser.detect_vba_macros():
+        print("No VBA macros detected")
+        return
+
+    for (filename, stream_path, vba_filename, vba_code) in vba_parser.extract_macros():
+        # Determine extension from stream path
+        ext = '.cls' if 'Class' in stream_path else '.bas'
+        safe_name = vba_filename.replace('/', '_').replace('\\', '_')
+        out_file = out / f"{safe_name}{ext}"
+        out_file.write_text(vba_code, encoding='utf-8')
+        print(f"Extracted: {out_file.name} ({len(vba_code)} chars)")
+
+    vba_parser.close()
+
+# Example usage:
+extract_vba_source("report-automation.xlsm", "vba_backup_2026-04-15")</code></pre>
+
+      <h2>Method 3 — Pre-Conversion Checklist (for teams)</h2>
+
+      <p>If you're working with others or running a regular conversion process, use this checklist before any format change:</p>
+
+      <ul class="checklist">
+        <li>Run Macro Inspector on file — confirm VBA modules present</li>
+        <li>Count modules, classes, and forms (document the number)</li>
+        <li>Export vbaProject.bin using vba_backup.py</li>
+        <li>Export readable source with oletools (optional but recommended)</li>
+        <li>Copy original XLSM to archive folder with date suffix</li>
+        <li>Confirm backup folder size &gt; 0 bytes</li>
+        <li>Only then: proceed with format conversion</li>
+        <li>After conversion: verify converted file opens without errors</li>
+        <li>Note which features will be broken (VBA-dependent formulas, buttons, etc.)</li>
+      </ul>
+
+      <h2>Where to Store Macro Backups</h2>
+
+      <table>
+        <thead>
+          <tr><th>Storage option</th><th>Pros</th><th>Cons</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Local folder (same directory)</td><td>Fast, zero setup</td><td>Lost if drive fails, not searchable</td></tr>
+          <tr><td>Dated subfolder</td><td>Clear versioning</td><td>Still local-only</td></tr>
+          <tr><td>Git repository</td><td>Full history, diff-able VBA code, searchable</td><td>Requires git setup, .frx binaries not diff-able</td></tr>
+          <tr><td>SharePoint / OneDrive</td><td>Automatic version history</td><td>Macros blocked in online edit; only useful as backup</td></tr>
+          <tr><td>Dedicated archive ZIP</td><td>Single file to move around</td><td>No easy browsing without extraction</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>Best practice:</strong> Store <code>.bas</code> and <code>.cls</code> files in a git repository. VBA is plain text — you can diff modules, see who changed what, and roll back to any version. The <code>.frx</code> binary (UserForm controls) can't be diffed but should still be committed for restore purposes.
+      </div>
+
+      <h2>Restoring Macros After a Bad Conversion</h2>
+
+      <p>If you have a backup and need to restore:</p>
+
+      <ol>
+        <li>Open the converted file in Excel</li>
+        <li>Save As → XLSM (must be XLSM to accept macros)</li>
+        <li>Open VBA Editor (Alt+F11)</li>
+        <li>File → Import File → select each .bas / .cls from your backup</li>
+        <li>For UserForms: place .frm and .frx in the same folder, import the .frm</li>
+        <li>Test all macros — update any references that changed during conversion</li>
+      </ol>
+
+      <p>If you only have the vbaProject.bin binary (not readable source), use the <a href="https://github.com/decalage2/oletools" rel="noopener">oletools library</a> to extract the source from the binary before re-importing.</p>
+
+      <h2>Automating Backups System-Wide</h2>
+
+      <p>For teams that run regular conversions, automate the backup step so it can't be forgotten:</p>
+
+      <pre><code>#!/bin/bash
+# pre-convert-hook.sh — Run before any XLSM conversion
+# Add to your conversion pipeline as a required step
+
+FILE="$1"
+
+if [[ "$FILE" == *.xlsm ]] || [[ "$FILE" == *.xls ]]; then
+  echo "Macro-capable file detected. Running backup..."
+  python3 vba_backup.py "$FILE"
+  if [ $? -ne 0 ]; then
+    echo "ERROR: Backup failed. Aborting conversion."
+    exit 1
+  fi
+  echo "Backup complete. Proceeding with conversion."
+fi</code></pre>
+
+      <div class="cta-box">
+        <h3>Complete pre-conversion workflow kit</h3>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:4px;">MacroKit includes the full backup script, pre-conversion checklist, restore guide, and batch conversion workflow — everything you need to handle XLSM conversions without ever losing a line of VBA code.</p>
+        <a class="cta-btn" href="https://jbhihall-droid.github.io/macro-converter-kit/#pricing">Get MacroKit — $9</a>
+        <p style="color:var(--muted);font-size:12px;margin-top:12px;">Or check if your file has macros first: <a href="https://jbhihall-droid.github.io/macro-converter-kit/tools/macro-inspector/">Free Macro Inspector →</a></p>
+      </div>
+
+      <h2>Related Guides</h2>
+      <ul>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-xlsx-keep-macros/">Convert XLSM to XLSX Without Losing Macros</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/vba-macros-lost-after-conversion-fix/">VBA Macros Lost After Conversion — Recovery Guide</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-vs-xlsx-difference/">XLSM vs XLSX: What's the Technical Difference?</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/batch-convert-excel-keep-macros/">Batch Convert Excel Files While Keeping Macros</a></li>
+      </ul>
+    </article>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 MacroKit · <a href="https://jbhihall-droid.github.io/macro-converter-kit/">Home</a> · <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/">Blog</a></p>
+    </div>
+  </footer>
+</body>
+</html>

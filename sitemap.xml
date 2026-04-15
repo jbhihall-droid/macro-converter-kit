@@ -181,4 +181,28 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-vs-xlsx-difference/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-xlsx-keep-macros/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/excel-macro-backup-before-conversion/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jbhihall-droid.github.io/macro-converter-kit/blog/open-xlsm-without-enabling-macros/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

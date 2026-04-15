@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XLSM vs XLSX: What's the Difference? (And Why It Matters for Macros)</title>
+  <meta name="description" content="XLSM and XLSX look identical but behave completely differently when macros are involved. Here's the technical difference and when each format breaks your workflow.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-vs-xlsx-difference/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --accent: #6c5ce7; --accent2: #00cec9; --text: #e2e8f0; --muted: #94a3b8; --green: #00b894; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.7; }
+    a { color: var(--accent2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    nav { border-bottom: 1px solid var(--border); padding: 16px 0; }
+    nav .container { display: flex; align-items: center; gap: 12px; }
+    .logo { font-weight: 700; font-size: 15px; color: var(--text); }
+    .badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+    .breadcrumb { padding: 16px 0; font-size: 13px; color: var(--muted); }
+    article { padding: 48px 0 80px; }
+    .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 16px; }
+    h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.2; letter-spacing: -0.8px; margin-bottom: 20px; }
+    .meta { font-size: 13px; color: var(--muted); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    h2 { font-size: 22px; font-weight: 700; margin: 40px 0 16px; letter-spacing: -0.3px; }
+    h3 { font-size: 17px; font-weight: 700; margin: 28px 0 10px; }
+    p { margin-bottom: 18px; }
+    ul, ol { padding-left: 24px; margin-bottom: 18px; }
+    li { margin-bottom: 8px; }
+    .callout { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .callout strong { color: #c4b5fd; }
+    .warning { background: #1f1a0e; border: 1px solid #78350f; border-radius: 10px; padding: 20px 24px; margin: 28px 0; }
+    .warning strong { color: #fbbf24; }
+    table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    th { background: var(--surface); padding: 10px 14px; text-align: left; border: 1px solid var(--border); font-weight: 600; }
+    td { padding: 10px 14px; border: 1px solid var(--border); color: var(--muted); }
+    td:first-child { color: var(--text); font-weight: 500; }
+    .verdict-yes { color: #00b894; font-weight: 700; }
+    .verdict-no { color: #d63031; font-weight: 700; }
+    .cta-box { background: #1e1b2e; border: 1px solid #4a3f8a; border-radius: 12px; padding: 32px; text-align: center; margin: 40px 0; }
+    .cta-box h3 { color: #c4b5fd; margin-bottom: 8px; font-size: 18px; }
+    .cta-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 8px; font-size: 15px; text-decoration: none; margin-top: 20px; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; font-size: 13px; overflow-x: auto; margin-bottom: 18px; }
+    code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; background: var(--surface); padding: 2px 6px; border-radius: 3px; }
+    .format-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 12px 0; }
+    .format-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .format-card .ext { font-size: 22px; font-weight: 800; color: var(--accent2); margin-bottom: 4px; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "XLSM vs XLSX: What's the Difference? (And Why It Matters for Macros)",
+    "description": "XLSM and XLSX look identical but behave completely differently when macros are involved. Here's the technical difference and when each format breaks your workflow.",
+    "datePublished": "2026-04-01",
+    "dateModified": "2026-04-15",
+    "author": { "@type": "Organization", "name": "MacroKit" },
+    "publisher": { "@type": "Organization", "name": "MacroKit" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-vs-xlsx-difference/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the difference between XLSM and XLSX?",
+        "acceptedAnswer": { "@type": "Answer", "text": "XLSM is the macro-enabled variant of Excel's Open XML format. XLSX cannot store VBA code. Both are ZIP archives with XML inside, but XLSM includes a vbaProject.bin binary that holds all VBA modules, class modules, and UserForms. If you save a macro-enabled workbook as XLSX, Excel silently deletes every line of VBA code." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I change XLSM to XLSX without losing macros?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Converting XLSM to XLSX will always remove VBA macros — it's a structural limitation of the XLSX format, not a software bug. The correct approach is to export the VBA code to .bas/.cls files first, convert the file, then re-import the modules if needed in the new format." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is XLSM safe to open?",
+        "acceptedAnswer": { "@type": "Answer", "text": "XLSM files are safe to open if you trust the sender. Macros only execute if you click 'Enable Content'. Excel's Protected View prevents auto-execution when opening files from the internet. Always scan files from unknown sources with your antivirus before enabling macros." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which format should I use: XLSM or XLSX?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Use XLSX if your workbook has no VBA code — it's smaller, more compatible, and safer to share. Use XLSM only when you need VBA macros to run. Never use XLSM just for compatibility; the macro capability comes with security scrutiny." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <span class="logo">MacroKit</span>
+      <span class="badge">Free Guide</span>
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/" style="margin-left:auto;font-size:13px;color:var(--muted)">← Home</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/">Home</a> →
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/">Blog</a> →
+      XLSM vs XLSX
+    </div>
+  </div>
+
+  <div class="container">
+    <article>
+      <div class="label">Excel Format Guide</div>
+      <h1>XLSM vs XLSX: What's the Difference?<br>(And Why It Matters for Macros)</h1>
+      <div class="meta">By MacroKit · Updated April 2026 · 8 min read</div>
+
+      <p>You've seen both file extensions sitting in folders. They look the same. They open in Excel the same way. But the moment macros are involved, XLSM and XLSX are completely different formats — and mixing them up will silently delete weeks of VBA code.</p>
+
+      <p>This guide explains the technical distinction between the two formats, when each one is appropriate, and exactly what happens when converters handle them incorrectly.</p>
+
+      <div class="callout">
+        <strong>The short answer:</strong> XLSX cannot store VBA macros. XLSM is structurally identical to XLSX except it includes a binary <code>vbaProject.bin</code> inside the ZIP that holds all your macro code. Converting from XLSM → XLSX will always destroy macros. There is no exception.
+      </div>
+
+      <h2>The Technical Difference</h2>
+
+      <p>Both XLSX and XLSM are Open XML formats — ZIP archives with XML files inside. You can rename either to <code>.zip</code> and extract it to see the raw structure. But the contents differ in two critical places:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>XLSX</th>
+            <th>XLSM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>File format base</td><td>Open XML (ZIP)</td><td>Open XML (ZIP)</td></tr>
+          <tr><td>Can store VBA macros</td><td class="verdict-no">No — stripped on save</td><td class="verdict-yes">Yes — vbaProject.bin</td></tr>
+          <tr><td>Can store UserForms</td><td class="verdict-no">No</td><td class="verdict-yes">Yes</td></tr>
+          <tr><td>Can store VBA class modules</td><td class="verdict-no">No</td><td class="verdict-yes">Yes</td></tr>
+          <tr><td>Can store Excel 4 macros (XLM)</td><td class="verdict-no">No</td><td class="verdict-yes">Yes (legacy)</td></tr>
+          <tr><td>Typical file size (same data)</td><td>Smaller</td><td>Larger by ~10-50KB</td></tr>
+          <tr><td>Security warning on open</td><td class="verdict-no">None</td><td class="verdict-yes">"Enable Content" prompt</td></tr>
+          <tr><td>SharePoint/OneDrive compatible</td><td class="verdict-yes">Full support</td><td>Limited (macros blocked)</td></tr>
+          <tr><td>Google Sheets import</td><td class="verdict-yes">Native</td><td>Opens, macros lost</td></tr>
+        </tbody>
+      </table>
+
+      <h2>What's Inside Each ZIP Archive</h2>
+
+      <p>Rename any Excel file to <code>.zip</code> and extract it. Here's what you'll find:</p>
+
+      <h3>XLSX structure (no macros possible):</h3>
+      <pre><code>workbook.xlsx/
+├── [Content_Types].xml          ← no vba entry
+├── _rels/
+├── xl/
+│   ├── workbook.xml
+│   ├── worksheets/
+│   ├── styles.xml
+│   └── sharedStrings.xml
+└── docProps/</code></pre>
+
+      <h3>XLSM structure (macros live here):</h3>
+      <pre><code>workbook.xlsm/
+├── [Content_Types].xml          ← includes vbaProject entry
+├── _rels/
+├── xl/
+│   ├── workbook.xml
+│   ├── worksheets/
+│   ├── styles.xml
+│   ├── sharedStrings.xml
+│   └── vbaProject.bin           ← ALL your VBA code is here
+└── docProps/</code></pre>
+
+      <p>The <code>vbaProject.bin</code> file is a Compound Document Binary Format blob that stores the entire VBA project — every module, every class, every UserForm. When a converter saves as XLSX, it simply omits this file and removes the reference from <code>[Content_Types].xml</code>. The macros don't transform or migrate — they vanish.</p>
+
+      <div class="warning">
+        <strong>Warning — renaming doesn't work:</strong> Changing a file extension from <code>.xlsx</code> to <code>.xlsm</code> does NOT create a valid XLSM file. The internal <code>[Content_Types].xml</code> still declares it as XLSX. Excel will open it but will not allow macro execution. You must use File → Save As → Excel Macro-Enabled Workbook to create a proper XLSM.
+      </div>
+
+      <h2>When Online Converters Destroy Your Macros</h2>
+
+      <p>This is where the real damage happens. Tools like CloudConvert, Zamzar, iLovePDF, and Smallpdf all perform server-side conversions using LibreOffice or similar engines. When they convert XLSM files, the pipeline does one of two things:</p>
+
+      <ol>
+        <li><strong>Export to target format, drop vbaProject.bin</strong> — the macro code is silently deleted with no warning</li>
+        <li><strong>Re-encode as XLSX internally but keep the .xlsm extension</strong> — the file looks like XLSM but the macros are gone; Excel opens it without error and you discover the loss hours later</li>
+      </ol>
+
+      <p>Neither scenario gives you an error. Neither scenario gives you a warning. You get a clean file back with zero VBA code inside.</p>
+
+      <div class="callout">
+        <strong>Real scenario:</strong> An accountant uploads a 47-worksheet XLSM with 12 VBA modules to CloudConvert for a "format cleanup." The output looks identical. Opens fine. The macros are gone. She doesn't discover this until the following Monday when the automated report fails to generate. Three days of re-coding follows.
+      </div>
+
+      <h2>The Four Excel Macro Formats Compared</h2>
+
+      <p>XLSM isn't the only macro-capable format. Here's how all four relate:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Macros?</th>
+            <th>Year introduced</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>.xlsm</td>
+            <td class="verdict-yes">Yes (VBA)</td>
+            <td>2007</td>
+            <td>Modern workbooks with VBA — the default macro format</td>
+          </tr>
+          <tr>
+            <td>.xlsb</td>
+            <td class="verdict-yes">Yes (VBA)</td>
+            <td>2007</td>
+            <td>Large files (50MB+) — binary format, 30-70% smaller, same VBA support</td>
+          </tr>
+          <tr>
+            <td>.xls</td>
+            <td class="verdict-yes">Yes (VBA + XLM)</td>
+            <td>1997</td>
+            <td>Legacy compatibility only — avoid for new workbooks</td>
+          </tr>
+          <tr>
+            <td>.xlsx</td>
+            <td class="verdict-no">No</td>
+            <td>2007</td>
+            <td>Sharing, collaboration, Google Sheets, no-macro workbooks</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>When to Use Each Format</h2>
+
+      <h3>Use XLSX when:</h3>
+      <ul>
+        <li>Your workbook has zero VBA code</li>
+        <li>You're sharing with people who may flag macro warnings as security risks</li>
+        <li>You're uploading to SharePoint, Teams, or OneDrive for co-authoring</li>
+        <li>You're importing into Google Sheets</li>
+        <li>You want the smallest possible file size</li>
+      </ul>
+
+      <h3>Use XLSM when:</h3>
+      <ul>
+        <li>The workbook requires VBA modules, event handlers, or UserForms to function</li>
+        <li>You're distributing to users who will enable macros in a controlled environment</li>
+        <li>You're building tools for internal use within an organisation</li>
+        <li>You need to preserve macro code between sessions</li>
+      </ul>
+
+      <h3>Use XLSB when:</h3>
+      <ul>
+        <li>The workbook is very large (&gt;10MB) and open/save performance matters</li>
+        <li>You don't need to inspect the raw XML (forensic auditing, version control)</li>
+        <li>You still need full VBA support but want the binary format's speed advantage</li>
+      </ul>
+
+      <h2>Converting XLSM → XLSX Safely (Without Macro Loss)</h2>
+
+      <p>If you need to share an XLSM file with someone who can't enable macros, the safe workflow is:</p>
+
+      <ol>
+        <li><strong>Export VBA modules first.</strong> In the VBA editor (Alt+F11), right-click each module → Export File. Save as <code>.bas</code> (standard modules), <code>.cls</code> (class modules), or <code>.frm</code> (UserForms).</li>
+        <li><strong>Create a macro-free copy.</strong> File → Save As → Excel Workbook (.xlsx). This is your sharing copy — no macros, fully compatible.</li>
+        <li><strong>Keep the XLSM original.</strong> Never overwrite it. The XLSX is a derived artefact, not the master.</li>
+        <li><strong>Document what's lost.</strong> Add a README worksheet to the XLSX noting which functionality requires macros and where to find the XLSM original.</li>
+      </ol>
+
+      <div class="callout">
+        <strong>Batch conversion:</strong> If you need to convert dozens of XLSM files to XLSX while archiving all macro code, the <a href="https://jbhihall-droid.github.io/macro-converter-kit/">MacroKit conversion workflow</a> includes a Python script that extracts all modules before conversion and creates a structured backup per file.
+      </div>
+
+      <h2>How to Check if a File Has Macros Before Converting</h2>
+
+      <p>Before you hand a file to any converter, check whether it contains VBA code:</p>
+
+      <p><strong>Option 1 — In Excel:</strong> Alt+F11 opens the VBA editor. If the Project Explorer shows modules with code, macros are present.</p>
+
+      <p><strong>Option 2 — Free browser tool:</strong> Drop the file into the <a href="https://jbhihall-droid.github.io/macro-converter-kit/tools/macro-inspector/">XLSM Macro Inspector</a> — it reads the ZIP structure client-side and lists every VBA module name and line count before you convert anything. No upload required.</p>
+
+      <p><strong>Option 3 — Command line (Windows PowerShell):</strong></p>
+      <pre><code>Add-Type -Assembly System.IO.Compression.FileSystem
+$zip = [System.IO.Compression.ZipFile]::OpenRead("workbook.xlsm")
+$hasMacros = $zip.Entries | Where-Object { $_.Name -eq "vbaProject.bin" }
+if ($hasMacros) { "Has macros" } else { "No macros found" }
+$zip.Dispose()</code></pre>
+
+      <h2>Summary: The Critical Difference</h2>
+
+      <table>
+        <thead>
+          <tr><th>Question</th><th>Answer</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Can XLSX store VBA?</td><td class="verdict-no">Never</td></tr>
+          <tr><td>Is XLSM just XLSX with a different extension?</td><td class="verdict-no">No — different internal structure</td></tr>
+          <tr><td>Do converters warn you when macros are stripped?</td><td class="verdict-no">Almost never</td></tr>
+          <tr><td>Can you recover macros after XLSM→XLSX conversion?</td><td class="verdict-no">Not without a backup</td></tr>
+          <tr><td>Is there a safe way to convert XLSM without losing macros?</td><td class="verdict-yes">Yes — export modules first</td></tr>
+        </tbody>
+      </table>
+
+      <div class="cta-box">
+        <h3>Don't lose your macros in a conversion</h3>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:4px;">MacroKit gives you the exact workflow — pre-conversion inventory, safe conversion scripts, and post-conversion validation — so you never discover missing macros on Monday morning.</p>
+        <a class="cta-btn" href="https://jbhihall-droid.github.io/macro-converter-kit/#pricing">Get MacroKit — $9</a>
+        <p style="color:var(--muted);font-size:12px;margin-top:12px;">Or try the <a href="https://jbhihall-droid.github.io/macro-converter-kit/tools/macro-inspector/">free Macro Inspector</a> first.</p>
+      </div>
+
+      <h2>Related Guides</h2>
+      <ul>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/convert-xlsx-to-xlsm-keep-macros/">How to Convert XLSX to XLSM and Keep Macros</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/vba-macros-lost-after-conversion-fix/">VBA Macros Lost After Conversion — Recovery Guide</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/batch-convert-excel-keep-macros/">Batch Convert Excel Files While Keeping Macros</a></li>
+        <li><a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsb-to-xlsm-converter/">XLSB to XLSM Converter Guide</a></li>
+      </ul>
+    </article>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 MacroKit · <a href="https://jbhihall-droid.github.io/macro-converter-kit/">Home</a> · <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/">Blog</a></p>
+    </div>
+  </footer>
+</body>
+</html>
