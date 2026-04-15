@@ -58,7 +58,12 @@
     .related h3 { font-size: 15px; color: var(--muted); margin-bottom: 12px; margin-top: 0; }
     .related ul { list-style: none; padding: 0; margin: 0; }
     .related li { margin-bottom: 8px; }
-  </style>
+  
+  /* EthicalAds — display ad unit */
+  .ea-wrapper{margin:24px 0 32px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;text-align:center}
+  .ea-wrapper .ea-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:block}
+  [data-ea-publisher]{display:inline-block}
+</style>
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
@@ -139,6 +144,13 @@
 <article>
   <div class="label">Format Conversion</div>
   <h1>XLSB to XLSX: Convert Binary Excel to Standard Format</h1>
+<!-- EthicalAds — ENG-134 ad unit (activate with: bash ~/projects/revenue-engine/ads/activate-ads.sh YOUR_PUBLISHER_ID) -->
+<div class="ea-wrapper">
+  <span class="ea-label">Sponsored</span>
+  <div data-ea-publisher="PUBLISHER_ID_PLACEHOLDER" data-ea-type="image"></div>
+</div>
+<script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
+
   <div class="meta">By MacroKit &nbsp;·&nbsp; Updated April 2026 &nbsp;·&nbsp; 5 min read</div>
   <h2>What Is XLSB and Why Convert to XLSX?</h2>
 XLSB (Excel Binary Workbook) is a compressed binary format that opens faster and saves with smaller file sizes than XLSX — but it's less portable. Many systems, APIs, and BI tools that accept XLSX reject XLSB. Converting to XLSX makes the file universally readable by Google Sheets, LibreOffice, Pandas, and every data tool that understands Open XML.

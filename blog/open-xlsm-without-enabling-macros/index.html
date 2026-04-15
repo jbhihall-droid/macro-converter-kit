@@ -49,7 +49,12 @@
     footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
     pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; font-size: 13px; overflow-x: auto; margin-bottom: 18px; }
     code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; background: var(--surface); padding: 2px 6px; border-radius: 3px; }
-  </style>
+  
+  /* EthicalAds — display ad unit */
+  .ea-wrapper{margin:24px 0 32px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;text-align:center}
+  .ea-wrapper .ea-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:block}
+  [data-ea-publisher]{display:inline-block}
+</style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -108,6 +113,13 @@
     <article>
       <div class="label">Security &amp; Access</div>
       <h1>Open XLSM Without Enabling Macros<br><span style="color:var(--muted);font-size:0.75em">Safe Access to Data &amp; Formulas</span></h1>
+<!-- EthicalAds — ENG-134 ad unit (activate with: bash ~/projects/revenue-engine/ads/activate-ads.sh YOUR_PUBLISHER_ID) -->
+<div class="ea-wrapper">
+  <span class="ea-label">Sponsored</span>
+  <div data-ea-publisher="PUBLISHER_ID_PLACEHOLDER" data-ea-type="image"></div>
+</div>
+<script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
+
       <div class="meta">By MacroKit · Updated April 2026 · 7 min read</div>
 
       <p>You received an XLSM file and you're not sure whether to enable macros. Maybe it's from an external sender. Maybe you just want to read the data without triggering anything. Either way — you don't have to choose between access and safety.</p>

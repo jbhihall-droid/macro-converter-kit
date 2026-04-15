@@ -47,7 +47,12 @@
     footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); }
     pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; font-size: 13px; overflow-x: auto; margin-bottom: 18px; }
     code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; }
-  </style>
+  
+  /* EthicalAds — display ad unit */
+  .ea-wrapper{margin:24px 0 32px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;text-align:center}
+  .ea-wrapper .ea-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:block}
+  [data-ea-publisher]{display:inline-block}
+</style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -104,6 +109,13 @@
 <article>
   <p class="label">Excel Format Guide</p>
   <h1>Convert XLS to XLSM: Keep Every Macro in the New Format (2026)</h1>
+<!-- EthicalAds — ENG-134 ad unit (activate with: bash ~/projects/revenue-engine/ads/activate-ads.sh YOUR_PUBLISHER_ID) -->
+<div class="ea-wrapper">
+  <span class="ea-label">Sponsored</span>
+  <div data-ea-publisher="PUBLISHER_ID_PLACEHOLDER" data-ea-type="image"></div>
+</div>
+<script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
+
   <p class="meta">Updated April 2026 &middot; By MacroKit Team &middot; 9 min read</p>
 
   <p>XLS to XLSM is a more treacherous conversion than most people expect. The naive assumption is: both formats support VBA, so any converter should handle it. The reality is that XLS and XLSM store VBA in fundamentally different ways, and most tools silently drop the macros without warning.</p>

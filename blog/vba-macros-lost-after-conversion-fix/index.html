@@ -120,7 +120,12 @@
     .step { display: flex; align-items: flex-start; margin-bottom: 20px; }
     .step-content { flex: 1; }
     .tag { display: inline-block; background: var(--surface); border: 1px solid var(--border); font-size: 12px; padding: 3px 8px; border-radius: 4px; color: var(--muted); margin-right: 6px; }
-  </style>
+  
+  /* EthicalAds — display ad unit */
+  .ea-wrapper{margin:24px 0 32px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;text-align:center}
+  .ea-wrapper .ea-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:block}
+  [data-ea-publisher]{display:inline-block}
+</style>
 </head>
 <body>
 
@@ -145,6 +150,13 @@
   <article>
 
     <h1>VBA Macros Lost After Conversion? Here's the Fix (2026)</h1>
+<!-- EthicalAds — ENG-134 ad unit (activate with: bash ~/projects/revenue-engine/ads/activate-ads.sh YOUR_PUBLISHER_ID) -->
+<div class="ea-wrapper">
+  <span class="ea-label">Sponsored</span>
+  <div data-ea-publisher="PUBLISHER_ID_PLACEHOLDER" data-ea-type="image"></div>
+</div>
+<script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
+
     <div class="meta">
       <span>Updated April 2026</span>
       <span>·</span>
