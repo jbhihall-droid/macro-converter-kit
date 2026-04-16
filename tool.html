@@ -581,14 +581,21 @@ document.getElementById('gate-form').addEventListener('submit', async (e) => {
   btn.textContent = 'Saving…';
   btn.disabled = true;
 
-  // Submit to formsubmit.co (primary — no tunnel dependency)
-  try {
-    await fetch('https://formsubmit.co/ajax/hello@macrokit.io', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ email, source: 'xlsm-inspector-tool', _subject: 'MacroKit Tool Lead' }),
-    });
-  } catch (_) {}
+  // Submit to waitlist API (primary — live server)
+  const WAITLIST_ENDPOINTS = [
+    'https://mattress-velvet-disc-estate.trycloudflare.com/waitlist',
+    'https://formsubmit.co/ajax/hello@macrokit.io',
+  ];
+  for (const endpoint of WAITLIST_ENDPOINTS) {
+    try {
+      await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email, source: 'xlsm-inspector-tool', _subject: 'MacroKit Tool Lead' }),
+      });
+      break; // first success wins
+    } catch (_) {}
+  }
 
   // Unlock full report
   document.getElementById('email-gate').style.display = 'none';

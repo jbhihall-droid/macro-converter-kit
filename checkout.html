@@ -169,8 +169,8 @@
 })();
 
 // Show live checkout if Stripe URLs have been injected (setup-stripe.sh has run)
-const subUrl = "https://buy.stripe.com/00w4gB2DMerCaBO1b9aR201";
-const onetimeUrl = "https://buy.stripe.com/5kQ00l7Y6fvG11e8DBaR200";
+const subUrl = "https://buy.stripe.com/3cI9AVcembfq5hu7zxaR206";
+const onetimeUrl = "https://buy.stripe.com/cNi6oJ7Y6gzKfW8g63aR205";
 
 if (subUrl.startsWith("https://buy.stripe.com") || subUrl.startsWith("https://checkout.stripe.com")) {
   document.getElementById('checkout-live').style.display = 'block';
@@ -187,7 +187,7 @@ async function submitWaitlist(e) {
   btn.textContent = 'Saving...'; btn.disabled = true;
   let ok = false;
   try {
-    const r = await fetch('https://spoke-told-corporation-hewlett.trycloudflare.com/waitlist', {
+    const r = await fetch('https://mattress-velvet-disc-estate.trycloudflare.com/waitlist', {
       method: 'POST', headers: {'Content-Type':'application/json'},
       body: JSON.stringify({email})
     });
