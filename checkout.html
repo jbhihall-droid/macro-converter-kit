@@ -187,7 +187,7 @@ async function submitWaitlist(e) {
   btn.textContent = 'Saving...'; btn.disabled = true;
   let ok = false;
   try {
-    const r = await fetch('https://mattress-velvet-disc-estate.trycloudflare.com/waitlist', {
+    const r = await fetch('https://chris-machines-snake-pitch.trycloudflare.com/waitlist', {
       method: 'POST', headers: {'Content-Type':'application/json'},
       body: JSON.stringify({email})
     });
