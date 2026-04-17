@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Macro-Safe Workflow Cheat Sheet — MacroKit</title>
+<meta name="description" content="Get the free 1-page cheat sheet: which file converters silently destroy Excel macros, and the only safe workflow that preserves every VBA module. Instant download.">
+<link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/start">
+<meta property="og:title" content="Free: Which File Converters Destroy Your Macros (Cheat Sheet)">
+<meta property="og:description" content="1-page reference: safe vs. destructive converters, the only macro-preserving workflow, and what to check before you convert.">
+<meta property="og:url" content="https://jbhihall-droid.github.io/macro-converter-kit/start">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Free Macro-Safe Workflow Cheat Sheet",
+  "description": "Email opt-in page for the MacroKit free cheat sheet on macro-safe file conversion.",
+  "url": "https://jbhihall-droid.github.io/macro-converter-kit/start"
+}
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #222536;
+    --border: #2a2d3a;
+    --accent: #6c5ce7;
+    --accent2: #00cec9;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --green: #00b894;
+    --red: #ff6b6b;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  a { color: var(--accent2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .container { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+  /* NAV */
+  nav {
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+  }
+  nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.3px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent2); }
+  .nav-link {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* HERO */
+  .hero {
+    padding: 64px 0 48px;
+    text-align: center;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--accent2);
+    margin-bottom: 20px;
+    padding: 4px 12px;
+    border: 1px solid rgba(0,206,201,0.3);
+    border-radius: 20px;
+  }
+  h1 {
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 18px;
+  }
+  h1 .highlight { color: var(--accent2); }
+  h1 .danger { color: var(--red); }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+  }
+
+  /* CHEAT SHEET PREVIEW */
+  .preview-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin: 0 auto 40px;
+    text-align: left;
+    max-width: 560px;
+  }
+  .preview-card h3 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .preview-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .preview-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .preview-list li .icon { flex-shrink: 0; margin-top: 1px; }
+  .icon-safe { color: var(--green); font-size: 15px; }
+  .icon-danger { color: var(--red); font-size: 15px; }
+  .icon-check { color: var(--accent2); font-size: 15px; }
+
+  /* FORM */
+  .form-box {
+    background: var(--surface2);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 36px 32px;
+    max-width: 560px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .form-box h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .form-box .form-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .email-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .email-input {
+    flex: 1;
+    min-width: 200px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 15px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .email-input:focus { border-color: var(--accent); }
+  .email-input::placeholder { color: var(--muted); }
+  .btn-submit {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+  .btn-submit:hover { opacity: 0.85; }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+  .privacy-note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 14px;
+  }
+  .success-msg {
+    display: none;
+    background: rgba(0,184,148,0.1);
+    border: 1px solid var(--green);
+    border-radius: 8px;
+    padding: 16px;
+    color: var(--green);
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 16px;
+  }
+  .error-msg {
+    display: none;
+    background: rgba(255,107,107,0.1);
+    border: 1px solid var(--red);
+    border-radius: 8px;
+    padding: 12px;
+    color: var(--red);
+    font-size: 13px;
+    margin-top: 12px;
+  }
+
+  /* TOOL SECTION */
+  .tool-section {
+    padding: 56px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .tool-section h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+  }
+  .tool-section p {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .btn-tool {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid var(--accent2);
+    color: var(--accent2);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 12px 28px;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .btn-tool:hover {
+    background: rgba(0,206,201,0.1);
+    text-decoration: none;
+  }
+
+  /* MEMBERSHIP CTA */
+  .membership-section {
+    padding: 56px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .membership-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px 32px;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .membership-card .price {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .membership-card .price span {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .membership-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    margin-top: 12px;
+  }
+  .membership-card p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.7;
+  }
+  .btn-membership {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 32px;
+    border-radius: 8px;
+    transition: opacity 0.15s;
+  }
+  .btn-membership:hover { opacity: 0.85; text-decoration: none; color: #fff; }
+  .membership-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 12px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 480px) {
+    .form-box, .preview-card, .membership-card { padding: 24px 20px; }
+    .email-row { flex-direction: column; }
+    .btn-submit { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/" class="logo">Macro<span>Kit</span></a>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/tool.html" class="nav-link">Free Macro Inspector →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Free resource</span>
+    <h1>
+      The <span class="highlight">1-page cheat sheet</span> every Excel developer needs before hitting <span class="danger">Convert</span>
+    </h1>
+    <p class="hero-sub">
+      Every major file converter silently destroys VBA macros. This reference tells you which tools are safe,
+      which ones kill your code, and the only workflow that actually preserves every module.
+    </p>
+
+    <!-- Cheat sheet preview -->
+    <div class="preview-card">
+      <h3>What's inside</h3>
+      <ul class="preview-list">
+        <li>
+          <span class="icon icon-danger">✗</span>
+          <span><strong>Destructive converters</strong> — Adobe Acrobat, Smallpdf, ILovePDF, LibreOffice headless, Google Drive export</span>
+        </li>
+        <li>
+          <span class="icon icon-safe">✓</span>
+          <span><strong>Macro-safe paths</strong> — the only conversion workflows that keep every VBA module intact</span>
+        </li>
+        <li>
+          <span class="icon icon-check">→</span>
+          <span><strong>Pre-flight checklist</strong> — 5 things to verify before you convert any macro-enabled file</span>
+        </li>
+        <li>
+          <span class="icon icon-check">→</span>
+          <span><strong>Recovery playbook</strong> — what to do when a client sends you a converted file with macros stripped</span>
+        </li>
+        <li>
+          <span class="icon icon-check">→</span>
+          <span><strong>Format decision matrix</strong> — .xlsm vs .xlsb vs .xla vs .xlam: when to use each</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Email capture form -->
+    <div class="form-box">
+      <h2>Get the cheat sheet — free</h2>
+      <p class="form-sub">Enter your email. You'll get the PDF instantly, then one follow-up email with our best macro-safe workflow tips.</p>
+
+      <form id="subscribe-form" novalidate>
+        <div class="email-row">
+          <input
+            type="email"
+            id="email-input"
+            class="email-input"
+            name="email"
+            placeholder="you@company.com"
+            autocomplete="email"
+            required
+          />
+          <button type="submit" class="btn-submit" id="submit-btn">
+            Send me the cheat sheet
+          </button>
+        </div>
+        <div class="success-msg" id="success-msg">
+          Check your inbox — the cheat sheet is on its way. (Check spam if it doesn't arrive in 2 minutes.)
+        </div>
+        <div class="error-msg" id="error-msg">
+          Something went wrong. Try again or email us directly.
+        </div>
+        <p class="privacy-note">No spam. Unsubscribe any time. Your email is never shared.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Free tool CTA -->
+<section class="tool-section">
+  <div class="container">
+    <h2>Already have a macro-enabled file?</h2>
+    <p>Use the free browser-based inspector to see exactly which VBA modules your file contains — before you convert anything.</p>
+    <a href="https://jbhihall-droid.github.io/macro-converter-kit/tool.html" class="btn-tool">
+      Open the free XLSM Macro Inspector →
+    </a>
+  </div>
+</section>
+
+<!-- Membership upsell -->
+<section class="membership-section">
+  <div class="container">
+    <div class="membership-card">
+      <p class="price">$9 <span>/ month</span></p>
+      <h3>Monthly research drops for file-conversion builders</h3>
+      <p>
+        Every month: new keyword opportunities, competitive intelligence, format-pair gaps your competitors haven't found,
+        and one bonus resource. Built for founders building macro-safe tools.
+      </p>
+      <a href="https://jbhihall-droid.github.io/macro-converter-kit/membership.html" class="btn-membership">
+        See what's included →
+      </a>
+      <p class="membership-sub">Cancel any time. Billed monthly via Stripe.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2026 MacroKit &nbsp;·&nbsp; <a href="https://jbhihall-droid.github.io/macro-converter-kit/">Home</a> &nbsp;·&nbsp; <a href="https://jbhihall-droid.github.io/macro-converter-kit/tool.html">Free Tool</a> &nbsp;·&nbsp; <a href="https://jbhihall-droid.github.io/macro-converter-kit/membership.html">Membership</a></p>
+  </div>
+</footer>
+
+<script>
+  const BUTTONDOWN_USERNAME = 'macrokit'; // Joshua: replace with your actual Buttondown username
+
+  document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email-input').value.trim();
+    const btn = document.getElementById('submit-btn');
+    const successEl = document.getElementById('success-msg');
+    const errorEl = document.getElementById('error-msg');
+
+    if (!email || !email.includes('@')) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    successEl.style.display = 'none';
+    errorEl.style.display = 'none';
+
+    try {
+      const res = await fetch(
+        `https://buttondown.email/api/emails/embed-subscribe/${BUTTONDOWN_USERNAME}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, tag: 'cheat-sheet-optin' })
+        }
+      );
+
+      if (res.ok || res.status === 201) {
+        successEl.style.display = 'block';
+        document.getElementById('email-input').value = '';
+        btn.textContent = 'Sent!';
+        // Track conversion event if analytics is present
+        if (typeof plausible !== 'undefined') {
+          plausible('Email Signup', { props: { source: 'start-page' } });
+        }
+      } else {
+        throw new Error('non-2xx: ' + res.status);
+      }
+    } catch (err) {
+      errorEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Send me the cheat sheet';
+    }
+  });
+</script>
+
+</body>
+</html>
