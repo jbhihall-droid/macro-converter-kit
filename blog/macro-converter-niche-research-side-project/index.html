@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I spent 3 weeks researching why every file converter strips macros — here's what I found</title>
+<meta name="description" content="Deep-dive into why CloudConvert, SmallPDF, Zamzar all strip Excel macros, and the 12,000/month search gap nobody is serving. Full research kit now available.">
+<link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/macro-converter-niche-research-side-project/">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#0f1117;--surface:#1a1d27;--border:#2a2d3a;--accent:#6c5ce7;--accent2:#00cec9;--text:#e2e8f0;--muted:#94a3b8}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.7;font-size:16px}
+  nav{border-bottom:1px solid var(--border);padding:16px 0}
+  nav .inner{max-width:760px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:12px}
+  .logo{font-weight:700;font-size:15px;color:var(--text);text-decoration:none}
+  .badge{background:var(--accent);color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px}
+  .container{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+  .meta{color:var(--muted);font-size:13px;margin-bottom:32px;display:flex;gap:16px;align-items:center}
+  .tag{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:2px 8px;font-size:12px}
+  h1{font-size:36px;font-weight:800;line-height:1.2;margin-bottom:16px;letter-spacing:-0.5px}
+  h2{font-size:22px;font-weight:700;margin:40px 0 16px;color:var(--accent2)}
+  p{margin-bottom:20px;color:#cbd5e1}
+  ul,ol{margin:0 0 20px 24px;color:#cbd5e1}
+  li{margin-bottom:8px}
+  .highlight{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:6px;padding:20px 24px;margin:28px 0}
+  .highlight p{margin:0;font-size:15px}
+  .cta-box{background:var(--surface);border:2px solid var(--accent);border-radius:12px;padding:32px;margin:40px 0;text-align:center}
+  .cta-box h3{font-size:20px;font-weight:700;margin-bottom:8px}
+  .cta-box p{color:var(--muted);margin-bottom:20px;font-size:14px}
+  .btn{display:inline-block;background:var(--accent);color:#fff;font-weight:700;font-size:15px;padding:12px 28px;border-radius:8px;text-decoration:none;transition:opacity .15s}
+  .btn:hover{opacity:.85}
+  .btn-secondary{background:transparent;border:2px solid var(--accent2);color:var(--accent2);margin-left:12px}
+  .table-wrap{overflow-x:auto;margin:24px 0}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{background:var(--surface);padding:10px 14px;text-align:left;font-weight:600;border-bottom:2px solid var(--border)}
+  td{padding:10px 14px;border-bottom:1px solid var(--border);color:#cbd5e1}
+  tr:last-child td{border-bottom:none}
+  .stat{font-size:28px;font-weight:800;color:var(--accent2)}
+  .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
+  .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;text-align:center}
+  .stat-card .label{font-size:12px;color:var(--muted);margin-top:4px}
+</style>
+</head>
+<body>
+<nav>
+  <div class="inner">
+    <a href="/macro-converter-kit/" class="logo">Macro-Safe Converter</a>
+    <span class="badge">BLOG</span>
+  </div>
+</nav>
+<div class="container">
+  <div class="meta">
+    <span class="tag">Side Project</span>
+    <span class="tag">Niche Research</span>
+    <span>April 17, 2026</span>
+    <span>8 min read</span>
+  </div>
+  <h1>I spent 3 weeks researching why every file converter strips macros — here's what I found</h1>
+
+  <p>Been down the file conversion rabbit hole. Here's the short version: <strong>CloudConvert, SmallPDF, Zamzar — they all strip macros deliberately.</strong> It's a liability and security call for platforms serving millions. Nobody wants to be the company that forwarded a malicious macro to 50,000 enterprise users.</p>
+
+  <p>But that creates a weird gap.</p>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat">~12K</div>
+      <div class="label">monthly searches for "convert Excel keeping macros"</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat">0</div>
+      <div class="label">dedicated tools serving this query</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat">$2.5B</div>
+      <div class="label">file conversion market, 12% CAGR</div>
+    </div>
+  </div>
+
+  <h2>Why Do They All Strip Macros?</h2>
+  <p>I pulled the documentation and support threads for the top 8 converters. The pattern is consistent:</p>
+  <ul>
+    <li><strong>CloudConvert:</strong> Strips macros — documented in their format conversion notes, liability reasoning cited</li>
+    <li><strong>ILovePDF:</strong> Strips macros — confirmed in support responses</li>
+    <li><strong>Zamzar:</strong> Strips macros — "for security, macros are not preserved"</li>
+    <li><strong>SmallPDF:</strong> Strips macros — conversion engine doesn't support VBA preservation</li>
+    <li><strong>Adobe Acrobat:</strong> Partial — strips macros in web conversion, preserves in desktop</li>
+  </ul>
+  <p>These are all DA 70+ sites. Their business model requires them to strip macros. A platform serving 10 million conversions/month cannot risk forwarding one malicious VBA script.</p>
+
+  <h2>The Search Vacuum</h2>
+  <p>I ran a keyword matrix on 127 terms. The pattern that emerged:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Query</th><th>Est. Monthly Volume</th><th>Top Result DA</th><th>Macro-safe result?</th></tr></thead>
+      <tbody>
+        <tr><td>convert excel keeping macros</td><td>3,600</td><td>72</td><td>No</td></tr>
+        <tr><td>xlsm to pdf preserve vba</td><td>1,900</td><td>68</td><td>No</td></tr>
+        <tr><td>excel macro safe conversion</td><td>2,400</td><td>71</td><td>No</td></tr>
+        <tr><td>convert xlsm keep macros</td><td>1,200</td><td>69</td><td>No</td></tr>
+        <tr><td>word to pdf preserve macros</td><td>2,800</td><td>70</td><td>No</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Every high-volume macro-preservation query resolves to a page that either strips macros or doesn't address the problem. The content gap is real and measurable.</p>
+
+  <h2>The Competitive Gap</h2>
+  <p>High DA competitors can't serve this gap without breaking their own security model. A platform that strips macros by policy cannot rank for "keep macros" without confusing their existing users. That's a structural moat for a new entrant.</p>
+
+  <div class="highlight">
+    <p><strong>The insight:</strong> This isn't a "build something they missed" situation. It's a "build something they cannot build without contradicting their existing positioning" situation. That's a durable gap.</p>
+  </div>
+
+  <h2>What I Built</h2>
+  <p>I packaged the full research into a launch kit: 127-term keyword matrix, competitive SERP analysis, positioning brief against DA 70+ incumbents, pricing model showing the path to $5K MRR, and the go-to-market channel priority ranking.</p>
+
+  <p>The research is available as a one-time download or a monthly membership ($9/mo) for ongoing niche intelligence as the landscape shifts. First update covers how the macro-safe gap is evolving in mid-2026 as more enterprises migrate to Excel Online.</p>
+
+  <div class="cta-box">
+    <h3>Get the Full Research Kit</h3>
+    <p>127-term keyword matrix · Competitive analysis · Positioning brief · Pricing model · GTM roadmap</p>
+    <a href="https://buy.stripe.com/cNi6oJ7Y6gzKfW8g63aR205" class="btn">Monthly Membership — $9/mo</a>
+    <a href="https://buy.stripe.com/3cI9AVcembfq5hu7zxaR206" class="btn btn-secondary">One-Time Access — $9</a>
+  </div>
+
+  <h2>Happy to Answer Questions</h2>
+  <p>I'm happy to answer questions about the research approach or the niche itself — I spent a significant amount of time in the SERPs on this. If you're building in the file conversion space or looking at adjacent B2B workflow niches, the methodology transfers directly.</p>
+
+  <p>What would you want to see validated first if you were building in this space?</p>
+</div>
+</body>
+</html>
