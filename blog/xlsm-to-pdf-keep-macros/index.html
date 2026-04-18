@@ -4,12 +4,123 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How to Convert XLSM to PDF Without Losing Macros (2026 Guide)</title>
-<meta name="description" content="The complete guide to converting XLSM to PDF without losing macros. We cover every technical option: COM automation, Aspose.Cells, LibreOffice, and when macros ">
+<meta name="description" content="The complete guide to converting XLSM to PDF without losing macros. We cover every technical option: COM automation, Aspose.Cells, LibreOffice, and when macros can't be preserved at all.">
 <link rel="canonical" href="https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-pdf-keep-macros/">
 <meta property="og:title" content="How to Convert XLSM to PDF Without Losing Macros (2026 Guide)">
-<meta property="og:description" content="The complete guide to converting XLSM to PDF without losing macros. We cover every technical option: COM automation, Aspose.Cells, LibreOffice, and when macros ">
+<meta property="og:description" content="The complete guide to converting XLSM to PDF without losing macros. We cover every technical option: COM automation, Aspose.Cells, LibreOffice, and when macros can't be preserved at all.">
 <meta property="og:type" content="article">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Convert XLSM to PDF Without Losing Macros (2026 Guide)","datePublished":"2026-04-12","publisher":{"@type":"Organization","name":"Macro-Safe Converter"}}</script>
+<meta property="og:url" content="https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-pdf-keep-macros/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-pdf-keep-macros/#article",
+      "headline": "How to Convert XLSM to PDF Without Losing Macros (2026 Guide)",
+      "description": "The complete guide to converting XLSM to PDF without losing macros. Covers COM automation, Aspose.Cells, LibreOffice, and when macro preservation is genuinely impossible.",
+      "datePublished": "2026-04-12",
+      "dateModified": "2026-04-18",
+      "author": {
+        "@type": "Person",
+        "name": "Joshua Hall",
+        "url": "https://jbhihall-droid.github.io/macro-converter-kit/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Macro-Safe Converter",
+        "url": "https://jbhihall-droid.github.io/macro-converter-kit/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-pdf-keep-macros/"
+      },
+      "keywords": ["xlsm to pdf keep macros", "convert xlsm to pdf", "xlsm to pdf macro preservation", "excel macro safe converter", "xlsm pdf conversion vba"],
+      "wordCount": 1500,
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-pdf-keep-macros/#howto",
+      "name": "How to Convert XLSM to PDF While Preserving Macros",
+      "description": "Step-by-step guide to handling Excel VBA macros during XLSM to PDF conversion using different tools.",
+      "totalTime": "PT30M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Determine your goal",
+          "text": "Decide whether you need to preserve macros in the source file, move them to a new format, or simply document the macro code alongside a PDF export.",
+          "position": 1
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Choose your conversion tool",
+          "text": "For Windows batch conversion: use COM automation via Python win32com. For cross-platform production: use Aspose.Cells. For simple PDF export: use LibreOffice headless.",
+          "position": 2
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Run the conversion",
+          "text": "Execute your chosen method. For COM automation, use FileFormat=52 to save macro-enabled XLSM copies alongside PDF exports. For LibreOffice, use --headless --convert-to pdf for visual output.",
+          "position": 3
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Archive the VBA code",
+          "text": "If PDF is your final output, export VBA module code to .bas files alongside the PDF for documentation and future recovery.",
+          "position": 4
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://jbhihall-droid.github.io/macro-converter-kit/blog/xlsm-to-pdf-keep-macros/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I convert XLSM to PDF and keep the macros in the PDF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. PDF files cannot contain executable code. When you convert XLSM to PDF, the macros cannot be transferred to the PDF format — this is a PDF specification limitation, not a tool limitation. Your best option is to export the PDF for visual output and keep the original XLSM file with macros intact."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do all online converters remove macros from XLSM files?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Online converters deliberately strip macros from uploaded files for security reasons. Executing VBA code server-side creates significant liability and security risks for platforms serving millions of users. This is a deliberate policy decision, not a technical limitation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a free online tool that preserves macros in XLSM conversion?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For XLSM-to-PDF specifically: no. The PDF format cannot hold macros, so preservation is impossible regardless of the tool. For XLSM-to-XLSM batch migration where macros need to survive: COM automation (free, requires Windows + Excel license) or Aspose.Cells (paid, $1,200+/year) are your reliable options."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between XLSM and XLSX?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "XLSM is an Excel Macro-Enabled Workbook that can store and run VBA macros. XLSX is a standard Excel Workbook without macro support. Converting XLSM to XLSX strips all VBA macros. If you need macros to survive format conversion, keep the output format as XLSM using FileFormat=52 in COM automation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best way to batch convert XLSM files while keeping macros?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On Windows with Excel installed, COM automation via Python win32com is the most reliable free method. Use Workbook.SaveAs with FileFormat=52 (xlOpenXMLWorkbookMacroEnabled) to preserve macros in the output. For cross-platform production environments, Aspose.Cells handles XLSM batch conversion with full VBA preservation."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{--bg:#0f1117;--surface:#1a1d27;--border:#2a2d3a;--accent:#6c5ce7;--accent2:#00cec9;--text:#e2e8f0;--muted:#94a3b8}
@@ -34,21 +145,18 @@
   code{font-family:monospace;font-size:14px;color:var(--accent2)}
   hr{border:none;border-top:1px solid var(--border);margin:40px 0}
   strong{color:var(--text);font-weight:700}
-  .cta-box{background:var(--surface);border:2px solid var(--accent);border-radius:14px;padding:32px;margin:48px 0;text-align:center}
-  .cta-box h3{color:var(--accent2);margin-bottom:12px}
+  .cta-box{background:var(--surface);border:2px solid var(--accent);border-radius:14px;padding:32px;margin:32px 0;text-align:center}
+  .cta-box h3{color:var(--accent2);margin-bottom:12px;margin-top:0}
   .cta-box p{color:var(--muted);margin-bottom:20px}
   .btn{display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:14px 28px;border-radius:8px;font-size:16px}
+  .btn:hover{background:#5a4bc9;text-decoration:none}
   .breadcrumb{font-size:13px;color:var(--muted);margin-bottom:24px}
   .breadcrumb a{color:var(--muted)}
   table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px}
   th{background:var(--surface);padding:10px 14px;text-align:left;border:1px solid var(--border);font-weight:600}
   td{padding:10px 14px;border:1px solid var(--border)}
   tr:nth-child(even){background:var(--surface)}
-
-  /* EthicalAds — display ad unit */
-  .ea-wrapper{margin:24px 0 32px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;text-align:center}
-  .ea-wrapper .ea-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:block}
-  [data-ea-publisher]{display:inline-block}
+  .faq-section h3{color:var(--text);font-size:17px;margin:24px 0 8px}
 </style>
 </head>
 <body>
@@ -61,14 +169,14 @@
 </nav>
 <div class="container">
   <div class="breadcrumb"><a href="https://jbhihall-droid.github.io/macro-converter-kit">Home</a> › <a href="https://jbhihall-droid.github.io/macro-converter-kit/blog/">Blog</a> › How to Convert XLSM to PDF Without Losing Macros (2026 Guide)</div>
-  <div class="meta">Published 2026-04-12 &nbsp;·&nbsp; 5 min read</div>
+  <div class="meta">Published 2026-04-12 &nbsp;·&nbsp; Updated 2026-04-18 &nbsp;·&nbsp; 8 min read</div>
   <h1>How to Convert XLSM to PDF Without Losing Macros (2026 Guide)</h1>
-<!-- EthicalAds — ENG-134 ad unit (activate with: bash ~/projects/revenue-engine/ads/activate-ads.sh YOUR_PUBLISHER_ID) -->
-<div class="ea-wrapper">
-  <span class="ea-label">Sponsored</span>
-  <div data-ea-publisher="PUBLISHER_ID_PLACEHOLDER" data-ea-type="image"></div>
-</div>
-<script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
+
+  <div class="cta-box">
+    <h3>Need a complete Excel macro conversion toolkit?</h3>
+    <p>Get the Macro-Safe Converter Launch Kit — includes keyword matrix, VBA extraction scripts, programmatic SEO templates, and a 48-hour launch checklist. Trusted by Excel developers and SaaS founders.</p>
+    <a class="btn" href="https://buy.stripe.com/cNi6oJ7Y6gzKfW8g63aR205">Get the Membership — $9/month →</a>
+  </div>
 
 <p>If you've ever tried to convert an XLSM file to PDF using an online converter and found your macros missing afterwards, you've discovered one of the most misunderstood limitations in the file conversion space.</p>
 <p>This guide gives you the full picture: what actually happens to macros during XLSM to PDF conversion, which tools handle it correctly, and when macro preservation is genuinely impossible.</p>
@@ -76,9 +184,11 @@
 <h2>The Short Answer Nobody Gives You</h2>
 <p>Here it is upfront: <strong>VBA macros cannot be embedded in a PDF file.</strong> A PDF is a static document format. It has no execution layer for code.</p>
 <p>When people search for "xlsm to pdf keep macros," they usually mean one of three different things — and each has a different solution:</p>
-<p>1. <strong>Preserve macros in the source file</strong> during a batch migration (XLSM stays XLSM)
-2. <strong>Move macros to a new format</strong> that can still run them (XLSM → XLSM/XLSB/XLAM)
-3. <strong>Document the macro code</strong> alongside the PDF output for reference</p>
+<ol>
+<li><strong>Preserve macros in the source file</strong> during a batch migration (XLSM stays XLSM)</li>
+<li><strong>Move macros to a new format</strong> that can still run them (XLSM → XLSM/XLSB/XLAM)</li>
+<li><strong>Document the macro code</strong> alongside the PDF output for reference</li>
+</ol>
 <p>Understanding which of these you need determines which solution works for you.</p>
 <hr>
 <h2>Why Online Converters Strip Macros</h2>
@@ -91,48 +201,50 @@
 <p>The most reliable approach for enterprise batch conversion is Windows COM automation via Python or PowerShell. This uses Excel itself as the conversion engine, which means macro handling is fully faithful — Excel knows how to preserve its own formats.</p>
 <pre><code>import win32com.client
 import os
-<p>def convert_xlsm_batch(input_folder, output_folder, keep_macros=True):
+
+def convert_xlsm_batch(input_folder, output_folder, keep_macros=True):
     xl = win32com.client.Dispatch("Excel.Application")
     xl.Visible = False
     xl.DisplayAlerts = False
-    
+
     for filename in os.listdir(input_folder):
         if filename.endswith('.xlsm'):
             input_path = os.path.abspath(os.path.join(input_folder, filename))
-            
-            # For PDF output (macros cannot be in PDF — this is the Excel-rendered PDF)
             output_pdf = os.path.join(output_folder, filename.replace('.xlsm', '.pdf'))
-            
             wb = xl.Workbooks.Open(input_path)
-            
-            # Export to PDF (visual output — no macros in PDF)
+
+            # Export to PDF (visual output — macros cannot exist in PDF)
             wb.ExportAsFixedFormat(0, output_pdf)
-            
-            # If you also want to preserve macro-enabled copy:
+
+            # Save macro-enabled copy alongside PDF
             if keep_macros:
                 output_xlsm = os.path.join(output_folder, filename)
                 wb.SaveAs(output_xlsm, FileFormat=52)  # 52 = xlOpenXMLWorkbookMacroEnabled
-            
+
             wb.Close(False)
-    
+
     xl.Quit()
-</code></pre></p>
-<p><strong>FileFormat constants:</strong>
-<ul><li><code>51</code> = xlOpenXMLWorkbook (.xlsx) — strips macros</li>
+</code></pre>
+<p><strong>FileFormat constants:</strong></p>
+<ul>
+<li><code>51</code> = xlOpenXMLWorkbook (.xlsx) — strips macros</li>
 <li><code>52</code> = xlOpenXMLWorkbookMacroEnabled (.xlsm) — preserves macros</li>
 <li><code>56</code> = xlExcel8 (.xls) — legacy format, preserves macros</li>
 <li><code>0</code> = ExportAsFixedFormat PDF — visual-only, no macros possible</li>
 </ul>
-<strong>Limitation:</strong> Requires a licensed Excel installation on Windows. Cannot run on Linux/Mac servers without Excel.</p>
+<p><strong>Limitation:</strong> Requires a licensed Excel installation on Windows. Cannot run on Linux/Mac servers without Excel.</p>
 <hr>
 <h3>Option 2: Aspose.Cells (Cross-Platform, Paid)</h3>
 <p><a href="https://products.aspose.com/cells/">Aspose.Cells</a> is the only cross-platform library that handles macro-aware Excel conversion correctly. It runs on Linux, Mac, and Windows with no Excel dependency.</p>
 <pre><code>import aspose.cells as ac
-<p>wb = ac.Workbook("input.xlsm")</p>
-<h1>Save with macros preserved (to XLSM)</h1>
+
+wb = ac.Workbook("input.xlsm")
+
+# Save with macros preserved (to XLSM)
 save_options = ac.XlsSaveOptions(ac.SaveFormat.XLSM)
 wb.save("output.xlsm", save_options)
-<h1>Export to PDF (macros cannot be in PDF — this is the rendered output)</h1>
+
+# Export to PDF (macros cannot be in PDF — this is the rendered visual output)
 pdf_options = ac.PdfSaveOptions()
 wb.save("output.pdf", pdf_options)
 </code></pre>
@@ -141,11 +253,13 @@ wb.save("output.pdf", pdf_options)
 <hr>
 <h3>Option 3: LibreOffice Headless (Free, Inconsistent)</h3>
 <p>LibreOffice can open XLSM files and convert them, but macro handling is inconsistent. LibreOffice Basic (its macro engine) is not VBA-compatible, so VBA macros are not executed and may not be preserved correctly across formats.</p>
-<pre><code><h1>Convert XLSM to PDF (macros not preserved in PDF — unavoidable)</h1>
+<pre><code># Convert XLSM to PDF (macros not preserved in PDF — unavoidable)
 libreoffice --headless --convert-to pdf input.xlsm
-<h1>Convert XLSM to XLSX (macros stripped — LibreOffice doesn't preserve VBA in XLSX)</h1>
+
+# Convert XLSM to XLSX (macros stripped — LibreOffice doesn't preserve VBA in XLSX)
 libreoffice --headless --convert-to xlsx input.xlsm
-<h1>Convert XLSM to ODS (LibreOffice native — some macro preservation, but VBA → Basic conversion is lossy)</h1>
+
+# Convert XLSM to ODS (LibreOffice native — some macro preservation, but VBA → Basic conversion is lossy)
 libreoffice --headless --convert-to ods input.xlsm
 </code></pre>
 <p><strong>Reality check:</strong> LibreOffice is excellent for simple document conversion. For macro-heavy enterprise workbooks, expect to lose macro functionality. Use it for visual PDF export only.</p>
@@ -156,56 +270,75 @@ libreoffice --headless --convert-to ods input.xlsm
 <hr>
 <h2>When Macro Preservation Is Genuinely Impossible</h2>
 <p>If your goal is PDF output specifically, macros cannot be preserved — period. PDF has no execution layer.</p>
-<p>The closest you can achieve is:
-1. Export a high-quality PDF from the workbook (visual rendering, no code)
-2. Keep the original XLSM on hand for future editing/re-running macros
-3. Export the VBA code to a .bas file as documentation alongside the PDF</p>
+<p>The closest you can achieve is:</p>
+<ol>
+<li>Export a high-quality PDF from the workbook (visual rendering, no code)</li>
+<li>Keep the original XLSM on hand for future editing and re-running macros</li>
+<li>Export the VBA code to a .bas file as documentation alongside the PDF</li>
+</ol>
 <p>To export VBA code programmatically:</p>
 <pre><code>import win32com.client
-<p>xl = win32com.client.Dispatch("Excel.Application")
+
+xl = win32com.client.Dispatch("Excel.Application")
 xl.Visible = False
-wb = xl.Workbooks.Open(r"C:\path\to\file.xlsm")</p>
-<p>for component in wb.VBProject.VBComponents:
+wb = xl.Workbooks.Open(r"C:\path\to\file.xlsm")
+
+for component in wb.VBProject.VBComponents:
     if component.Type == 1:  # vbext_ct_StdModule
         code = component.CodeModule.Lines(1, component.CodeModule.CountOfLines)
         with open(f"{component.Name}.bas", "w") as f:
-            f.write(code)</p>
-<p>wb.Close(False)
+            f.write(code)
+
+wb.Close(False)
 xl.Quit()
-</code></pre></p>
-<p>This approach is useful for compliance/audit use cases where you need a PDF record of the workbook AND a code archive alongside it.</p>
+</code></pre>
+<p>This approach is useful for compliance and audit use cases where you need a PDF record of the workbook AND a code archive alongside it.</p>
 <hr>
 <h2>Summary: Which Tool for Which Use Case</h2>
-<p>| Use Case | Best Option | Cost | Platform |
-|----------|-------------|------|----------|
-| Single file, highest quality PDF | Manual Excel export | Free (needs Excel) | Windows/Mac |
-| Batch PDF export, macros not needed | LibreOffice headless | Free | Any |
-| Batch conversion preserving macros (.xlsm→.xlsm) | COM Automation | Free (needs Excel) | Windows only |
-| Cross-platform batch, production | Aspose.Cells | $1,200+/year | Any |
-| Quick online PDF (macros not needed) | CloudConvert/Zamzar | Free tier | Browser |</p>
+<table>
+<thead>
+<tr><th>Use Case</th><th>Best Option</th><th>Cost</th><th>Platform</th></tr>
+</thead>
+<tbody>
+<tr><td>Single file, highest quality PDF</td><td>Manual Excel export</td><td>Free (needs Excel)</td><td>Windows/Mac</td></tr>
+<tr><td>Batch PDF export, macros not needed</td><td>LibreOffice headless</td><td>Free</td><td>Any</td></tr>
+<tr><td>Batch conversion preserving macros (.xlsm→.xlsm)</td><td>COM Automation</td><td>Free (needs Excel)</td><td>Windows only</td></tr>
+<tr><td>Cross-platform batch, production</td><td>Aspose.Cells</td><td>$1,200+/year</td><td>Any</td></tr>
+<tr><td>Quick online PDF (macros not needed)</td><td>CloudConvert/Zamzar</td><td>Free tier</td><td>Browser</td></tr>
+</tbody>
+</table>
 <hr>
-<h2>FAQ</h2>
+<h2 class="faq-section">Frequently Asked Questions</h2>
+<div class="faq-section">
 <h3>Can I convert XLSM to PDF and keep the macros in the PDF?</h3>
-<p>No. PDF files cannot contain executable code. When you convert XLSM to PDF, the macros cannot be transferred to the PDF format — this is a PDF specification limitation, not a tool limitation.</p>
+<p>No. PDF files cannot contain executable code. When you convert XLSM to PDF, the macros cannot be transferred to the PDF format — this is a PDF specification limitation, not a tool limitation. Your best option is to export a high-quality PDF for visual output and keep the original XLSM file with macros intact for future use.</p>
+
 <h3>Why do all online converters remove macros?</h3>
 <p>Online converters deliberately strip macros from uploaded files for security reasons. Executing VBA code server-side creates liability and security risks for platforms serving millions of users. This is a policy decision, not a technical limitation.</p>
+
 <h3>Is there a free online tool that preserves macros in XLSM conversion?</h3>
-<p>For XLSM-to-PDF specifically: no. The PDF format cannot hold macros, so preservation is impossible regardless of the tool. For XLSM-to-XLSM batch migration: COM automation (free, Windows only) or Aspose.Cells (paid) are your options.</p>
+<p>For XLSM-to-PDF specifically: no. The PDF format cannot hold macros, so preservation is impossible regardless of the tool. For XLSM-to-XLSM batch migration where macros need to survive: COM automation (free, Windows only) or Aspose.Cells (paid) are your reliable options.</p>
+
 <h3>What's the difference between XLSM and XLSX?</h3>
-<p>XLSM is an Excel Macro-Enabled Workbook. XLSX is a standard Excel Workbook without macro support. Converting XLSM to XLSX strips all VBA macros. If you need the macros to survive, keep the output format as XLSM.</p>
+<p>XLSM is an Excel Macro-Enabled Workbook. XLSX is a standard Excel Workbook without macro support. Converting XLSM to XLSX strips all VBA macros. If you need the macros to survive, keep the output format as XLSM using FileFormat=52 in COM automation.</p>
+
+<h3>What is the best way to batch convert XLSM files while keeping macros?</h3>
+<p>On Windows with Excel installed, COM automation via Python win32com is the most reliable free method. Use Workbook.SaveAs with FileFormat=52 to save macro-enabled XLSM copies alongside any PDF exports. For cross-platform production environments without Excel, Aspose.Cells handles XLSM batch conversion with full VBA preservation.</p>
+</div>
 <hr>
 <h2>Going Deeper: The Founder Opportunity</h2>
 <p>If you're a developer who landed here while researching whether to build a macro-safe conversion tool, the short answer is: the mid-market gap is real.</p>
-<p>Enterprise users need this solved. The only reliable tool (Aspose) costs $1,200+/year. A SaaS at $7-15/month with COM automation on Windows or Aspose license cost built into unit economics would be competitive and defensible.</p>
+<p>Enterprise users need this solved. The only reliable tool (Aspose) costs $1,200+/year. A SaaS at $7–15/month with COM automation on Windows or Aspose license cost built into unit economics would be competitive and defensible.</p>
 <p>I researched this niche in depth — competitive landscape, search demand, pricing model, technical architecture options, and programmatic SEO plan. If you want the full breakdown:</p>
-<p><strong><a href="[GUMROAD_URL]">Macro-Safe Converter Launch Kit</a></strong> — keyword matrix, positioning guide, landing page copy, pricing framework, and 48-hour launch checklist for building in this niche.</p>
-<hr>
-<p><em>Last updated: April 2026</em></p>
+<p><strong><a href="https://buy.stripe.com/cNi6oJ7Y6gzKfW8g63aR205">Macro-Safe Converter Membership</a></strong> — keyword matrix, positioning guide, landing page copy, pricing framework, VBA extraction scripts, and 48-hour launch checklist for building in this niche.</p>
+
   <div class="cta-box">
     <h3>Stop losing Excel macros to broken converters</h3>
-    <p>Macro-Safe Converter preserves VBA macros through XLSM conversions. One-time kit — no subscription.</p>
-    <a class="btn" href="https://jbhihall-droid.github.io/macro-converter-kit/checkout.html">Get the Kit — $9 one-time →</a>
+    <p>Macro-Safe Converter membership includes VBA extraction scripts, keyword matrix, conversion templates, and ongoing updates. Cancel anytime.</p>
+    <a class="btn" href="https://buy.stripe.com/cNi6oJ7Y6gzKfW8g63aR205">Join the Membership — $9/month →</a>
   </div>
+<hr>
+<p><em>Last updated: April 2026</em></p>
 </div>
 </body>
 </html>
